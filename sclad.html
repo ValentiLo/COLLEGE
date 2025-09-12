@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1><b>Django</b></h1>
+    <h1>Создание проекта</h1>
+    <p>
+Проект (Project) — это вся ваша веб-приложение в целом. Он содержит настройки для всех частей приложения: базы данных, шаблоны, URL и т.д.
+</p>
+<p>Как создать?</p>
+<p>Создайте и активируйте виртуальное окружение (очень важно для изоляции зависимостей):</p>
+<pre>bash
+# Создание
+python -m venv myenv
+
+# Активация (Windows)
+myenv\Scripts\activate
+# Активация (macOS/Linux)
+source myenv/bin/activate</pre>
+<p>Установите Django:</p>
+<pre>bash
+pip install django</pre>
+<p>Создайте сам проект:</p>
+<pre>bash
+django-admin startproject myproject .
+</pre>
+<p>Обратите внимание на точку (.) в конце! Она говорит Django создать проект в текущей директории, а не вкладывать лишнюю папку myproject/myproject.
+</p>
+<p>Что создалось?</p>
+    <p>Структура файлов после команды startproject:</p>
+    <pre>text
+myproject/       # Корневая директория проекта (папка из терминала)
+    manage.py     # Командная утилита для управления проектом
+    myproject/    # Пакет вашего проекта (папка с настройками)
+        __init__.py
+        settings.py  # Настройки всего проекта: БД, приложения, middleware и т.д.
+        urls.py      # Главный "список" URL-путей всего проекта.
+        asgi.py      # Точка входа для ASGI-серверов (для async)
+        wsgi.py      # Точка входа для WSGI-серверов (для деплоя)
+</pre>
+    <p>Запустите сервер для проверки:</p>
+    <pre>bash
+python manage.py runserver
+Перейдите по адресу http://127.0.0.1:8000. Вы должны увидеть страницу с ракетой —恭喜你 (поздравляю), проект создан!
+</pre>
+    <h1>Пути и view-функции</h1>
+<p>Это основа любого веб-фреймворка. Пользователь запрашивает определенный адрес (URL), 
+    и фреймворк решает, какой код выполнить, чтобы дать ответ.
+</p>
+<p>View-функция (Представление) — это обычная функция Python, которая принимает HTTP-запрос (request) и возвращает HTTP-ответ (response). Её задача — обработать запрос и вернуть результат (HTML, JSON, и т.д.).
+</p>
+<p>URLconf (Конфигурация URL) — это "список рассылки", который связывает конкретный URL с конкретной view-функцией.
+</p>
+<p>Как это работает?</p>
+<p>Запрос пользователя (URL) -> urls.py -> View-функция -> Ответ (HTML)</p>
+<p>Пример:</p>
+<ol>
+    <li>Создайте view-функцию. Откройте myproject/views.py (если его нет — создайте) и напишите:</li>
+    <br>
+    <code>
+        from django.http import HttpResponse
+
+def home_page(request):
+    # Простейшая view-функция
+    return HttpResponse("<h1>Добро пожаловать на мой сайт!</h1>")
+
+def about_page(request):
+    return HttpResponse("<h1>О нас</h1><p>Это страница о нашей компании.</p>")
+    </code>
+    <li>Свяжите URL с view. Откройте главный myproject/urls.py и импортируйте ваши функции:</li>
+    <br>
+    <pre>
+    <code>
+        from django.contrib import admin
+from django.urls import path
+from . import views  # импортируем наши view-функции из текущего каталога
+
+urlpatterns = [
+    path('admin/', admin.site.urls),  # уже есть по умолчанию
+    path('', views.home_page, name='home'), # Путь '' - это корневая страница
+    path('about/', views.about_page, name='about'), # Путь 'about/'
+]
+    </code>
+</pre>
+<p>Теперь:</p>
+<ul>
+    <li>http://127.0.0.1:8000/ вызовет home_page
+</li>
+    <li>http://127.0.0.1:8000/about/ вызовет about_page</li>
+</ul>
+    
+</ol>
+    <h1>Вёрстка для бэкендера</h1>
+<p>Возвращать HTML-код прямо в HttpResponse, как выше — плохая практика. Смешивать логику (Python) и отображение (HTML) нельзя.</p>
+<p>Решение: Шаблоны (Templates).</p>
+<p>Шаблон — это HTML-файл с специальными "дырками" (переменными) и простой логикой (тегами), которые Django заполняет данными из Python.</p>
+<h3>Как использовать?</h3>
+<ol>
+    <li>Настройте директорию для шаблонов.</li>
+     <p> В settings.py найдите параметр TEMPLATES и в DIRS укажите путь:</p>
+    <pre><code>
+        'DIRS': [BASE_DIR / 'templates'], # Для современных версий Django
+# Или
+'DIRS': [os.path.join(BASE_DIR, 'templates')], # Старый вариант
+    </code></pre>
+     <li>Создайте папку templates в корне вашего проекта (рядом с manage.py). Внутри неё можно создавать подпапки для организации (например, templates/news/article.html).</li>
+    <li>Создайте ваш первый шаблон. Например, templates/home.html:</li>
+    <pre><code>
+&lt;!DOCTYPE html>
+&lt;head>
+    &lt;html lang="ru">
+    &lt;meta charset="UTF-8">
+    &lt;title>Главная страница</title>
+&lt;/head>
+&lt;body>
+    &lt;h1>{{ page_title }}&lt;/h1> <!-- Это переменная, её передаст Django -->
+    &lt;p>Сегодня: {{ current_date }}&lt;/p>
+    &lt;ul>
+        {% for item in list_of_items %} <!-- Это тег для цикла -->
+        &lt;li>{{ item }}&lt;/li>
+        {% endfor %}
+    &lt;/ul>
+&lt;/body>
+&lt;/html>
+    </code></pre>
+    <li>Обработайте шаблон во view-функции. Используем функцию render():</li>
+<pre>
+    <code>from django.shortcuts import render
+from datetime import datetime
+
+def home_page(request):
+    # Данные, которые мы хотим передать в шаблон
+    context = {
+        'page_title': 'Мой крутой сайт',
+        'current_date': datetime.now(),
+        'list_of_items': ['Пункт 1', 'Пункт 2', 'Пункт 3'],
+    }
+    # Функция render сама найдёт шаблон, подставит в него данные (context)
+    # и вернёт готовый HttpResponse
+    return render(request, 'home.html', context)</code>
+</pre>
+</ol>
+<h3>Ключевые элементы синтаксиса шаблонов Django:</h3>
+<ul>
+    <li>{{ variable }} — вывод переменной.</li>
+    <li>{% tag %} — выполнение кода (циклы, условия и т.д.).</li>
+    <li>{# comment #} — комментарий (не попадает в HTML).</li>
+</ul>
+    <h1>HTML и шаблоны Django</h1>
+<h3>Наследование шаблонов (Суперсила Django)</h3>
+<p>Чтобы не копировать общий HTML (шапку, меню, подвал) на каждую страницу, используется наследование.</p>
+<ol>
+    <li>Создайте базовый шаблон templates/base.html:</li>
+    <pre>
+       <code>
+&lt;!DOCTYPE html>
+&lt;html lang="ru">
+&lt;head>
+    &lt;meta charset="UTF-8">
+    &lt;title>{% block title %}Мой сайт{% endblock %}&lt;/title>
+&lt;/head>
+&lt;body>
+    &lt;header>Моё навигационное меню&lt;/header>
+
+    &lt;main>
+        {% block content %}
+        &lt;!-- Сюда будет подставляться уникальный контент для каждой страницы -->
+        {% endblock %}
+    &lt;/main>
+
+    &lt;footer>&copy; Myproject, 2023&lt;/footer>
+&lt;/body>
+&lt;/html>
+       </code> 
+    </pre>
+    <li>Наследуйте его в дочерних шаблонах (например, templates/home.html):</li>
+    <pre>
+        <code>
+{% extends 'base.html' %} &lt;!-- Указываем, кого наследуем -->
+
+{% block title %}Главная страница{% endblock %}
+
+{% block content %}
+  &lt;h1>Добро пожаловать!&lt;/h1>
+  &lt;p>Это контент главной страницы.&lt;/p>
+{% endblock %}
+        </code>
+    </pre>
+</ol>
+<p>Теперь при запросе главной страницы Django возьмет base.html, найдет в нем блоки {% block %} и заменит их на содержимое из home.html.</p>
+<p>Итог: Вы научились создавать проект, направлять запросы к нужным функциям и возвращать красивые HTML-страницы, используя мощь шаблонов. Это основа для создания любого сайта на Django.</p>
+
+</body>
+</html>
