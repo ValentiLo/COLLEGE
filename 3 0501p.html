@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <title>МДК 06.03 - Классификация методов проектирования АИС</title> 
+        <link rel="stylesheet" href="style.css">
+        <style> :root { --primary-color: #2c3e50; --secondary-color: #3498db; --accent-color: #e74c3c; --light-color: #ecf0f1; --dark-color: #2c3e50; --text-color: #333; --shadow: 0 4px 6px rgba(0, 0, 0, 0.1); }
+text
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+        background-color: #f5f7fa;
+        color: var(--text-color);
+        line-height: 1.6;
+    }
+    
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    
+    header {
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        color: white;
+        padding: 30px 0;
+        text-align: center;
+        border-radius: 0 0 10px 10px;
+        box-shadow: var(--shadow);
+        margin-bottom: 30px;
+    }
+    
+    h1 {
+        font-size: 2.2rem;
+        margin-bottom: 10px;
+    }
+    
+    .subtitle {
+        font-size: 1.2rem;
+        opacity: 0.9;
+    }
+    
+    .card {
+        background: white;
+        border-radius: 10px;
+        padding: 25px;
+        margin-bottom: 25px;
+        box-shadow: var(--shadow);
+        transition: transform 0.3s ease;
+    }
+    
+    .card:hover {
+        transform: translateY(-5px);
+    }
+    
+    h2 {
+        color: var(--primary-color);
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid var(--secondary-color);
+    }
+    
+    h3 {
+        color: var(--secondary-color);
+        margin: 15px 0 10px;
+    }
+    
+    p {
+        margin-bottom: 15px;
+    }
+    
+    ul, ol {
+        margin-left: 20px;
+        margin-bottom: 15px;
+    }
+    
+    li {
+        margin-bottom: 8px;
+        padding-left: 5px;
+    }
+    
+    .methods-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        margin: 20px 0;
+    }
+    
+    .method {
+        background: var(--light-color);
+        padding: 15px;
+        border-radius: 8px;
+        border-left: 4px solid var(--accent-color);
+    }
+    
+    .stages-container {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        margin: 20px 0;
+    }
+    
+    .stage {
+        background: linear-gradient(to right, #f0f8ff, white);
+        padding: 15px;
+        border-radius: 8px;
+        border-left: 4px solid var(--secondary-color);
+    }
+    
+    .stage-title {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+    
+    .stage-number {
+        background-color: var(--secondary-color);
+        color: white;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 10px;
+        font-weight: bold;
+    }
+    
+    .phase {
+        margin: 15px 0 10px 20px;
+        padding-bottom: 5px;
+        border-bottom: 1px dashed #ccc;
+    }
+    
+    .comparison-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+    }
+    
+    .comparison-table th, .comparison-table td {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: left;
+    }
+    
+    .comparison-table th {
+        background-color: var(--secondary-color);
+        color: white;
+    }
+    
+    .comparison-table tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+    
+    footer {
+        text-align: center;
+        margin-top: 40px;
+        padding: 20px;
+        color: #666;
+        font-size: 0.9rem;
+    }
+    
+    @media (max-width: 768px) {
+        .methods-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        h1 {
+            font-size: 1.8rem;
+        }
+    }
+</style>
+</head>
+
+<body>
+    <h1>Лекции</h1>
+    <div class="container"> <h1>МДК 06.03 Устройство и функционирование информационных систем</h1> 
+        <p class="subtitle">Классификация методов проектирования АИС. Стадии и этапы создания АИС</p> </div> 
+    <div class="cont">
+    <div>
+    <ol>
+        <li><a href="1 0501p.html">Описание технологий, используемых при проектировании ИС. Описание основных стадий и этапов создания ИС.</a></li>
+        <li><a href="2 0501p.html">Разработка ТЗ. Этапы создания. Разработка эскизного проекта. Разработка технического проекта.</a></li>
+        <li><a href="3 0501p.html">Классификация методов проектирования АИС. Стадии и этапы создания АИС</a></li>
+        <li><a href="4 0501p.html">Описание основных case-средств и принципа работы с ними.</a></li>
+        <li><a href="5 0501p.html">Практическое занятие 1 Формирование требований пользователя к информационной системе</a></li>
+        <li><a href="6 0501p.html">Практическое занятие 2 Разработка и утверждение технического задания на создание информационной системы</a></li>
+        <li><a href="7 0501p.html">Практическое занятие 3 Разработка раздела «введение» документации ИС</a></li>
+        <li><a href="8 0501p.html">Практическое занятие 4 Назначение технической документации</a></li>
+        <li><a href="9 0501p.html">Практическое занятие 5 Классификация стандартов разработки ИС</a></li>
+        <li><a href="10 0501p.html">Практическое занятие 6 Российские стандарты разработки ИС</a></li>
+        <li><a href="11 0501p.html">Практическое занятие 7 Международные стандарты разработки ИС</a></li>
+        <li><a href="12 0501p.html">Практическое занятие 8 Жизненный цикл информационной системы</a></li>
+        <li><a href="13 0501p.html">Практическое занятие 9 Предпроектное обследование объекта автоматизации</a></li>
+        <li><a href="14 0501p.html">Практическое занятие 10 Формирование требований к информационной системе</a></li>
+        <li><a href="15 0501p.html">Практическое занятие 11 Разработка эскизного и технического проекта</a></li>
+        <li><a href="16 0501p.html">Практическое занятие 12 Разработка технического проекта</a></li>
+        <li><a href="17 0501p.html">Практическое занятие 13 Разработка спецификации программы</a></li>
+        <li><a href="18 0501p.html">Практическое занятие 14 Разработка руководства пользователя</a></li>
+        <li><a href="19 0501p.html">Практическое занятие 15 Разработка руководства оператора</a></li>
+        <li><a href="20 0501p.html">Практическое занятие 16 Разработка руководство администратора</a></li>
+        <li><a href="21 0501p.html">Практическое занятие 17 Разработка руководства системного администратора</a></li>
+        <li><a href="22 0501p.html">Практическое занятие 18 Разработка руководства программиста</a></li>
+        <li><a href="23 0501p.html">Практическое занятие 19 Разработка руководства системного программиста</a></li>
+        <li><a href="24 0501p.html">Практическое занятие 20 Процессы жизненного цикла программного обеспечения</a></li>
+        <li><a href="25 0501p.html">Практическое занятие 21 План разработки программного обеспечения</a></li>
+        <li><a href="26 0501p.html">Практическое занятие 22 План верификации программного обеспечения</a></li>
+    </ol></div>
+    <div>
+       
+    </header>
+
+<div class="container">
+    <div class="card">
+        <h2>Введение в проектирование АИС</h2>
+        <p>Автоматизированные информационные системы (АИС) представляют собой сложные комплексы программных, технических, информационных и организационных компонентов. Проектирование АИС — это процесс создания проекта, который определяет структуру, компоненты, функции и документирование будущей системы.</p>
+    </div>
+    
+    <div class="card">
+        <h2>Классификация методов проектирования АИС</h2>
+        <p>Существует несколько подходов к классификации методов проектирования АИС. Рассмотрим основные из них:</p>
+        
+        <h3>По степени охвата проектных задач</h3>
+        <div class="methods-grid">
+            <div class="method">
+                <h3>Локальные методы</h3>
+                <p>Ориентированы на решение отдельных задач проектирования (например, проектирование интерфейсов или баз данных).</p>
+            </div>
+            
+            <div class="method">
+                <h3>Интегрированные методы</h3>
+                <p>Охватывают все этапы жизненного цикла АИС и обеспечивают комплексное проектирование системы.</p>
+            </div>
+        </div>
+        
+        <h3>По степени формализации</h3>
+        <div class="methods-grid">
+            <div class="method">
+                <h3>Интуитивные методы</h3>
+                <p>Основаны на опыте и экспертных знаниях проектировщиков. Малая формализация процессов.</p>
+            </div>
+            
+            <div class="method">
+                <h3>Формализованные методы</h3>
+                <p>Используют строгие математические модели и формальные спецификации для проектирования.</p>
+            </div>
+            
+            <div class="method">
+                <h3>Комбинированные методы</h3>
+                <p>Сочетают формальные методы с эвристическими подходами и экспертными знаниями.</p>
+            </div>
+        </div>
+        
+        <h3>По степени использования инструментальных средств</h3>
+        <div class="methods-grid">
+            <div class="method">
+                <h3>Ручное проектирование</h3>
+                <p>Все проектные операции выполняются вручную без использования специализированного ПО.</p>
+            </div>
+            
+            <div class="method">
+                <h3>Компьютерно-поддерживаемое проектирование</h3>
+                <p>Используются отдельные программные средства для автоматизации частных задач проектирования.</p>
+            </div>
+            
+            <div class="method">
+                <h3>Автоматизированное проектирование</h3>
+                <p>Применяются интегрированные CASE-средства (Computer-Aided Software Engineering), охватывающие все этапы проектирования.</p>
+            </div>
+        </div>
+        
+        <h3>Основные методологии проектирования</h3>
+        <table class="comparison-table">
+            <tr>
+                <th>Методология</th>
+                <th>Подход</th>
+                <th>Преимущества</th>
+                <th>Недостатки</th>
+            </tr>
+            <tr>
+                <td>Структурное проектирование</td>
+                <td>Нисходящее проектирование, декомпозиция на модули</td>
+                <td>Четкая структура, хорошая документированность</td>
+                <td>Сложность адаптации к изменениям требований</td>
+            </tr>
+            <tr>
+                <td>Объектно-ориентированное проектирование</td>
+                <td>Моделирование системы как совокупности взаимодействующих объектов</td>
+                <td>Гибкость, повторное использование компонентов</td>
+                <td>Высокие начальные затраты на обучение</td>
+            </tr>
+            <tr>
+                <td>Прототипное проектирование</td>
+                <td>Быстрое создание упрощенных версий системы для уточнения требований</td>
+                <td>Быстрая обратная связь, уточнение требований</td>
+                <td>Риск неоптимальных архитектурных решений</td>
+            </tr>
+            <tr>
+                <td>Быстрая разработка приложений (RAD)</td>
+                <td>Итеративная разработка с использованием CASE-средств</td>
+                <td>Сокращение времени разработки, высокая гибкость</td>
+                <td>Требует высокой дисциплины команды</td>
+            </tr>
+        </table>
+    </div>
+    
+    <div class="card">
+        <h2>Стадии и этапы создания АИС</h2>
+        <p>Создание автоматизированной информационной системы представляет собой сложный процесс, который включает несколько последовательных стадий. Рассмотрим общепринятую структуру жизненного цикла АИС:</p>
+        
+        <div class="stages-container">
+            <div class="stage">
+                <div class="stage-title">
+                    <div class="stage-number">1</div>
+                    <h3>Предпроектная стадия</h3>
+                </div>
+                <p>На этой стадии формируются цели и концепция будущей системы, оценивается ее целесообразность и возможная эффективность.</p>
+                
+                <div class="phase">• Обследование объекта и обоснование необходимости создания АИС</div>
+                <div class="phase">• Формирование требований пользователя</div>
+                <div class="phase">• Разработка технико-экономического обоснования</div>
+                <div class="phase">• Разработка и утверждение технического задания на проектирование</div>
+            </div>
+            
+            <div class="stage">
+                <div class="stage-title">
+                    <div class="stage-number">2</div>
+                    <h3>Проектирование</h3>
+                </div>
+                <p>Стадия непосредственного создания проектных решений, определяющих архитектуру системы, ее функции и основные характеристики.</p>
+                
+                <div class="phase">• Техническое проектирование (разработка архитектуры системы)</div>
+                <div class="phase">• Разработка проектных решений по подсистемам</div>
+                <div class="phase">• Проектирование информационного обеспечения</div>
+                <div class="phase">• Проектирование программного обеспечения</div>
+                <div class="phase">• Проектирование технического обеспечения</div>
+                <div class="phase">• Разработка документации</div>
+            </div>
+            
+            <div class="stage">
+                <div class="stage-title">
+                    <div class="stage-number">3</div>
+                    <h3>Разработка</h3>
+                </div>
+                <p>Стадия реализации проектных решений, создания компонентов системы и их интеграции.</p>
+                
+                <div class="phase">• Программирование и настройка программных модулей</div>
+                <div class="phase">• Подготовка данных и наполнение базы данных</div>
+                <div class="phase">• Создание и адаптация программных средств</div>
+                <div class="phase">• Комплексная отладка системы</div>
+            </div>
+            
+            <div class="stage">
+                <div class="stage-title">
+                    <div class="stage-number">4</div>
+                    <h3>Ввод в действие</h3>
+                </div>
+                <p>Стадия подготовки к эксплуатации и непосредственного запуска системы в промышленную эксплуатацию.</p>
+                
+                <div class="phase">• Подготовка к внедрению</div>
+                <div class="phase">• Проведение опытной эксплуатации</div>
+                <div class="phase">• Обучение персонала</div>
+                <div class="phase">• Сопровождение внедрения</div>
+                <div class="phase">• Подписание акта о вводе в промышленную эксплуатацию</div>
+            </div>
+            
+            <div class="stage">
+                <div class="stage-title">
+                    <div class="stage-number">5</div>
+                    <h3>Эксплуатация и сопровождение</h3>
+                </div>
+                <p>Стадия использования системы, ее поддержки и развития в соответствии с changing требованиями.</p>
+                
+                <div class="phase">• Эксплуатация системы</div>
+                <div class="phase">• Локализация проблем и устранение ошибок</div>
+                <div class="phase">• Анализ функционирования и модернизация</div>
+                <div class="phase">• Поддержка пользователей</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="card">
+        <h2>Современные тенденции в проектировании АИС</h2>
+        <p>С развитием технологий подходы к проектированию АИС continuously evolving. К современным тенденциям относятся:</p>
+        
+        <ul>
+            <li><strong>Использование agile-методологий</strong> — гибких итеративных подходов к разработке</li>
+            <li><strong>Микросервисная архитектура</strong> — проектирование системы как набора loosely coupled сервисов</li>
+            <li><strong>DevOps-практики</strong> — интеграция процессов разработки и эксплуатации</li>
+            <li><strong>Low-code/No-code платформы</strong> — ускорение разработки через визуальное проектирование</li>
+            <li><strong>Облачные технологии</strong> — проектирование систем с ориентацией на облачную инфраструктуру</li>
+            <li><strong>Контейнеризация</strong> — использование Docker и Kubernetes для упрощения развертывания</li>
+        </ul>
+    </div>
+</div>
+
+
+    </div>
+</div><footer>
+    <div class="container">
+        <p>МДК 06.03 Устройство и функционирование информационных систем</p>
+        <p>© 2023 | Материал для студентов IT-специальностей</p>
+    </div>
+</footer>
+</body>
+</html>
