@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Практическое занятие: Сопровождение 1С:Предприятие</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f0f7ff;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #1e88e5, #0d47a1);
+            color: white;
+            padding: 30px 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+        
+        .lecture-info {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            border-radius: 6px;
+        }
+        
+        .content-wrapper {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        main {
+            flex: 4;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        aside {
+            flex: 1;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            align-self: flex-start;
+        }
+        
+        h2 {
+            color: #1e88e5;
+            margin: 30px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e3f2fd;
+        }
+        
+        h3 {
+            color: #0d47a1;
+            margin: 25px 0 15px;
+        }
+        
+        p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+        
+        ul, ol {
+            margin-bottom: 25px;
+            padding-left: 25px;
+        }
+        
+        li {
+            margin-bottom: 12px;
+            position: relative;
+        }
+        
+        li:before {
+            content: "•";
+            color: #1e88e5;
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+        
+        .highlight {
+            background-color: #e3f2fd;
+            border-left: 5px solid #1e88e5;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .task {
+            background-color: #ffecb3;
+            border: 1px solid #ffd54f;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 25px 0;
+        }
+        
+        .task h3 {
+            color: #ff6f00;
+            margin-top: 0;
+        }
+        
+        .steps {
+            background-color: #e8f5e9;
+            border: 1px solid #66bb6a;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 25px 0;
+        }
+        
+        .steps h3 {
+            color: #2e7d32;
+            margin-top: 0;
+        }
+        
+        .types-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .types-table th, .types-table td {
+            border: 1px solid #ddd;
+            padding: 15px;
+            text-align: left;
+        }
+        
+        .types-table th {
+            background-color: #1e88e5;
+            color: white;
+        }
+        
+        .types-table tr:nth-child(even) {
+            background-color: #f5f9ff;
+        }
+        
+        .nav-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .nav-list li {
+            margin-bottom: 12px;
+        }
+        
+        .nav-list a {
+            text-decoration: none;
+            color: #1e88e5;
+            display: block;
+            padding: 12px 15px;
+            border-radius: 6px;
+            transition: all 0.3s;
+            background-color: #f0f7ff;
+            border-left: 4px solid #1e88e5;
+        }
+        
+        .nav-list a:hover {
+            background-color: #e3f2fd;
+            transform: translateX(5px);
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 25px;
+            color: #546e7a;
+            font-size: 0.9rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #1e88e5;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 10px 5px;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #0d47a1;
+        }
+        
+        @media (max-width: 768px) {
+            .content-wrapper {
+                flex-direction: column;
+            }
+            
+            .lecture-info {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+        
+        .screenshot {
+            text-align: center;
+            margin: 25px 0;
+        }
+        
+        .screenshot img {
+            max-width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .screenshot .caption {
+            font-style: italic;
+            color: #546e7a;
+            margin-top: 8px;
+        }
+        
+        .code-block {
+            background-color: #263238;
+            color: #e0e0e0;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 25px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Практическое занятие: Сопровождение и обслуживание ИС</h1>
+            <p class="subtitle">На примере системы 1С:Предприятие</p>
+            <p class="subtitle">МДК 06.03 Устройство и функционирование информационных систем</p>
+            <div class="lecture-info">
+                <span>Практическое занятие №1</span>
+                <span>Для студентов специальности "Информационные системы"</span>
+                <span>Продолжительность: 4 академических часа</span>
+            </div>
+        </header>
+        
+        <div class="content-wrapper">
+            <aside>
+                <h3>Рекомендуемые темы для изучения</h3>
+                <ol>
+        <li><a href="1u.html">Базовая структура информационной системы.</a></li>
+        <li><a href="2u.html">Особенности информационного, программного и технического обеспечения различных видов ИС.</a></li>
+        <li><a href="3u.html">Особенности сопровождения различных информационных систем</a></li>
+        <li><a href="4u.html">Практическое занятие 1 Сопровождение и обслуживание ИС на примере системы 1С: Предприятие</a></li>
+        <li><a href="5u.html">Практическое занятие 2 Сопровождение и обслуживание локальной сети</a></li>
+        <li><a href="6u.html">Модели качества информационных систем</a></li>
+        <li><a href="7u.html">Надежность информационных систем: основные понятия и определения</a></li>
+        <li><a href="8u.html">Основные угрозы безопасности ИС</a></li>
+        <li><a href="9u.html">Практическое занятие 3 Общие показатели надежности системы</a></li>
+        <li><a href="10u.html">Практическое занятие 4 Определение показателей безотказности системы</a></li>
+        <li><a href="11u.html">Практическое занятие 5 Определение показателей долговечности системы</a></li>
+        <li><a href="12u.html">Практическое занятие 6 Определение показателей ремонтопригодности системы</a></li>
+        <li><a href="13u.html">Практическое занятие 7 Определение комплексных показателей надежности системы</a></li>
+        <li><a href="14u.html">Литература</a></li>
+
+    </ol>
+                <h2>Быстрая навигация</h2>
+                <ul class="nav-list">
+                    <li><a href="#goal">Цель занятия</a></li>
+                    <li><a href="#tasks">Задачи занятия</a></li>
+                    <li><a href="#practice">Практическая часть</a></li>
+                    <li><a href="#monitoring">Мониторинг и оптимизация</a></li>
+                    <li><a href="#conclusion">Итоги занятия</a></li>
+                </ul>
+                
+                <div class="highlight">
+                    <h3>Материалы для скачивания</h3>
+                    <ul>
+                        <li><a href="#" class="btn">Учебная версия 1С</a></li>
+                        <li><a href="#" class="btn">Демо-база "УТ"</a></li>
+                        <li><a href="#" class="btn">Методические указания</a></li>
+                    </ul>
+                </div>
+                
+                <h3>Полезные ресурсы</h3>
+                <ul>
+                    <li>Официальная документация 1С</li>
+                    <li>Форумы поддержки 1С</li>
+                    <li>База знаний по типовым конфигурациям</li>
+                    <li>Видеоуроки по администрированию 1С</li>
+                </ul>
+                
+                <h3>Критерии оценки</h3>
+                <ul>
+                    <li>Правильность выполнения заданий - 40%</li>
+                    <li>Скорость выполнения - 20%</li>
+                    <li>Качество отчета - 25%</li>
+                    <li>Ответы на контрольные вопросы - 15%</li>
+                </ul>
+            </aside>
+            <main>
+                <section id="goal">
+                    <h2>Цель занятия</h2>
+                    <p>Ознакомиться с основными принципами сопровождения и обслуживания информационных систем на примере платформы 1С:Предприятие. Получить практические навыки выполнения типовых операций по поддержке и администрированию системы.</p>
+                    
+                    <div class="highlight">
+                        <p>По итогам занятия студенты должны уметь выполнять базовые операции по обслуживанию типовой конфигурации 1С:Предприятие, включая обновление, резервное копирование и мониторинг работы системы.</p>
+                    </div>
+                </section>
+                
+                <section id="tasks">
+                    <h2>Задачи практического занятия</h2>
+                    <ol>
+                        <li>Изучить архитектуру платформы 1С:Предприятие</li>
+                        <li>Освоить основные приемы работы с конфигуратором</li>
+                        <li>Выполнить операции по обновлению типовой конфигурации</li>
+                        <li>Освоить технику создания резервных копий информационной базы</li>
+                        <li>Провести тестирование и исправление информационной базы</li>
+                        <li>Изучить основные методы мониторинга производительности системы</li>
+                    </ol>
+                </section>
+                
+                <section id="practice">
+                    <h2>Практическая часть</h2>
+                    
+                    <div class="task">
+                        <h3>Задание 1: Подготовка рабочего окружения</h3>
+                        <p>Установите учебную версию платформы 1С:Предприятие и демонстрационную базу "Управление торговлей".</p>
+                        
+                        <div class="steps">
+                            <h3>Шаги выполнения:</h3>
+                            <ol>
+                                <li>Скачайте учебную версию с официального сайта 1С</li>
+                                <li>Установите платформу 1С:Предприятие на компьютер</li>
+                                <li>Добавьте демонстрационную базу "Управление торговлей"</li>
+                                <li>Запустите конфигуратор и ознакомьтесь с интерфейсом</li>
+                            </ol>
+                        </div>
+                    </div>
+                    
+                    <div class="task">
+                        <h3>Задание 2: Обновление конфигурации</h3>
+                        <p>Выполните обновление типовой конфигурации до последней доступной версии.</p>
+                        
+                        <div class="steps">
+                            <h3>Шаги выполнения:</h3>
+                            <ol>
+                                <li>Откройте конфигуратор базы данных</li>
+                                <li>Перейдите в меню "Конфигурация" → "Обновить конфигурацию"</li>
+                                <li>Выберите способ обновления (например, из файла обновления)</li>
+                                <li>Выполните сравнение и объединение конфигураций</li>
+                                <li>Обновите конфигурацию базы данных</li>
+                                <li>Запустите систему в режиме предприятия для проверки</li>
+                            </ol>
+                        </div>
+                        
+                        <div class="highlight">
+                            <p>Важно: Перед выполнением обновления обязательно создайте резервную копию информационной базы!</p>
+                        </div>
+                    </div>
+                    
+                    <div class="task">
+                        <h3>Задание 3: Резервное копирование и восстановление</h3>
+                        <p>Освойте технику создания резервных копий и восстановления информационной базы.</p>
+                        
+                        <div class="steps">
+                            <h3>Шаги выполнения:</h3>
+                            <ol>
+                                <li>Создайте резервную копию базы данных с помощью конфигуратора</li>
+                                <li>Изучите альтернативные методы резервного копирования (с помощью утилит)</li>
+                                <li>Выполните процедуру восстановления базы из резервной копии</li>
+                                <li>Проверьте целостность восстановленной базы данных</li>
+                            </ol>
+                        </div>
+                    </div>
+                    
+                    <div class="screenshot">
+                        <div class="caption">Пример: Интерфейс конфигуратора 1С:Предприятие</div>
+                    </div>
+                </section>
+                
+                <section id="monitoring">
+                    <h2>Мониторинг и оптимизация производительности</h2>
+                    <p>Изучите основные техники мониторинга и оптимизации производительности системы 1С:Предприятие.</p>
+                    
+                    <h3>Техники мониторинга:</h3>
+                    <ul>
+                        <li>Анализ журнала регистрации</li>
+                        <li>Мониторинг блокировок и активных соединений</li>
+                        <li>Анализ производительности запросов к базе данных</li>
+                        <li>Использование встроенных средств мониторинга</li>
+                    </ul>
+                    
+                    <div class="code-block">
+                        // Пример кода для анализа блокировок в 1С<br>
+                        // Открытие журнала регистрации<br>
+                        ЖурналРегистрации = Новый ЖурналРегистрации;<br>
+                        ЖурналРегистрации.Прочитать();<br>
+                        // Фильтрация по событиям блокировок<br>
+                        ЖурналРегистрации.Отбор.Событие = "Блокировка";<br>
+                    </div>
+                </section>
+                
+                <section id="conclusion">
+                    <h2>Итоги занятия</h2>
+                    <p>По результатам выполнения практического занятия студенты должны:</p>
+                    <ul>
+                        <li>Понимать архитектуру системы 1С:Предприятие</li>
+                        <li>Уметь выполнять обновление типовых конфигураций</li>
+                        <li>Владеть техникой резервного копирования и восстановления</li>
+                        <li>Уметь проводить базовый мониторинг работы системы</li>
+                        <li>Понимать основные принципы оптимизации производительности</li>
+                    </ul>
+                    
+                    <div class="highlight">
+                        <p>Полученные навыки могут быть применены для сопровождения не только систем на платформе 1С, но и других информационных систем с аналогичной архитектурой.</p>
+                    </div>
+                </section>
+            </main>
+            
+            
+        </div>
+        
+        <footer>
+            <p>Практическое занятие по МДК 06.03 "Устройство и функционирование информационных систем"</p>
+            <p>© 2025 Кафедра информационных систем и технологий</p>
+            <p>Для студентов специальности "Информационные системы и программирование"</p>
+        </footer>
+    </div>
+</body>
+</html>
