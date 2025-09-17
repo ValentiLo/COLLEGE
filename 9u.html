@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Практическое занятие: Показатели надежности системы</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4efe9 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            padding: 30px 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+        
+        .lecture-info {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            border-radius: 6px;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .content-wrapper {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        main {
+            flex: 4;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        aside {
+            flex: 1;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            align-self: flex-start;
+        }
+        
+        h2 {
+            color: #2c3e50;
+            margin: 30px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eaeaea;
+        }
+        
+        h3 {
+            color: #3498db;
+            margin: 25px 0 15px;
+        }
+        
+        p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+        
+        ul, ol {
+            margin-bottom: 25px;
+            padding-left: 25px;
+        }
+        
+        li {
+            margin-bottom: 12px;
+            position: relative;
+        }
+        
+        li:before {
+            content: "•";
+            color: #3498db;
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+        
+        .highlight {
+            background-color: #e3f2fd;
+            border-left: 5px solid #3498db;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .task {
+            background-color: #fff3e0;
+            border: 1px solid #ffb74d;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 25px 0;
+        }
+        
+        .task h3 {
+            color: #f57c00;
+            margin-top: 0;
+        }
+        
+        .steps {
+            background-color: #e8f5e9;
+            border: 1px solid #66bb6a;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 25px 0;
+        }
+        
+        .steps h3 {
+            color: #2e7d32;
+            margin-top: 0;
+        }
+        
+        .reliability-icon {
+            font-size: 1.2rem;
+            color: #3498db;
+            margin-right: 8px;
+        }
+        
+        .nav-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .nav-list li {
+            margin-bottom: 12px;
+        }
+        
+        .nav-list a {
+            text-decoration: none;
+            color: #3498db;
+            display: block;
+            padding: 12px 15px;
+            border-radius: 6px;
+            transition: all 0.3s;
+            background-color: #f5f7fa;
+            border-left: 4px solid #3498db;
+        }
+        
+        .nav-list a:hover {
+            background-color: #e3f2fd;
+            transform: translateX(5px);
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 25px;
+            color: #546e7a;
+            font-size: 0.9rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 10px 5px;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .formula-box {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 25px 0;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+            font-size: 1.2rem;
+        }
+        
+        .calculator {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 25px 0;
+            border-left: 4px solid #3498db;
+        }
+        
+        .calculator h3 {
+            margin-top: 0;
+        }
+        
+        .input-group {
+            margin-bottom: 15px;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .input-group button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .input-group button:hover {
+            background: #2980b9;
+        }
+        
+        .result-box {
+            margin-top: 15px;
+            padding: 15px;
+            background: #e8f5e9;
+            border-radius: 4px;
+            display: none;
+        }
+        
+        .scheme {
+            text-align: center;
+            margin: 30px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .scheme-placeholder {
+            height: 200px;
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #3498db;
+            font-weight: bold;
+        }
+        
+        .indicators-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .indicators-table th, .indicators-table td {
+            border: 1px solid #ddd;
+            padding: 15px;
+            text-align: left;
+        }
+        
+        .indicators-table th {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .indicators-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        @media (max-width: 768px) {
+            .content-wrapper {
+                flex-direction: column;
+            }
+            
+            .lecture-info {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Практическое занятие: Общие показатели надежности системы</h1>
+            <p class="subtitle">МДК 06.03 Устройство и функционирование информационных систем</p>
+            <div class="lecture-info">
+                <span class="info-item"><i class="fas fa-clock"></i> Продолжительность: 4 часа</span>
+                <span class="info-item"><i class="fas fa-user-graduate"></i> Специальность: "Информационные системы"</span>
+                <span class="info-item"><i class="fas fa-book"></i> Практическое занятие №3</span>
+            </div>
+        </header>
+        
+        <div class="content-wrapper">
+            <aside>
+                <h3>Рекомендуемые темы для изучения</h3>
+                <ol>
+        <li><a href="1u.html">Базовая структура информационной системы.</a></li>
+        <li><a href="2u.html">Особенности информационного, программного и технического обеспечения различных видов ИС.</a></li>
+        <li><a href="3u.html">Особенности сопровождения различных информационных систем</a></li>
+        <li><a href="4u.html">Практическое занятие 1 Сопровождение и обслуживание ИС на примере системы 1С: Предприятие</a></li>
+        <li><a href="5u.html">Практическое занятие 2 Сопровождение и обслуживание локальной сети</a></li>
+        <li><a href="6u.html">Модели качества информационных систем</a></li>
+        <li><a href="7u.html">Надежность информационных систем: основные понятия и определения</a></li>
+        <li><a href="8u.html">Основные угрозы безопасности ИС</a></li>
+        <li><a href="9u.html">Практическое занятие 3 Общие показатели надежности системы</a></li>
+        <li><a href="10u.html">Практическое занятие 4 Определение показателей безотказности системы</a></li>
+        <li><a href="11u.html">Практическое занятие 5 Определение показателей долговечности системы</a></li>
+        <li><a href="12u.html">Практическое занятие 6 Определение показателей ремонтопригодности системы</a></li>
+        <li><a href="13u.html">Практическое занятие 7 Определение комплексных показателей надежности системы</a></li>
+        <li><a href="14u.html">Литература</a></li>
+
+    </ol>
+                <h2><i class="fas fa-map-signs"></i> Навигация</h2>
+                <ul class="nav-list">
+                    <li><a href="#goal"><i class="fas fa-bullseye"></i> Цель занятия</a></li>
+                    <li><a href="#tasks"><i class="fas fa-tasks"></i> Задачи занятия</a></li>
+                    <li><a href="#theory"><i class="fas fa-book"></i> Теоретическая часть</a></li>
+                    <li><a href="#practice"><i class="fas fa-laptop-code"></i> Практическая часть</a></li>
+                    <li><a href="#conclusion"><i class="fas fa-check-circle"></i> Итоги</a></li>
+                </ul>
+                
+                <div class="highlight">
+                    <h3><i class="fas fa-download"></i> Материалы</h3>
+                    <ul>
+                        <li><a href="#" class="btn"><i class="fas fa-file-pdf"></i> Методические указания</a></li>
+                        <li><a href="#" class="btn"><i class="fas fa-table"></i> Шаблон отчета</a></li>
+                        <li><a href="#" class="btn"><i class="fas fa-calculator"></i> Калькулятор надежности</a></li>
+                    </ul>
+                </div>
+                
+                <h3><i class="fas fa-tools"></i> Полезные ресурсы</h3>
+                <ul>
+                    <li>Стандарты надежности IEC 61508</li>
+                    <li>Методики расчета надежности</li>
+                    <li>Примеры расчетов для реальных систем</li>
+                    <li>Шаблоны для оформления отчетов</li>
+                </ul>
+                
+                <h3><i class="fas fa-clipboard-check"></i> Критерии оценки</h3>
+                <ul>
+                    <li>Правильность расчетов - 40%</li>
+                    <li>Глубина анализа результатов - 30%</li>
+                    <li>Каство отчета - 20%</li>
+                    <li>Ответы на контрольные вопросы - 10%</li>
+                </ul>
+            </aside>
+            <main>
+                <section id="goal">
+                    <h2><i class="fas fa-bullseye reliability-icon"></i> Цель занятия</h2>
+                    <p>Ознакомиться с основными показателями надежности информационных систем и научиться рассчитывать их на практике. Получить навыки анализа и оценки надежности систем на основе количественных показателей.</p>
+                    
+                    <div class="highlight">
+                        <p>По итогам занятия студенты должны уметь рассчитывать основные показатели надежности, анализировать их значения и делать выводы о надежности информационной системы.</p>
+                    </div>
+                </section>
+                
+                <section id="tasks">
+                    <h2><i class="fas fa-tasks reliability-icon"></i> Задачи практического занятия</h2>
+                    <ol>
+                        <li>Изучить основные показатели надежности информационных систем</li>
+                        <li>Освоить методы расчета показателей надежности</li>
+                        <li>Провести расчеты для различных конфигураций системы</li>
+                        <li>Проанализировать полученные результаты</li>
+                        <li>Сравнить надежность различных архитектурных решений</li>
+                        <li>Сформулировать рекомендации по повышению надежности</li>
+                    </ol>
+                </section>
+                
+                <section id="theory">
+                    <h2><i class="fas fa-book reliability-icon"></i> Теоретическая часть</h2>
+                    
+                    <h3>Основные показатели надежности</h3>
+                    
+                    <table class="indicators-table">
+                        <thead>
+                            <tr>
+                                <th>Показатель</th>
+                                <th>Обозначение</th>
+                                <th>Определение</th>
+                                <th>Формула</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Вероятность безотказной работы</td>
+                                <td>P(t)</td>
+                                <td>Вероятность того, что система будет работать безотказно в течение времени t</td>
+                                <td>P(t) = e<sup>-λt</sup></td>
+                            </tr>
+                            <tr>
+                                <td>Средняя наработка на отказ</td>
+                                <td>MTBF</td>
+                                <td>Ожидаемое время между отказами системы</td>
+                                <td>MTBF = 1/λ</td>
+                            </tr>
+                            <tr>
+                                <td>Среднее время восстановления</td>
+                                <td>MTTR</td>
+                                <td>Ожидаемое время восстановления системы после отказа</td>
+                                <td>MTTR = Σt<sub>восст</sub>/n</td>
+                            </tr>
+                            <tr>
+                                <td>Коэффициент готовности</td>
+                                <td>K<sub>г</sub></td>
+                                <td>Вероятность того, что система окажется работоспособной в произвольный момент времени</td>
+                                <td>K<sub>г</sub> = MTBF/(MTBF+MTTR)</td>
+                            </tr>
+                            <tr>
+                                <td>Интенсивность отказов</td>
+                                <td>λ</td>
+                                <td>Количество отказов в единицу времени</td>
+                                <td>λ = n/Σt<sub>раб</sub></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="formula-box">
+                        P(t) = e<sup>-λt</sup> = e<sup>-t/MTBF</sup>
+                    </div>
+                    
+                    <div class="formula-box">
+                        K<sub>г</sub> = MTBF / (MTBF + MTTR)
+                    </div>
+                    
+                    <h3>Надежность систем с резервированием</h3>
+                    <p>Для повышения надежности systems используются различные схемы резервирования:</p>
+                    
+                    <ul>
+                        <li><strong>Hot standby</strong> — горячее резервирование, когда резервный компонент работает параллельно с основным</li>
+                        <li><strong>Cold standby</strong> — холодное резервирование, когда резервный компонент включается только после отказа основного</li>
+                        <li><strong>Warm standby</strong> — теплое резервирование, промежуточный вариант между горячим и холодным</li>
+                    </ul>
+                    
+                    <div class="scheme">
+                        <h4>Схема системы с резервированием</h4>
+                        <div class="scheme-placeholder">
+                            [Схема: Основной сервер → Резервный сервер → Коммутатор]
+                        </div>
+                    </div>
+                </section>
+                
+                <section id="practice">
+                    <h2><i class="fas fa-laptop-code reliability-icon"></i> Практическая часть</h2>
+                    
+                    <div class="task">
+                        <h3><i class="fas fa-calculator"></i> Задание 1: Расчет вероятности безотказной работы</h3>
+                        <p>Рассчитайте вероятность безотказной работы системы в течение 1000 часов, если интенсивность отказов составляет λ = 0.0001 отказов/час.</p>
+                        
+                        <div class="calculator">
+                            <h4>Калькулятор вероятности безотказной работы</h4>
+                            <div class="input-group">
+                                <label for="lambda">Интенсивность отказов (λ, отказов/час):</label>
+                                <input type="number" id="lambda" step="0.00001" value="0.0001">
+                            </div>
+                            <div class="input-group">
+                                <label for="time">Время работы (t, часов):</label>
+                                <input type="number" id="time" value="1000">
+                            </div>
+                            <div class="input-group">
+                                <button onclick="calculateProbability()">Рассчитать</button>
+                            </div>
+                            <div class="result-box" id="probabilityResult">
+                                <strong>Результат:</strong> Вероятность безотказной работы P(t) = <span id="resultValue"></span>
+                            </div>
+                        </div>
+                        
+                        <div class="steps">
+                            <h3>Шаги выполнения:</h3>
+                            <ol>
+                                <li>Запишите формулу для расчета вероятности безотказной работы</li>
+                                <li>Подставьте значения λ и t в формулу</li>
+                                <li>Выполните расчет</li>
+                                <li>Проанализируйте полученный результат</li>
+                            </ol>
+                        </div>
+                    </div>
+                    
+                    <div class="task">
+                        <h3><i class="fas fa-calculator"></i> Задание 2: Расчет коэффициента готовности</h3>
+                        <p>Рассчитайте коэффициент готовности системы, если средняя наработка на отказ составляет 500 часов, а среднее время восстановления — 2 часа.</p>
+                        
+                        <div class="calculator">
+                            <h4>Калькулятор коэффициента готовности</h4>
+                            <div class="input-group">
+                                <label for="mtbf">Средняя наработка на отказ (MTBF, часов):</label>
+                                <input type="number" id="mtbf" value="500">
+                            </div>
+                            <div class="input-group">
+                                <label for="mttr">Среднее время восстановления (MTTR, часов):</label>
+                                <input type="number" id="mttr" value="2">
+                            </div>
+                            <div class="input-group">
+                                <button onclick="calculateAvailability()">Рассчитать</button>
+                            </div>
+                            <div class="result-box" id="availabilityResult">
+                                <strong>Результат:</strong> Коэффициент готовности K<sub>г</sub> = <span id="availabilityValue"></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="task">
+                        <h3><i class="fas fa-chart-line"></i> Задание 3: Сравнение надежности систем</h3>
+                        <p>Проанализируйте и сравните показатели надежности для трех различных конфигураций системы:</p>
+                        
+                        <table class="indicators-table">
+                            <thead>
+                                <tr>
+                                    <th>Конфигурация</th>
+                                    <th>MTBF (часов)</th>
+                                    <th>MTTR (часов)</th>
+                                    <th>Стоимость (у.е.)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Базовая</td>
+                                    <td>500</td>
+                                    <td>4</td>
+                                    <td>1000</td>
+                                </tr>
+                                <tr>
+                                    <td>С резервированием</td>
+                                    <td>2000</td>
+                                    <td>2</td>
+                                    <td>2500</td>
+                                </tr>
+                                <tr>
+                                    <td>Высоконадежная</td>
+                                    <td>5000</td>
+                                    <td>1</td>
+                                    <td>5000</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <div class="steps">
+                            <h3>Шаги выполнения:</h3>
+                            <ol>
+                                <li>Рассчитайте коэффициент готовности для каждой конфигурации</li>
+                                <li>Рассчитайте вероятность безотказной работы за 1000 часов для каждой конфигурации</li>
+                                <li>Сравните полученные показатели</li>
+                                <li>Проанализируйте соотношение "надежность/стоимость"</li>
+                                <li>Сделайте вывод о целесообразности каждой конфигурации</li>
+                            </ol>
+                        </div>
+                    </div>
+                </section>
+                
+                <section id="conclusion">
+                    <h2><i class="fas fa-check-circle reliability-icon"></i> Итоги занятия</h2>
+                    <p>По результатам выполнения практического занятия студенты должны:</p>
+                    <ul>
+                        <li>Понимать основные показатели надежности информационных систем</li>
+                        <li>Уметь рассчитывать вероятность безотказной работы и коэффициент готовности</li>
+                        <li>Уметь анализировать и сравнивать надежность различных конфигураций систем</li>
+                        <li>Понимать влияние резервирования на надежность системы</li>
+                        <li>Уметь формулировать рекомендации по повышению надежности</li>
+                    </ul>
+                    
+                    <div class="highlight">
+                        <p>Полученные навыки необходимы для работы системным аналитиком, архитектором информационных систем или специалистом по качеству и надежности.</p>
+                    </div>
+                </section>
+            </main>
+            
+            
+        </div>
+        
+        <footer>
+            <p>Практическое занятие по МДК 06.03 "Устройство и функционирование информационных систем"</p>
+            <p>© 2023 Кафедра информационных систем и технологий | Разработано для специальности "Информационные системы"</p>
+        </footer>
+    </div>
+
+    <script>
+        function calculateProbability() {
+            const lambda = parseFloat(document.getElementById('lambda').value);
+            const time = parseFloat(document.getElementById('time').value);
+            
+            const probability = Math.exp(-lambda * time);
+            
+            document.getElementById('resultValue').textContent = probability.toFixed(6);
+            document.getElementById('probabilityResult').style.display = 'block';
+        }
+        
+        function calculateAvailability() {
+            const mtbf = parseFloat(document.getElementById('mtbf').value);
+            const mttr = parseFloat(document.getElementById('mttr').value);
+            
+            const availability = mtbf / (mtbf + mttr);
+            
+            document.getElementById('availabilityValue').textContent = availability.toFixed(6);
+            document.getElementById('availabilityResult').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
