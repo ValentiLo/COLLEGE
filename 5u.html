@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Практическое занятие: Сопровождение локальной сети</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4efe9 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            padding: 30px 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+        
+        .lecture-info {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            border-radius: 6px;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .content-wrapper {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        main {
+            flex: 4;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        aside {
+            flex: 1;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            align-self: flex-start;
+        }
+        
+        h2 {
+            color: #2c3e50;
+            margin: 30px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eaeaea;
+        }
+        
+        h3 {
+            color: #3498db;
+            margin: 25px 0 15px;
+        }
+        
+        p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+        
+        ul, ol {
+            margin-bottom: 25px;
+            padding-left: 25px;
+        }
+        
+        li {
+            margin-bottom: 12px;
+            position: relative;
+        }
+        
+        li:before {
+            content: "•";
+            color: #3498db;
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+        
+        .highlight {
+            background-color: #e3f2fd;
+            border-left: 5px solid #3498db;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .task {
+            background-color: #fff3e0;
+            border: 1px solid #ffb74d;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 25px 0;
+        }
+        
+        .task h3 {
+            color: #f57c00;
+            margin-top: 0;
+        }
+        
+        .steps {
+            background-color: #e8f5e9;
+            border: 1px solid #66bb6a;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 25px 0;
+        }
+        
+        .steps h3 {
+            color: #2e7d32;
+            margin-top: 0;
+        }
+        
+        .network-icon {
+            font-size: 1.2rem;
+            color: #3498db;
+            margin-right: 8px;
+        }
+        
+        .nav-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .nav-list li {
+            margin-bottom: 12px;
+        }
+        
+        .nav-list a {
+            text-decoration: none;
+            color: #3498db;
+            display: block;
+            padding: 12px 15px;
+            border-radius: 6px;
+            transition: all 0.3s;
+            background-color: #f5f7fa;
+            border-left: 4px solid #3498db;
+        }
+        
+        .nav-list a:hover {
+            background-color: #e3f2fd;
+            transform: translateX(5px);
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 25px;
+            color: #546e7a;
+            font-size: 0.9rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 10px 5px;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .network-diagram {
+            text-align: center;
+            margin: 30px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .diagram-placeholder {
+            height: 200px;
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #3498db;
+            font-weight: bold;
+        }
+        
+        .command-block {
+            background-color: #263238;
+            color: #e0e0e0;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 25px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .command {
+            color: #82b1ff;
+        }
+        
+        .comment {
+            color: #78909c;
+        }
+        
+        .equipment-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .equipment-item {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .equipment-item h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .content-wrapper {
+                flex-direction: column;
+            }
+            
+            .lecture-info {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .equipment-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Практическое занятие: Сопровождение и обслуживание локальной сети</h1>
+            <p class="subtitle">МДК 06.03 Устройство и функционирование информационных систем</p>
+            <div class="lecture-info">
+                <span class="info-item"><i class="fas fa-book"></i> Практическое занятие №2</span>
+                <span class="info-item"><i class="fas fa-user-graduate"></i> Специальность: "Информационные системы"</span>
+                <span class="info-item"><i class="fas fa-clock"></i> Продолжительность: 4 часа</span>
+            </div>
+        </header>
+        
+        <div class="content-wrapper">
+            
+            
+            <aside>
+                <h2>Рекомендуемые темы для изучения</h2>
+                <ol>
+        <li><a href="1u.html">Базовая структура информационной системы.</a></li>
+        <li><a href="2u.html">Особенности информационного, программного и технического обеспечения различных видов ИС.</a></li>
+        <li><a href="3u.html">Особенности сопровождения различных информационных систем</a></li>
+        <li><a href="4u.html">Практическое занятие 1 Сопровождение и обслуживание ИС на примере системы 1С: Предприятие</a></li>
+        <li><a href="5u.html">Практическое занятие 2 Сопровождение и обслуживание локальной сети</a></li>
+        <li><a href="6u.html">Модели качества информационных систем</a></li>
+        <li><a href="7u.html">Надежность информационных систем: основные понятия и определения</a></li>
+        <li><a href="8u.html">Основные угрозы безопасности ИС</a></li>
+        <li><a href="9u.html">Практическое занятие 3 Общие показатели надежности системы</a></li>
+        <li><a href="10u.html">Практическое занятие 4 Определение показателей безотказности системы</a></li>
+        <li><a href="11u.html">Практическое занятие 5 Определение показателей долговечности системы</a></li>
+        <li><a href="12u.html">Практическое занятие 6 Определение показателей ремонтопригодности системы</a></li>
+        <li><a href="13u.html">Практическое занятие 7 Определение комплексных показателей надежности системы</a></li>
+        <li><a href="14u.html">Литература</a></li>
+
+    </ol>
+                <h2><i class="fas fa-map-signs"></i> Навигация</h2>
+                <ul class="nav-list">
+                    <li><a href="#goal"><i class="fas fa-bullseye"></i> Цель занятия</a></li>
+                    <li><a href="#tasks"><i class="fas fa-tasks"></i> Задачи занятия</a></li>
+                    <li><a href="#equipment"><i class="fas fa-server"></i> Оборудование</a></li>
+                    <li><a href="#practice"><i class="fas fa-laptop-code"></i> Практическая часть</a></li>
+                    <li><a href="#security"><i class="fas fa-shield-alt"></i> Безопасность</a></li>
+                    <li><a href="#conclusion"><i class="fas fa-check-circle"></i> Итоги</a></li>
+                </ul>
+                
+                <div class="highlight">
+                    <h3><i class="fas fa-download"></i> Материалы</h3>
+                    <ul>
+                        <li><a href="https://skillbox.ru/media/code/chto-takoe-ping-ping-kak-proverit-kachestvo-soedineniya-cherez-komandnuyu-stroku/" class="btn"><i class="fas fa-file-pdf"></i>Пинг (ping): что это</a></li>
+                        <li><a href="https://dzen.ru/a/XmqSeEfae1SRI9qD" class="btn"><i class="fas fa-table"></i>PING для диагностики сети</a></li>
+                        <li><a href="https://netpoint-dc.com/blog/network-connectivity-checklist/" class="btn"><i class="fas fa-table"></i> Чек-лист диагностики</a></li>
+                        <li><a href="#" class="btn"><i class="fas fa-book"></i> Глоссарий терминов</a></li>
+                    </ul>
+                </div>
+                
+                <h3><i class="fas fa-tools"></i> Полезные утилиты</h3>
+                <ul>
+                    <li>Wireshark - анализатор трафика</li>
+                    <li>Putty - SSH-клиент</li>
+                    <li>Advanced IP Scanner</li>
+                    <li>Angry IP Scanner</li>
+                </ul>
+                
+                <h3><i class="fas fa-clipboard-check"></i> Критерии оценки</h3>
+                <ul>
+                    <li>Правильность выполнения заданий - 40%</li>
+                    <li>Скорость диагностики проблем - 25%</li>
+                    <li>Качество отчета - 20%</li>
+                    <li>Ответы на вопросы - 15%</li>
+                </ul>
+            </aside>
+            <main>
+                <section id="goal">
+                    <h2><i class="fas fa-bullseye network-icon"></i> Цель занятия</h2>
+                    <p>Ознакомиться с принципами сопровождения и обслуживания локальных вычислительных сетей (ЛВС). Получить практические навыки диагностики, мониторинга и устранения неисправностей в сетевой инфраструктуре.</p>
+                    
+                    <div class="highlight">
+                        <p>По итогам занятия студенты должны уметь выполнять базовые операции по обслуживанию локальной сети, диагностировать типовые проблемы и обеспечивать стабильную работу сетевых services.</p>
+                    </div>
+                </section>
+                
+                <section id="tasks">
+                    <h2><i class="fas fa-tasks network-icon"></i> Задачи практического занятия</h2>
+                    <ol>
+                        <li>Изучить основные компоненты локальной сети и их функции</li>
+                        <li>Освоить технику диагностики сетевых подключений</li>
+                        <li>Научиться настраивать сетевое оборудование (маршрутизаторы, коммутаторы)</li>
+                        <li>Освоить методы мониторинга сетевой активности</li>
+                        <li>Изучить технику обеспечения сетевой безопасности</li>
+                        <li>Отработать действия по устранению типовых сетевых неисправностей</li>
+                    </ol>
+                </section>
+                
+                <section id="equipment">
+                    <h2><i class="fas fa-server network-icon"></i> Сетевое оборудование</h2>
+                    <p>Для выполнения практических заданий потребуется следующее сетевое оборудование:</p>
+                    
+                    <div class="equipment-list">
+                        <div class="equipment-item">
+                            <h4><i class="fas fa-wifi"></i> Маршрутизатор</h4>
+                            <p>Устройство для организации обмена данными между различными сетями</p>
+                        </div>
+                        <div class="equipment-item">
+                            <h4><i class="fas fa-network-wired"></i> Коммутатор</h4>
+                            <p>Устройство для соединения нескольких узлов компьютерной сети</p>
+                        </div>
+                        <div class="equipment-item">
+                            <h4><i class="fas fa-ethernet"></i> Сетевые кабели</h4>
+                            <p>Кабели UTP категории 5e/6 с коннекторами RJ-45</p>
+                        </div>
+                        <div class="equipment-item">
+                            <h4><i class="fas fa-network-wired"></i> Сетевые адаптеры</h4>
+                            <p>Wi-Fi адаптеры и Ethernet карты для подключения компьютеров</p>
+                        </div>
+                    </div>
+                </section>
+                
+                <section id="practice">
+                    <h2><i class="fas fa-laptop-code network-icon"></i> Практическая часть</h2>
+                    
+                    <div class="task">
+                        <h3><i class="fas fa-network-wired"></i> Задание 1: Построение физической структуры сети</h3>
+                        <p>Создайте физическую структуру локальной сети по предложенной схеме, подключив компьютеры через коммутатор к маршрутизатору.</p>
+                        
+                        <div class="network-diagram">
+                            <h4>Схема сети</h4>
+                            <div class="diagram-placeholder">
+                                [Схема сети: Маршрутизатор → Коммутатор → Компьютеры]
+                            </div>
+                            <img src="сеть.png" style="width: 80%;" alt="">
+                        </div>
+                        
+                        <div class="steps">
+                            <h3>Шаги выполнения:</h3>
+                            <ol>
+                                <li>Подключите маршрутизатор к источнику питания</li>
+                                <li>Соедините маршрутизатор и коммутатор с помощью сетевого кабеля</li>
+                                <li>Подключите компьютеры к коммутатору</li>
+                                <li>Настройте сетевое питание (PoE) при необходимости</li>
+                                <li>Проверьте физические подключения и индикацию на устройствах</li>
+                            </ol>
+                        </div>
+                    </div>
+                    
+                    <div class="task">
+                        <h3><i class="fas fa-cogs"></i> Задание 2: Настройка сетевых параметров</h3>
+                        <p>Настройте IP-адресацию на компьютерах в соответствии с предложенной схемой.</p>
+                        
+                        <div class="steps">
+                            <h3>Шаги выполнения:</h3>
+                            <ol>
+                                <li>Определите диапазон IP-адресов для вашей сети</li>
+                                <li>Настройте статические IP-адреса на компьютерах или настройте DHCP-сервер на маршрутизаторе</li>
+                                <li>Настройте маску подсети и шлюз по умолчанию</li>
+                                <li>Укажите адреса DNS-серверов</li>
+                                <li>Проверьте связь между компьютерами сети</li>
+                            </ol>
+                        </div>
+                        
+                        <div class="command-block">
+                            <span class="command">ping 192.168.1.1</span> <span class="comment"># Проверка связи с маршрутизатором</span><br>
+                            <span class="command">ipconfig /all</span> <span class="comment"># Просмотр сетевых параметров (Windows)</span><br>
+                            <span class="command">ifconfig</span> <span class="comment"># Просмотр сетевых параметров (Linux)</span><br>
+                        </div>
+                        <h3><i class="fas fa-cogs"></i> Пример выполнения</h3>
+                        <div class="command-block">
+                            <span class="command">ping 192.168.1.1</span> <span class="comment"># Проверка связи с маршрутизатором</span><br>
+                            <img src="ping1.gif" style="width: 100%;" alt="">
+                        </div>
+                        <h3><i class="fas fa-cogs"></i> Пример выполнения</h3>
+                        <div class="command-block">
+                            <span class="command">ipconfig /all</span> <span class="comment"># Просмотр сетевых параметров (Windows)</span><br>
+                            <img src="ipconfig.gif" style="width: 100%;" alt="">
+                        </div>
+                    </div>
+                    
+                    <div class="task">
+                        <h3><i class="fas fa-search"></i> Задание 3: Диагностика сетевых проблем</h3>
+                        <p>Используйте network-утилиты для диагностики и устранения сетевых неисправностей.</p>
+                        
+                        <div class="steps">
+                            <h3>Шаги выполнения:</h3>
+                            <ol>
+                                <li>Сымитируйте обрыв сетевого кабеля и определите симптомы проблемы</li>
+                                <li>Используйте ping для проверки базовой connectivity</li>
+                                <li>Примените tracert/traceroute для определения точки сбоя</li>
+                                <li>Используйте nslookup для диагностики DNS-проблем</li>
+                                <li>Примените инструменты мониторинга трафика (Wireshark)</li>
+                            </ol>
+                        </div>
+                    </div>
+                </section>
+                
+                <section id="security">
+                    <h2><i class="fas fa-shield-alt network-icon"></i> Обеспечение сетевой безопасности</h2>
+                    <p>Изучите основные техники обеспечения безопасности локальной сети.</p>
+                    
+                    <h3>Меры безопасности:</h3>
+                    <ul>
+                        <li>Настройка брандмауэра на маршрутизаторе</li>
+                        <li>Фильтрация MAC-адресов</li>
+                        <li>Сегментация сети на подсети/VLAN</li>
+                        <li>Настройка VPN для безопасного удаленного доступа</li>
+                        <li>Регулярное обновление firmware сетевых устройств</li>
+                    </ul>
+                    
+                    <div class="highlight">
+                        <p>Важно: При настройке сетевой безопасности всегда соблюдайте баланс между уровнем защиты и удобством использования сети.</p>
+                    </div>
+                </section>
+                
+                <section id="conclusion">
+                    <h2><i class="fas fa-check-circle network-icon"></i> Итоги занятия</h2>
+                    <p>По результатам выполнения практического занятия студенты должны:</p>
+                    <ul>
+                        <li>Понимать архитектуру и компоненты локальной сети</li>
+                        <li>Уметь настраивать сетевое оборудование</li>
+                        <li>Владеть техникой диагностики сетевых проблем</li>
+                        <li>Уметь обеспечивать базовую сетевую безопасность</li>
+                        <li>Понимать принципы мониторинга сетевой активности</li>
+                    </ul>
+                    
+                    <div class="highlight">
+                        <p>Полученные навыки необходимы для работы сетевым администратором, специалистом технической поддержки или системным администратором.</p>
+                    </div>
+                </section>
+            </main>
+        </div>
+        
+        <footer>
+            <p>Практическое занятие по МДК 06.03 "Устройство и функционирование информационных систем"</p>
+            <p>© 2023 Кафедра информационных систем и технологий | Разработано для специальности "Информационные системы"</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Практическое занятие 7 | МДК 06.03</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #2c3e50, #1a2530);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            border-radius: 0 0 10px 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin: 25px 0 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        h3 {
+            font-size: 1.4rem;
+            color: #2980b9;
+            margin: 20px 0 10px;
+        }
+        
+        .module-code {
+            font-size: 1.2rem;
+            color: #bdc3c7;
+        }
+        
+        .content {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .main-content {
+            flex: 4;
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        }
+        
+        .sidebar {
+            flex: 1;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        }
+        
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        ul, ol {
+            margin-bottom: 20px;
+            margin-left: 20px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        .card {
+            background: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .definition {
+            background: #e8f4fc;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+        
+        .formula {
+            font-family: 'Courier New', monospace;
+            background: #f4f6f7;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .task {
+            background: #e7f5e9;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 20px 0;
+        }
+        
+        .task h3 {
+            color: #27ae60;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        .conclusion {
+            background: #fff8e1;
+            padding: 20px;
+            border-radius: 6px;
+            margin: 30px 0;
+            border-left: 4px solid #f39c12;
+        }
+        
+        .steps {
+            background: #f9f3ff;
+            padding: 20px;
+            border-radius: 6px;
+            margin: 20px 0;
+            border-left: 4px solid #9b59b6;
+        }
+        
+        .indicator-card {
+            background: #fff;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border-left: 4px solid #e74c3c;
+        }
+        
+        .indicator-card h4 {
+            color: #e74c3c;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .indicator-card h4 i {
+            margin-right: 10px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            background: #2c3e50;
+            color: white;
+            border-radius: 10px 10px 0 0;
+        }
+        
+        .calculator {
+            background: #f0f7ff;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .calculator h3 {
+            color: #16a085;
+        }
+        
+        .input-group {
+            margin: 15px 0;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            background: #2980b9;
+        }
+        
+        .result {
+            margin-top: 15px;
+            padding: 15px;
+            background: #eafaf1;
+            border-radius: 4px;
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Практическое занятие 7</h1>
+            <p class="module-code">МДК 06.03 Устройство и функционирование информационных систем</p>
+            <p>Определение комплексных показателей надежности системы</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="content">
+            <div class="main-content">
+                <h2>Цель занятия</h2>
+                <p>Изучение методов определения комплексных показателей надежности информационных систем, приобретение практических навыков расчета и оценки интегральных характеристик надежности.</p>
+                
+                <div class="definition">
+                    <h3>Комплексные показатели надежности</h3>
+                    <p>Комплексные показатели надежности — это интегральные характеристики, которые учитывают несколько аспектов надежности системы, таких как безотказность, ремонтопригодность, долговечность и сохраняемость.</p>
+                </div>
+                
+                <h2>Теоретические сведения</h2>
+                <p>Комплексные показатели надежности информационных систем позволяют оценить общую способность системы выполнять требуемые функции в заданных условиях в течение определенного времени. Основные комплексные показатели включают:</p>
+                
+                <div class="indicator-card">
+                    <h4><i class="fas fa-calculator"></i> Коэффициент готовности (Kг)</h4>
+                    <p>Вероятность того, что система окажется в работоспособном состоянии в произвольный момент времени, кроме планируемых периодов, когда использование системы не предусмотрено.</p>
+                </div>
+                
+                <div class="indicator-card">
+                    <h4><i class="fas fa-chart-line"></i> Коэффициент оперативной готовности (Kог)</h4>
+                    <p>Вероятность того, что система окажется в работоспособном состоянии в произвольный момент времени и будет работать безотказно в течение заданного интервала времени.</p>
+                </div>
+                
+                <div class="indicator-card">
+                    <h4><i class="fas fa-tachometer-alt"></i> Коэффициент технического использования (Kти)</h4>
+                    <p>Отношение математического ожидания времени пребывания системы в работоспособном состоянии за некоторый период эксплуатации к сумме математических ожиданий времени пребывания системы в работоспособном состоянии, простоев, обусловленных техническим обслуживанием, и ремонтов за тот же период.</p>
+                </div>
+                
+                <div class="card">
+                    <h3>Формулы для расчета</h3>
+                    <div class="formula">
+                        Kг = T₀ / (T₀ + Tв)
+                    </div>
+                    <p>где T₀ — средняя наработка на отказ, Tв — среднее время восстановления</p>
+                    
+                    <div class="formula">
+                        Kог = Kг × P(t)
+                    </div>
+                    <p>где P(t) — вероятность безотказной работы в течение времени t</p>
+                    
+                    <div class="formula">
+                        Kти = T₀ / (T₀ + Tв + Tт)
+                    </div>
+                    <p>где Tт — среднее время технического обслуживания</p>
+                </div>
+                
+                <div class="calculator">
+                    <h3>Калькулятор коэффициента готовности</h3>
+                    <div class="input-group">
+                        <label for="mtbf">Средняя наработка на отказ (T₀), часов:</label>
+                        <input type="number" id="mtbf" placeholder="Введите значение">
+                    </div>
+                    <div class="input-group">
+                        <label for="mttr">Среднее время восстановления (Tв), часов:</label>
+                        <input type="number" id="mttr" placeholder="Введите значение">
+                    </div>
+                    <button class="btn" onclick="calculateAvailability()">Рассчитать</button>
+                    <div class="result" id="availabilityResult">
+                        <h4>Результат:</h4>
+                        <p id="resultText"></p>
+                    </div>
+                </div>
+                
+                <h2>Практическая часть</h2>
+                <div class="task">
+                    <h3>Задание 1: Расчет комплексных показателей</h3>
+                    <p>На основе данных о работе информационной системы рассчитать комплексные показатели надежности:</p>
+                    <ol>
+                        <li>Коэффициент готовности</li>
+                        <li>Коэффициент оперативной готовности для времени 10 часов</li>
+                        <li>Коэффициент технического использования</li>
+                    </ol>
+                    <table>
+                        <tr>
+                            <th>Параметр</th>
+                            <th>Значение</th>
+                        </tr>
+                        <tr>
+                            <td>Средняя наработка на отказ (T₀)</td>
+                            <td>500 часов</td>
+                        </tr>
+                        <tr>
+                            <td>Среднее время восстановления (Tв)</td>
+                            <td>2 часа</td>
+                        </tr>
+                        <tr>
+                            <td>Среднее время технического обслуживания (Tт)</td>
+                            <td>1 час</td>
+                        </tr>
+                        <tr>
+                            <td>Интенсивность отказов (λ)</td>
+                            <td>0.002 1/час</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="task">
+                    <h3>Задание 2: Анализ надежности системы</h3>
+                    <p>По предоставленным данным рассчитать комплексные показатели надежности для двух конфигураций системы и сделать вывод о наиболее надежной конфигурации.</p>
+                    <table>
+                        <tr>
+                            <th>Параметр</th>
+                            <th>Конфигурация A</th>
+                            <th>Конфигурация B</th>
+                        </tr>
+                        <tr>
+                            <td>Средняя наработка на отказ (T₀)</td>
+                            <td>450 часов</td>
+                            <td>600 часов</td>
+                        </tr>
+                        <tr>
+                            <td>Среднее время восстановления (Tв)</td>
+                            <td>1.5 часа</td>
+                            <td>3 часа</td>
+                        </tr>
+                        <tr>
+                            <td>Среднее время технического обслуживания (Tт)</td>
+                            <td>0.5 часа</td>
+                            <td>1 час</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <h2>Методика выполнения работы</h2>
+                <div class="steps">
+                    <ol>
+                        <li>Изучить теоретические сведения о комплексных показателях надежности</li>
+                        <li>Выполнить расчеты по заданным формулам</li>
+                        <li>Проанализировать полученные результаты</li>
+                        <li>Сравнить показатели надежности различных конфигураций системы</li>
+                        <li>Определить наиболее критичные параметры надежности</li>
+                        <li>Предложить мероприятия по улучшению комплексных показателей надежности</li>
+                        <li>Сформулировать выводы о надежности системы</li>
+                        <li>Оформить отчет о выполнении практической работы</li>
+                    </ol>
+                </div>
+                
+                <div class="conclusion">
+                    <h3>Выводы</h3>
+                    <p>На основе выполненных расчетов и анализа комплексных показателей надежности можно сделать вывод об общей способности информационной системы выполнять требуемые функции в заданных условиях, а также разработать рекомендации по повышению надежности системы.</p>
+                </div>
+            </div>
+            
+            <div class="sidebar">
+                <h2>Материалы</h2>
+                <ul>
+                    <li><i class="fas fa-file-pdf"></i> Конспект лекций</li>
+                    <li><i class="fas fa-book"></i> Методические указания</li>
+                    <li><i class="fas fa-file-word"></i> Шаблон отчета</li>
+                    <li><i class="fas fa-book-open"></i> Дополнительная литература</li>
+                </ul>
+                
+                <h2>Полезные ресурсы</h2>
+                <ul>
+                    <li><i class="fas fa-graduation-cap"></i> ГОСТ Р 27.301-2011 Надежность в технике</li>
+                    <li><i class="fas fa-globe"></i> Стандарты ISO 25010</li>
+                    <li><i class="fas fa-calculator"></i> Методы расчета комплексных показателей</li>
+                    <li><i class="fas fa-chart-bar"></i> Подходы к оценке надежности систем</li>
+                </ul>
+                
+                <h2>Факторы надежности</h2>
+                <ul>
+                    <li><i class="fas microchip"></i> Аппаратная надежность</li>
+                    <li><i class="fas fa-code"></i> Качество программного обеспечения</li>
+                    <li><i class="fas fa-cogs"></i> Условия эксплуатации</li>
+                    <li><i class="fas fa-tools"></i> Качество технического обслуживания</li>
+                    <li><i class="fas fa-user-cog"></i> Квалификация персонала</li>
+                </ul>
+                <h2>Рекомендуемые темы для изучения</h2>
+                <ol>
+        <li><a href="1u.html">Базовая структура информационной системы.</a></li>
+        <li><a href="2u.html">Особенности информационного, программного и технического обеспечения различных видов ИС.</a></li>
+        <li><a href="3u.html">Особенности сопровождения различных информационных систем</a></li>
+        <li><a href="4u.html">Практическое занятие 1 Сопровождение и обслуживание ИС на примере системы 1С: Предприятие</a></li>
+        <li><a href="5u.html">Практическое занятие 2 Сопровождение и обслуживание локальной сети</a></li>
+        <li><a href="6u.html">Модели качества информационных систем</a></li>
+        <li><a href="7u.html">Надежность информационных систем: основные понятия и определения</a></li>
+        <li><a href="8u.html">Основные угрозы безопасности ИС</a></li>
+        <li><a href="9u.html">Практическое занятие 3 Общие показатели надежности системы</a></li>
+        <li><a href="10u.html">Практическое занятие 4 Определение показателей безотказности системы</a></li>
+        <li><a href="11u.html">Практическое занятие 5 Определение показателей долговечности системы</a></li>
+        <li><a href="12u.html">Практическое занятие 6 Определение показателей ремонтопригодности системы</a></li>
+        <li><a href="13u.html">Практическое занятие 7 Определение комплексных показателей надежности системы</a></li>
+        <li><a href="14u.html">Литература</a></li>
+
+    </ol>
+                <h2>Критерии оценки</h2>
+                <ol>
+                    <li>Правильность расчетов - 30%</li>
+                    <li>Глубина анализа - 25%</li>
+                    <li>Сравнительный анализ - 20%</li>
+                    <li>Предложения по улучшению - 15%</li>
+                    <li>Оформление отчета - 10%</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>Практическое занятие по МДК 06.03 "Устройство и функционирование информационных систем"</p>
+            <p>© 2023 Разработано для образовательных целей</p>
+        </div>
+    </footer>
+
+    <script>
+        function calculateAvailability() {
+            const mtbf = parseFloat(document.getElementById('mtbf').value);
+            const mttr = parseFloat(document.getElementById('mttr').value);
+            
+            if (isNaN(mtbf) || isNaN(mttr) || mtbf <= 0 || mttr <= 0) {
+                alert('Пожалуйста, введите корректные числовые значения больше нуля.');
+                return;
+            }
+            
+            const availability = mtbf / (mtbf + mttr);
+            const percentage = (availability * 100).toFixed(2);
+            
+            document.getElementById('resultText').innerHTML = 
+                `Коэффициент готовности (Kг) = ${availability.toFixed(4)}<br>
+                 Это означает, что система будет доступна approximately <strong>${percentage}%</strong> времени.`;
+            
+            document.getElementById('availabilityResult').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

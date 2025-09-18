@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Практическое занятие 5 | МДК 06.03</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #2c3e50, #1a2530);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            border-radius: 0 0 10px 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin: 25px 0 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        h3 {
+            font-size: 1.4rem;
+            color: #2980b9;
+            margin: 20px 0 10px;
+        }
+        
+        .module-code {
+            font-size: 1.2rem;
+            color: #bdc3c7;
+        }
+        
+        .content {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .main-content {
+            flex: 4;
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        }
+        
+        .sidebar {
+            flex: 1;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        }
+        
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        ul, ol {
+            margin-bottom: 20px;
+            margin-left: 20px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        .card {
+            background: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .definition {
+            background: #e8f4fc;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+        
+        .formula {
+            font-family: 'Courier New', monospace;
+            background: #f4f6f7;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .task {
+            background: #e7f5e9;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 20px 0;
+        }
+        
+        .task h3 {
+            color: #27ae60;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        .conclusion {
+            background: #fff8e1;
+            padding: 20px;
+            border-radius: 6px;
+            margin: 30px 0;
+            border-left: 4px solid #f39c12;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            background: #2c3e50;
+            color: white;
+            border-radius: 10px 10px 0 0;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Практическое занятие 5</h1>
+            <p class="module-code">МДК 06.03 Устройство и функционирование информационных систем</p>
+            <p>Определение показателей долговечности системы</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="content">
+            <div class="sidebar">
+                <h2>Рекомендуемые темы для изучения</h2>
+                <ol>
+        <li><a href="1u.html">Базовая структура информационной системы.</a></li>
+        <li><a href="2u.html">Особенности информационного, программного и технического обеспечения различных видов ИС.</a></li>
+        <li><a href="3u.html">Особенности сопровождения различных информационных систем</a></li>
+        <li><a href="4u.html">Практическое занятие 1 Сопровождение и обслуживание ИС на примере системы 1С: Предприятие</a></li>
+        <li><a href="5u.html">Практическое занятие 2 Сопровождение и обслуживание локальной сети</a></li>
+        <li><a href="6u.html">Модели качества информационных систем</a></li>
+        <li><a href="7u.html">Надежность информационных систем: основные понятия и определения</a></li>
+        <li><a href="8u.html">Основные угрозы безопасности ИС</a></li>
+        <li><a href="9u.html">Практическое занятие 3 Общие показатели надежности системы</a></li>
+        <li><a href="10u.html">Практическое занятие 4 Определение показателей безотказности системы</a></li>
+        <li><a href="11u.html">Практическое занятие 5 Определение показателей долговечности системы</a></li>
+        <li><a href="12u.html">Практическое занятие 6 Определение показателей ремонтопригодности системы</a></li>
+        <li><a href="13u.html">Практическое занятие 7 Определение комплексных показателей надежности системы</a></li>
+        <li><a href="14u.html">Литература</a></li>
+
+    </ol>
+                <h2>Полезные ресурсы</h2>
+                <ul>
+                    <li>ГОСТ Р 27.301-2011 Надежность в технике</li>
+                    <li>Стандарты ISO 25010</li>
+                    <li>Методы оценки надежности систем</li>
+                </ul>
+                
+                <h2>Критерии оценки</h2>
+                <ol>
+                    <li>Правильность расчетов - 40%</li>
+                    <li>Глубина анализа - 30%</li>
+                    <li>Оформление отчета - 20%</li>
+                    <li>Своевременность выполнения - 10%</li>
+                </ol>
+            </div>
+            <div class="main-content">
+                <h2>Цель занятия</h2>
+                <p>Ознакомление с методами определения показателей долговечности информационных систем, приобретение практических навыков расчета и оценки надежности систем.</p>
+                
+                <div class="definition">
+                    <h3>Долговечность системы</h3>
+                    <p>Долговечность — свойство системы сохранять работоспособность до наступления предельного состояния при установленной системе технического обслуживания и ремонта.</p>
+                </div>
+                
+                <h2>Теоретические сведения</h2>
+                <p>Долговечность информационных систем определяется способностью сохранять эксплуатационные характеристики в течение длительного времени. Основные показатели долговечности включают:</p>
+                
+                <ul>
+                    <li>Среднее время наработки на отказ (MTBF)</li>
+                    <li>Среднее время восстановления (MTTR)</li>
+                    <li>Коэффициент готовности</li>
+                    <li>Интенсивность отказов</li>
+                    <li>Срок службы системы</li>
+                </ul>
+                
+                <div class="card">
+                    <h3>Формулы для расчета</h3>
+                    <div class="formula">
+                        MTBF = T / n
+                    </div>
+                    <p>где T — общее время работы системы, n — количество отказов за это время</p>
+                    
+                    <div class="formula">
+                        Kг = MTBF / (MTBF + MTTR)
+                    </div>
+                    <p>где Kг — коэффициент готовности, MTBF — среднее время наработки на отказ, MTTR — среднее время восстановления</p>
+                </div>
+                
+                <h2>Практическая часть</h2>
+                <div class="task">
+                    <h3>Задание 1: Расчет показателей долговечности</h3>
+                    <p>На основе данных о работе информационной системы в течение 500 часов, в течение которых произошло 3 отказа, рассчитать:</p>
+                    <ol>
+                        <li>Среднее время наработки на отказ (MTBF)</li>
+                        <li>Коэффициент готовности системы, если среднее время восстановления составляет 2 часа</li>
+                    </ol>
+                </div>
+                
+                <div class="task">
+                    <h3>Задание 2: Анализ интенсивности отказов</h3>
+                    <p>По предоставленным данным построить график интенсивности отказов и сделать выводы о долговечности системы.</p>
+                    <table>
+                        <tr>
+                            <th>Период времени, ч</th>
+                            <th>Количество отказов</th>
+                            <th>Интенсивность отказов, 1/ч</th>
+                        </tr>
+                        <tr>
+                            <td>0-100</td>
+                            <td>2</td>
+                            <td>0.02</td>
+                        </tr>
+                        <tr>
+                            <td>100-300</td>
+                            <td>1</td>
+                            <td>0.005</td>
+                        </tr>
+                        <tr>
+                            <td>300-500</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <h2>Методика выполнения работы</h2>
+                <ol>
+                    <li>Изучить теоретические сведения о показателях долговечности</li>
+                    <li>Выполнить расчеты по заданным формулам</li>
+                    <li>Проанализировать полученные результаты</li>
+                    <li>Сформулировать выводы о долговечности системы</li>
+                    <li>Оформить отчет о выполнении практической работы</li>
+                </ol>
+                
+                <div class="conclusion">
+                    <h3>Выводы</h3>
+                    <p>На основе выполненных расчетов и анализа показателей долговечности можно сделать вывод о надежности информационной системы и ее пригодности для эксплуатации в заданных условиях.</p>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>Практическое занятие по МДК 06.03 "Устройство и функционирование информационных систем"</p>
+            <p>© 2023 Разработано для образовательных целей</p>
+        </div>
+    </footer>
+</body>
+</html>

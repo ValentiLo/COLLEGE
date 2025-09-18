@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Показатели безотказности системы</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4efe9 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #2c3e50, #27ae60);
+            color: white;
+            padding: 30px 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+        
+        .lecture-info {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            border-radius: 6px;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .content-wrapper {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        main {
+            flex: 4;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        aside {
+            flex: 1;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            align-self: flex-start;
+        }
+        
+        h2 {
+            color: #2c3e50;
+            margin: 30px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eaeaea;
+        }
+        
+        h3 {
+            color: #27ae60;
+            margin: 25px 0 15px;
+        }
+        
+        p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+        
+        ul, ol {
+            margin-bottom: 25px;
+            padding-left: 25px;
+        }
+        
+        li {
+            margin-bottom: 12px;
+            position: relative;
+        }
+        
+        li:before {
+            content: "•";
+            color: #27ae60;
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+        
+        .highlight {
+            background-color: #e3f2fd;
+            border-left: 5px solid #27ae60;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .task {
+            background-color: #fff3e0;
+            border: 1px solid #ffb74d;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 25px 0;
+        }
+        
+        .task h3 {
+            color: #f57c00;
+            margin-top: 0;
+        }
+        
+        .steps {
+            background-color: #e8f5e9;
+            border: 1px solid #66bb6a;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 25px 0;
+        }
+        
+        .steps h3 {
+            color: #2e7d32;
+            margin-top: 0;
+        }
+        
+        .reliability-icon {
+            font-size: 1.2rem;
+            color: #27ae60;
+            margin-right: 8px;
+        }
+        
+        .nav-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .nav-list li {
+            margin-bottom: 12px;
+        }
+        
+        .nav-list a {
+            text-decoration: none;
+            color: #27ae60;
+            display: block;
+            padding: 12px 15px;
+            border-radius: 6px;
+            transition: all 0.3s;
+            background-color: #f5f7fa;
+            border-left: 4px solid #27ae60;
+        }
+        
+        .nav-list a:hover {
+            background-color: #e3f2fd;
+            transform: translateX(5px);
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 25px;
+            color: #546e7a;
+            font-size: 0.9rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #27ae60;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 10px 5px;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #219653;
+        }
+        
+        .formula-box {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 25px 0;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+            font-size: 1.2rem;
+        }
+        
+        .calculator {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 25px 0;
+            border-left: 4px solid #27ae60;
+        }
+        
+        .calculator h3 {
+            margin-top: 0;
+        }
+        
+        .input-group {
+            margin-bottom: 15px;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .input-group button {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .input-group button:hover {
+            background: #219653;
+        }
+        
+        .result-box {
+            margin-top: 15px;
+            padding: 15px;
+            background: #e8f5e9;
+            border-radius: 4px;
+            display: none;
+        }
+        
+        .scheme {
+            text-align: center;
+            margin: 30px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .scheme-placeholder {
+            height: 200px;
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        .indicators-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .indicators-table th, .indicators-table td {
+            border: 1px solid #ddd;
+            padding: 15px;
+            text-align: left;
+        }
+        
+        .indicators-table th {
+            background-color: #27ae60;
+            color: white;
+        }
+        
+        .indicators-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+        }
+        
+        .data-table th, .data-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+        
+        .data-table th {
+            background-color: #2c3e50;
+            color: white;
+        }
+        
+        .data-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .chart-container {
+            width: 100%;
+            height: 300px;
+            margin: 25px 0;
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            border: 1px solid #e0e0e0;
+        }
+        
+        @media (max-width: 768px) {
+            .content-wrapper {
+                flex-direction: column;
+            }
+            
+            .lecture-info {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Практическое занятие: Определение показателей безотказности системы</h1>
+            <p class="subtitle">МДК 06.03 Устройство и функционирование информационных систем</p>
+            <div class="lecture-info">
+                <span class="info-item"><i class="fas fa-clock"></i> Продолжительность: 4 часа</span>
+                <span class="info-item"><i class="fas fa-user-graduate"></i> Специальность: "Информационные системы"</span>
+                <span class="info-item"><i class="fas fa-book"></i> Практическое занятие №4</span>
+            </div>
+        </header>
+        
+        <div class="content-wrapper">
+            <aside>
+                <h2>Рекомендуемые темы для изучения</h2>
+                <ol>
+        <li><a href="1u.html">Базовая структура информационной системы.</a></li>
+        <li><a href="2u.html">Особенности информационного, программного и технического обеспечения различных видов ИС.</a></li>
+        <li><a href="3u.html">Особенности сопровождения различных информационных систем</a></li>
+        <li><a href="4u.html">Практическое занятие 1 Сопровождение и обслуживание ИС на примере системы 1С: Предприятие</a></li>
+        <li><a href="5u.html">Практическое занятие 2 Сопровождение и обслуживание локальной сети</a></li>
+        <li><a href="6u.html">Модели качества информационных систем</a></li>
+        <li><a href="7u.html">Надежность информационных систем: основные понятия и определения</a></li>
+        <li><a href="8u.html">Основные угрозы безопасности ИС</a></li>
+        <li><a href="9u.html">Практическое занятие 3 Общие показатели надежности системы</a></li>
+        <li><a href="10u.html">Практическое занятие 4 Определение показателей безотказности системы</a></li>
+        <li><a href="11u.html">Практическое занятие 5 Определение показателей долговечности системы</a></li>
+        <li><a href="12u.html">Практическое занятие 6 Определение показателей ремонтопригодности системы</a></li>
+        <li><a href="13u.html">Практическое занятие 7 Определение комплексных показателей надежности системы</a></li>
+        <li><a href="14u.html">Литература</a></li>
+
+    </ol>
+                <h2><i class="fas fa-map-signs"></i> Навигация</h2>
+                <ul class="nav-list">
+                    <li><a href="#goal"><i class="fas fa-bullseye"></i> Цель занятия</a></li>
+                    <li><a href="#tasks"><i class="fas fa-tasks"></i> Задачи занятия</a></li>
+                    <li><a href="#theory"><i class="fas fa-book"></i> Теоретическая часть</a></li>
+                    <li><a href="#practice"><i class="fas fa-laptop-code"></i> Практическая часть</a></li>
+                    <li><a href="#conclusion"><i class="fas fa-check-circle"></i> Итоги</a></li>
+                </ul>
+                
+                <div class="highlight">
+                    <h3><i class="fas fa-download"></i> Материалы</h3>
+                    <ul>
+                        <li><a href="#" class="btn"><i class="fas fa-file-pdf"></i> Методические указания</a></li>
+                        <li><a href="#" class="btn"><i class="fas fa-table"></i> Исходные данные</a></li>
+                        <li><a href="#" class="btn"><i class="fas fa-calculator"></i> Калькулятор показателей</a></li>
+                    </ul>
+                </div>
+                
+                <h3><i class="fas fa-tools"></i> Полезные ресурсы</h3>
+                <ul>
+                    <li>ГОСТ 27.002-89 "Надежность в технике"</li>
+                    <li>Методики расчета показателей надежности</li>
+                    <li>Примеры расчетов для реальных систем</li>
+                    <li>Шаблоны для оформления отчетов</li>
+                </ul>
+                
+                <h3><i class="fas fa-clipboard-check"></i> Критерии оценки</h3>
+                <ul>
+                    <li>Правильность расчетов - 40%</li>
+                    <li>Качество графиков и диаграмм - 25%</li>
+                    <li>Глубина анализа результатов - 20%</li>
+                    <li>Качество отчета - 15%</li>
+                </ul>
+            </aside>
+            <main>
+                <section id="goal">
+                    <h2><i class="fas fa-bullseye reliability-icon"></i> Цель занятия</h2>
+                    <p>Освоить методы определения и расчета показателей безотказности информационных систем. Научиться анализировать данные о надежности и делать выводы о качестве системы.</p>
+                    
+                    <div class="highlight">
+                        <p>По итогам занятия студенты должны уметь рассчитывать основные показатели безотказности, анализировать статистические данные и оценивать надежность системы на основе экспериментальных данных.</p>
+                    </div>
+                </section>
+                
+                <section id="tasks">
+                    <h2><i class="fas fa-tasks reliability-icon"></i> Задачи практического занятия</h2>
+                    <ol>
+                        <li>Изучить основные показатели безотказности информационных систем</li>
+                        <li>Освоить методы сбора и обработки данных о надежности</li>
+                        <li>Провести расчеты показателей безотказности на основе экспериментальных данных</li>
+                        <li>Построить графики изменения показателей безотказности во времени</li>
+                        <li>Проанализировать полученные результаты и сделать выводы о надежности системы</li>
+                        <li>Сформулировать рекомендации по повышению безотказности системы</li>
+                    </ol>
+                </section>
+                
+                <section id="theory">
+                    <h2><i class="fas fa-book reliability-icon"></i> Теоретическая часть</h2>
+                    
+                    <h3>Основные показатели безотказности</h3>
+                    
+                    <table class="indicators-table">
+                        <thead>
+                            <tr>
+                                <th>Показатель</th>
+                                <th>Обозначение</th>
+                                <th>Определение</th>
+                                <th>Формула</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Вероятность безотказной работы</td>
+                                <td>P(t)</td>
+                                <td>Вероятность того, что система будет работать безотказно в течение времени t</td>
+                                <td>P(t) = e<sup>-λt</sup></td>
+                            </tr>
+                            <tr>
+                                <td>Вероятность отказа</td>
+                                <td>Q(t)</td>
+                                <td>Вероятность того, что система откажет в течение времени t</td>
+                                <td>Q(t) = 1 - P(t)</td>
+                            </tr>
+                            <tr>
+                                <td>Интенсивность отказов</td>
+                                <td>λ(t)</td>
+                                <td>Условная плотность вероятности возникновения отказа</td>
+                                <td>λ(t) = f(t)/P(t)</td>
+                            </tr>
+                            <tr>
+                                <td>Средняя наработка до отказа</td>
+                                <td>T<sub>ср</sub></td>
+                                <td>Математическое ожидание наработки системы до первого отказа</td>
+                                <td>T<sub>ср</sub> = ∫<sub>0</sub><sup>∞</sup>P(t)dt</td>
+                            </tr>
+                            <tr>
+                                <td>Гамма-процентная наработка до отказа</td>
+                                <td>T<sub>γ</sub></td>
+                                <td>Наработка, в течение которой отказ не возникнет с вероятностью γ/100</td>
+                                <td>P(T<sub>γ</sub>) = γ/100</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="formula-box">
+                        P(t) = e<sup>-∫<sub>0</sub><sup>t</sup>λ(τ)dτ</sup>
+                    </div>
+                    
+                    <div class="formula-box">
+                        T<sub>ср</sub> = 1/λ (для экспоненциального распределения)
+                    </div>
+                    
+                    <h3>Этапы определения показателей безотказности</h3>
+                    
+                    <ol>
+                        <li>Сбор статистических данных об отказах системы</li>
+                        <li>Обработка и систематизация полученных данных</li>
+                        <li>Построение статистических рядов и гистограмм</li>
+                        <li>Определение закона распределения наработки на отказ</li>
+                        <li>Расчет точечных оценок показателей безотказности</li>
+                        <li>Построение графиков изменения показателей во времени</li>
+                        <li>Анализ полученных результатов и формулирование выводов</li>
+                    </ol>
+                </section>
+                
+                <section id="practice">
+                    <h2><i class="fas fa-laptop-code reliability-icon"></i> Практическая часть</h2>
+                    
+                    <div class="task">
+                        <h3><i class="fas fa-table"></i> Задание 1: Анализ статистических данных</h3>
+                        <p>По результатам испытаний 50 однотипных систем получены данные о наработке до первого отказа (в часах). Проанализируйте данные и рассчитайте показатели безотказности.</p>
+                        
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Интервалы наработки, ч</th>
+                                    <th>Количество отказов</th>
+                                    <th>Средняя наработка в интервале</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>0-500</td>
+                                    <td>8</td>
+                                    <td>250</td>
+                                </tr>
+                                <tr>
+                                    <td>500-1000</td>
+                                    <td>12</td>
+                                    <td>750</td>
+                                </tr>
+                                <tr>
+                                    <td>1000-1500</td>
+                                    <td>15</td>
+                                    <td>1250</td>
+                                </tr>
+                                <tr>
+                                    <td>1500-2000</td>
+                                    <td>10</td>
+                                    <td>1750</td>
+                                </tr>
+                                <tr>
+                                    <td>2000-2500</td>
+                                    <td>5</td>
+                                    <td>2250</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <div class="calculator">
+                            <h4>Расчет показателей безотказности</h4>
+                            <div class="input-group">
+                                <label for="timeValue">Время t (часов):</label>
+                                <input type="number" id="timeValue" value="1000">
+                            </div>
+                            <div class="input-group">
+                                <button onclick="calculateReliability()">Рассчитать показатели</button>
+                            </div>
+                            <div class="result-box" id="reliabilityResult">
+                                <h4>Результаты расчета для t = <span id="currentTime"></span> часов:</h4>
+                                <p>Вероятность безотказной работы P(t) = <span id="pValue"></span></p>
+                                <p>Вероятность отказа Q(t) = <span id="qValue"></span></p>
+                                <p>Интенсивность отказов λ(t) = <span id="lambdaValue"></span> 1/час</p>
+                                <p>Средняя наработка до отказа T<sub>ср</sub> = <span id="tAvgValue"></span> часов</p>
+                            </div>
+                        </div>
+                        
+                        <div class="steps">
+                            <h3>Шаги выполнения:</h3>
+                            <ol>
+                                <li>Определите общее количество систем и общую наработку</li>
+                                <li>Рассчитайте статистическую вероятность безотказной работы для каждого интервала</li>
+                                <li>Постройте гистограмму распределения отказов</li>
+                                <li>Определите закон распределения наработки на отказ</li>
+                                <li>Рассчитайте точечные оценки показателей безотказности</li>
+                                <li>Постройте графики P(t), Q(t) и λ(t)</li>
+                            </ol>
+                        </div>
+                    </div>
+                    
+                    <div class="task">
+                        <h3><i class="fas fa-chart-line"></i> Задание 2: Построение графиков безотказности</h3>
+                        <p>По результатам расчетов постройте графики изменения показателей безотказности в зависимости от времени.</p>
+                        
+                        <div class="chart-container">
+                            <p style="text-align: center; padding-top: 130px;">[Здесь будет график изменения P(t), Q(t) и λ(t) во времени]</p>
+                        </div>
+                        
+                        <div class="steps">
+                            <h3>Шаги выполнения:</h3>
+                            <ol>
+                                <li>Рассчитайте значения P(t) для t от 0 до 2500 часов с шагом 100 часов</li>
+                                <li>Рассчитайте соответствующие значения Q(t) = 1 - P(t)</li>
+                                <li>Определите значения интенсивности отказов λ(t) для каждого интервала</li>
+                                <li>Постройте график P(t) - функция надежности</li>
+                                <li>Постройте график Q(t) - функция ненадежности</li>
+                                <li>Постройте график λ(t) - интенсивность отказов</li>
+                                <li>Проанализируйте полученные графики</li>
+                            </ol>
+                        </div>
+                    </div>
+                    
+                    <div class="task">
+                        <h3><i class="fas fa-calculator"></i> Задание 3: Расчет гамма-процентной наработки</h3>
+                        <p>Рассчитайте гамма-процентную наработку до отказа для значений γ = 90%, 95% и 99%.</p>
+                        
+                        <div class="calculator">
+                            <h4>Калькулятор гамма-процентной наработки</h4>
+                            <div class="input-group">
+                                <label for="gammaValue">Введите значение γ (%):</label>
+                                <input type="number" id="gammaValue" min="0" max="100" value="90">
+                            </div>
+                            <div class="input-group">
+                                <button onclick="calculateGamma()">Рассчитать</button>
+                            </div>
+                            <div class="result-box" id="gammaResult">
+                                <p>Гамма-процентная наработка до отказа T<sub><span id="gammaPercent"></span></sub> = <span id="tGammaValue"></span> часов</p>
+                            </div>
+                        </div>
+                        
+                        <div class="steps">
+                            <h3>Шаги выполнения:</h3>
+                            <ol>
+                                <li>Для каждого значения γ решите уравнение P(t) = γ/100</li>
+                                <li>Запишите полученные значения T<sub>γ</sub></li>
+                                <li>Проанализируйте, как изменяется T<sub>γ</sub> с ростом γ</li>
+                                <li>Сравните T<sub>γ</sub> со средней наработкой до отказа T<sub>ср</sub></li>
+                                <li>Сделайте выводы о точности оценки безотказности системы</li>
+                            </ol>
+                        </div>
+                    </div>
+                </section>
+                
+                <section id="conclusion">
+                    <h2><i class="fas fa-check-circle reliability-icon"></i> Итоги занятия</h2>
+                    <p>По результатам выполнения практического занятия студенты должны:</p>
+                    <ul>
+                        <li>Понимать основные показатели безотказности и их физический смысл</li>
+                        <li>Уметь обрабатывать статистические данные об отказах системы</li>
+                        <li>Уметь рассчитывать P(t), Q(t), λ(t), T<sub>ср</sub> и T<sub>γ</sub></li>
+                        <li>Уметь строить графики изменения показателей безотказности</li>
+                        <li>Уметь анализировать полученные результаты и делать выводы о надежности системы</li>
+                    </ul>
+                    
+                    <div class="highlight">
+                        <p>Полученные навыки необходимы для работы инженером по надежности, тестировщиком, специалистом по качеству или разработчиком высоконадежных систем.</p>
+                    </div>
+                </section>
+            </main>
+            
+            
+        </div>
+        
+        <footer>
+            <p>Практическое занятие по МДК 06.03 "Устройство и функционирование информационных систем"</p>
+            <p>© 2023 Кафедра информационных систем и технологий | Разработано для специальности "Информационные системы"</p>
+        </footer>
+    </div>
+
+    <script>
+        function calculateReliability() {
+            const timeValue = parseFloat(document.getElementById('timeValue').value);
+            
+            // Упрощенные расчеты для демонстрации
+            // В реальном задании здесь должны быть сложные вычисления на основе статистических данных
+            const pValue = Math.exp(-0.0005 * timeValue);
+            const qValue = 1 - pValue;
+            const lambdaValue = 0.0005; // постоянная интенсивность отказов для упрощения
+            const tAvgValue = 1 / lambdaValue;
+            
+            document.getElementById('currentTime').textContent = timeValue;
+            document.getElementById('pValue').textContent = pValue.toFixed(6);
+            document.getElementById('qValue').textContent = qValue.toFixed(6);
+            document.getElementById('lambdaValue').textContent = lambdaValue.toFixed(6);
+            document.getElementById('tAvgValue').textContent = tAvgValue.toFixed(2);
+            
+            document.getElementById('reliabilityResult').style.display = 'block';
+        }
+        
+        function calculateGamma() {
+            const gammaValue = parseFloat(document.getElementById('gammaValue').value);
+            
+            // Упрощенный расчет для демонстрации
+            // В реальном задании расчет должен быть основан на статистических данных
+            const tGammaValue = (-Math.log(gammaValue / 100) / 0.0005).toFixed(2);
+            
+            document.getElementById('gammaPercent').textContent = gammaValue;
+            document.getElementById('tGammaValue').textContent = tGammaValue;
+            
+            document.getElementById('gammaResult').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
