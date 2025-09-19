@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Font Awesome Demo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1, h2, h3 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+        }
+        td{padding: 10px;border: 2px solid #3498db;}
+        
+        .section {
+            margin-bottom: 40px;
+            padding: 20px;
+            border-radius: 8px;
+            background: #f8f9fa;
+        }
+        
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .icon-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .icon-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        .icon-name {
+            font-size: 0.8rem;
+            text-align: center;
+            color: #666;
+        }
+        
+        .code-example {
+            background: #2c3e50;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            font-family: monospace;
+            overflow-x: auto;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        
+        .social-icon {
+            font-size: 2rem;
+            color: #2c3e50;
+            transition: color 0.3s;
+        }
+        
+        .social-icon:hover {
+            color: #3498db;
+        }
+        
+        .animated-icon {
+            font-size: 2rem;
+            color: #e74c3c;
+            margin: 10px;
+        }
+        
+        .color-examples {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        
+        .color-icon {
+            font-size: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><i class="fas fa-icons"></i> Font Awesome 6.4.0 Демо</h1>
+        
+        <div class="section">
+            <h2><i class="fas fa-info-circle"></i> Основные иконки</h2>
+            <div class="icon-grid">
+                <div class="icon-item">
+                    <div class="icon"><i class="fas fa-home"></i></div>
+                    <div class="icon-name">fa-home</div>
+                    <div class="icon-name">&lt;i class="fas fa-home"&gt;&lt;/i&gt;</div>
+                </div>
+                <div class="icon-item">
+                    <div class="icon"><i class="fas fa-user"></i></div>
+                    <div class="icon-name">fa-user</div>
+                    <div class="icon-name">&lt;i class="fas fa-user"&gt;&lt;/i&gt;</div>
+                </div>
+                <div class="icon-item">
+                    <div class="icon"><i class="fas fa-envelope"></i></div>
+                    <div class="icon-name">fa-envelope</div>
+                    <div class="icon-name">&lt;i class="fas fa-envelope"&gt;&lt;/i&gt;</div>
+                </div>
+                <div class="icon-item">
+                    <div class="icon"><i class="fas fa-cog"></i></div>
+                    <div class="icon-name">fa-cog</div>
+                    <div class="icon-name">&lt;i class="fas fa-cog"&gt;&lt;/i&gt;</div>
+                </div>
+                <div class="icon-item">
+                    <div class="icon"><i class="fas fa-heart"></i></div>
+                    <div class="icon-name">fa-heart</div>
+                    <div class="icon-name">&lt;i class="fas fa-heart"&gt;&lt;/i&gt;</div>
+                </div>
+                <div class="icon-item">
+                    <div class="icon"><i class="fas fa-star"></i></div>
+                    <div class="icon-name">fa-star</div>
+                    <div class="icon-name">&lt;i class="fas fa-star"&gt;&lt;/i&gt;</div>
+                </div>
+            </div>
+            
+            <div class="code-example">
+                &lt;i class="fas fa-home"&gt;&lt;/i&gt;
+                &lt;i class="fas fa-user"&gt;&lt;/i&gt;
+                &lt;i class="fas fa-envelope"&gt;&lt;/i&gt;
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2><i class="fas fa-expand-arrows-alt"></i> Размеры иконок</h2>
+            <div style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap; margin-top: 20px;">
+                <i class="fas fa-camera fa-xs"></i>
+                <i class="fas fa-camera fa-sm"></i>
+                <i class="fas fa-camera"></i>
+                <i class="fas fa-camera fa-lg"></i>
+                <i class="fas fa-camera fa-2x"></i>
+                <i class="fas fa-camera fa-3x"></i>
+                <i class="fas fa-camera fa-5x"></i>
+            </div>
+            
+            <div class="code-example">
+                &lt;i class="fas fa-camera fa-xs"&gt;&lt;/i&gt;
+                &lt;i class="fas fa-camera fa-sm"&gt;&lt;/i&gt;
+                &lt;i class="fas fa-camera"&gt;&lt;/i&gt;
+                &lt;i class="fas fa-camera fa-lg"&gt;&lt;/i&gt;
+                &lt;i class="fas fa-camera fa-2x"&gt;&lt;/i&gt;
+                &lt;i class="fas fa-camera fa-3x"&gt;&lt;/i&gt;
+                &lt;i class="fas fa-camera fa-5x"&gt;&lt;/i&gt;
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2><i class="fas fa-paint-brush"></i> Цвета иконок</h2>
+            <div class="color-examples">
+                <i class="fas fa-heart color-icon" style="color: #e74c3c;"></i>
+                <i class="fas fa-star color-icon" style="color: #f1c40f;"></i>
+                <i class="fas fa-thumbs-up color-icon" style="color: #3498db;"></i>
+                <i class="fas fa-check-circle color-icon" style="color: #2ecc71;"></i>
+                <i class="fas fa-exclamation-triangle color-icon" style="color: #e67e22;"></i>
+            </div>
+            
+            <div class="code-example">
+                &lt;i class="fas fa-heart" style="color: #e74c3c;"&gt;&lt;/i&gt;
+                &lt;i class="fas fa-star" style="color: #f1c40f;"&gt;&lt;/i&gt;
+                &lt;i class="fas fa-thumbs-up" style="color: #3498db;"&gt;&lt;/i&gt;
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2><i class="fas fa-play-circle"></i> Анимированные иконки</h2>
+            <table>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>&lt;i class="fas fa-spinner fa-spin"&gt;&lt;/i&gt;</td>
+                    <td><i class="fas fa-spinner fa-spin animated-icon"></i></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>&lt;i class="fas fa-circle-notch fa-spin"&gt;&lt;/i&gt;</td>
+                    <td><i class="fas fa-circle-notch fa-spin animated-icon"></i></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>&lt;i class="fas fa-sync fa-spin"&gt;&lt;/i&gt;</td>
+                    <td><i class="fas fa-sync fa-spin animated-icon"></i></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>&lt;i class="fas fa-cog fa-spin"&gt;&lt;/i&gt;</td>
+                    <td><i class="fas fa-cog fa-spin animated-icon"></i></td>
+                </tr>
+            </table>
+            <div style="display: flex; gap: 15px; justify-content: center; margin-top: 20px;">
+                <i class="fas fa-spinner fa-spin animated-icon"></i>
+                <i class="fas fa-circle-notch fa-spin animated-icon"></i>
+                <i class="fas fa-sync fa-spin animated-icon"></i>
+                <i class="fas fa-cog fa-spin animated-icon"></i>
+            </div>
+            
+            <div class="code-example">
+                &lt;i class="fas fa-spinner fa-spin"&gt;&lt;/i&gt;
+                &lt;i class="fas fa-circle-notch fa-spin"&gt;&lt;/i&gt;
+                &lt;i class="fas fa-sync fa-spin"&gt;&lt;/i&gt;
+                &lt;i class="fas fa-cog fa-spin"&gt;&lt;/i&gt;
+            </div>
+        </div>
+        
+        <div class="section">
+            <table>
+               
+                <tr>
+                    <td>&lt;i class="fab fa-twitter"&gt;&lt;/i&gt;</a></td>
+                    <td><a href="#"><i class="fab fa-twitter social-icon"></i></a></td>
+                </tr>
+                <tr>
+                    <td>&lt;i class="fab fa-facebook"&gt;&lt;/i&gt;</td>
+                    <td><a href="#"><i class="fab fa-facebook social-icon"></i></a></td>
+                </tr>
+                <tr>
+                    <td>&lt;i class="fab fa-instagram"&gt;&lt;/i&gt;</td>
+                    <td><a href="#"><i class="fab fa-instagram social-icon"></i></a></td>
+                </tr>
+                <tr>
+                    <td>&lt;i class="fab fa-github"&gt;&lt;/i&gt;</td>
+                    <td><a href="#"><i class="fab fa-github social-icon"></i></a></td>
+                </tr>
+                <tr>
+                    <td>&lt;i class="fab fa-linkedin"&gt;&lt;/i&gt;</td>
+                    <td><a href="#"><i class="fab fa-linkedin social-icon"></i></a></td>
+                </tr>
+                <tr>
+                    <td>&lt;i class="fab fa-youtube"&gt;&lt;/i&gt;</td>
+                    <td><a href="#"><i class="fab fa-youtube social-icon"></i></a></td>
+                </tr>
+            </table>
+            <h2><i class="fas fa-share-alt"></i> Иконки брендов</h2>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-twitter social-icon"></i></a>
+                <a href="#"><i class="fab fa-facebook social-icon"></i></a>
+                <a href="#"><i class="fab fa-instagram social-icon"></i></a>
+                <a href="#"><i class="fab fa-github social-icon"></i></a>
+                <a href="#"><i class="fab fa-linkedin social-icon"></i></a>
+                <a href="#"><i class="fab fa-youtube social-icon"></i></a>
+            </div>
+            
+            <div class="code-example">
+                &lt;i class="fab fa-twitter"&gt;&lt;/i&gt;
+                &lt;i class="fab fa-facebook"&gt;&lt;/i&gt;
+                &lt;i class="fab fa-instagram"&gt;&lt;/i&gt;
+                &lt;i class="fab fa-github"&gt;&lt;/i&gt;
+                &lt;i class="fab fa-linkedin"&gt;&lt;/i&gt;
+                &lt;i class="fab fa-youtube"&gt;&lt;/i&gt;
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2><i class="fas fa-code"></i> Как использовать</h2>
+            <p>Чтобы использовать Font Awesome в вашем проекте, добавьте эту строку в раздел <code>&lt;head&gt;</code> вашего HTML:</p>
+            
+            <div class="code-example">
+                &lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"&gt;
+            </div>
+            
+            <p>Затем вы можете добавлять иконки в любое место вашего HTML, используя тег <code>&lt;i&gt;</code> с соответствующими классами:</p>
+            
+            <div class="code-example">
+                &lt;i class="fas fa-camera"&gt;&lt;/i&gt;
+                &lt;i class="fas fa-heart" style="color: red;"&gt;&lt;/i&gt;
+                &lt;i class="fab fa-twitter"&gt;&lt;/i&gt;
+            </div>
+            
+            <p>Посетите <a href="https://fontawesome.com/icons" target="_blank">официальный сайт Font Awesome</a> для просмотра полной коллекции иконок.</p>
+        </div>
+    </div>
+</body>
+</html>
