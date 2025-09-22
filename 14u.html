@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Базовая структура информационной системы | МДК 06.03</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #2c3e50, #1a2530);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            border-radius: 0 0 10px 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin: 25px 0 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        h3 {
+            font-size: 1.4rem;
+            color: #2980b9;
+            margin: 20px 0 10px;
+        }
+        
+        h4 {
+            font-size: 1.2rem;
+            color: #34495e;
+            margin: 15px 0 8px;
+        }
+        
+        .module-code {
+            font-size: 1.2rem;
+            color: #bdc3c7;
+        }
+        
+        .content {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .main-content {
+            flex: 2;
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        }
+        
+        .sidebar {
+            flex: 1;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        }
+        
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        ul, ol {
+            margin-bottom: 20px;
+            margin-left: 20px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        .card {
+            background: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .definition {
+            background: #e8f4fc;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+        
+        .structure-diagram {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .component {
+            background: #fff;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border-left: 4px solid #e74c3c;
+        }
+        
+        .component h4 {
+            color: #e74c3c;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .component h4 i {
+            margin-right: 10px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        .conclusion {
+            background: #fff8e1;
+            padding: 20px;
+            border-radius: 6px;
+            margin: 30px 0;
+            border-left: 4px solid #f39c12;
+        }
+        
+        .levels {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .level-card {
+            flex: 1;
+            min-width: 250px;
+            background: #e8f4fc;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .level-card h4 {
+            color: #2980b9;
+            border-bottom: 1px solid #2980b9;
+            padding-bottom: 8px;
+            margin-bottom: 10px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            background: #2c3e50;
+            color: white;
+            border-radius: 10px 10px 0 0;
+        }
+        
+        .quiz {
+            background: #f0f7ff;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .quiz h3 {
+            color: #16a085;
+        }
+        
+        .question {
+            margin: 15px 0;
+            padding: 10px;
+            background: #fff;
+            border-radius: 6px;
+        }
+        
+        .answers {
+            margin-left: 20px;
+        }
+        
+        .answers label {
+            display: block;
+            margin: 8px 0;
+            cursor: pointer;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                flex-direction: column;
+            }
+            
+            .levels {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Базовая структура информационной системы</h1>
+            <p class="module-code">МДК 06.03 Устройство и функционирование информационных систем</p>
+            <p>Лекционный материал</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="content">
+            <div class="main-content">
+                <h2>Понятие информационной системы</h2>
+                <div class="definition">
+                    <p><strong>Информационная система (ИС)</strong> — это взаимосвязанная совокупность средств, методов и персонала, используемых для хранения, обработки и выдачи информации в интересах достижения поставленной цели.</p>
+                </div>
+                
+                <p>Современные информационные системы предназначены для решения задач управления и обработки данных в различных предметных областях. Они являются основой информатизации общества и играют ключевую роль в бизнесе, науке, образовании и государственном управлении.</p>
+                
+                <h2>Базовая структура информационной системы</h2>
+                
+                <div class="structure-diagram">
+                    <h3>Общая архитектура информационной системы</h3>
+                    <p>(Схематическое изображение основных компонентов ИС)</p>
+                    <div style="display: flex; justify-content: center; margin: 20px 0;">
+                        <div style="text-align: center; margin: 0 15px;">
+                            <div style="background: #3498db; color: white; padding: 15px; border-radius: 8px; width: 150px;">
+                                <i class="fas fa-users fa-2x"></i>
+                                <p>Пользователи</p>
+                            </div>
+                            <div style="margin: 10px 0;">↓</div>
+                        </div>
+                        
+                        <div style="text-align: center; margin: 0 15px;">
+                            <div style="background: #2ecc71; color: white; padding: 15px; border-radius: 8px; width: 150px;">
+                                <i class="fas fa-desktop fa-2x"></i>
+                                <p>Аппаратное обеспечение</p>
+                            </div>
+                            <div style="margin: 10px 0;">↓</div>
+                        </div>
+                        
+                        <div style="text-align: center; margin: 0 15px;">
+                            <div style="background: #e74c3c; color: white; padding: 15px; border-radius: 8px; width: 150px;">
+                                <i class="fas fa-code fa-2x"></i>
+                                <p>Программное обеспечение</p>
+                            </div>
+                            <div style="margin: 10px 0;">↓</div>
+                        </div>
+                        
+                        <div style="text-align: center; margin: 0 15px;">
+                            <div style="background: #f39c12; color: white; padding: 15px; border-radius: 8px; width: 150px;">
+                                <i class="fas fa-database fa-2x"></i>
+                                <p>Данные</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p style="font-style: italic;">Взаимодействие компонентов информационной системы</p>
+                </div>
+                
+                <h3>Основные компоненты информационной системы</h3>
+                
+                <div class="component">
+                    <h4><i class="fas fa-users"></i> Пользователи</h4>
+                    <p>Люди, которые взаимодействуют с информационной системой. Пользователи могут быть разделены на различные категории:</p>
+                    <ul>
+                        <li>Конечные пользователи</li>
+                        <li>Администраторы системы</li>
+                        <li>Технические специалисты</li>
+                        <li>Аналитики и разработчики</li>
+                    </ul>
+                </div>
+                
+                <div class="component">
+                    <h4><i class="fas fa-desktop"></i> Аппаратное обеспечение</h4>
+                    <p>Физические компоненты системы, включая:</p>
+                    <ul>
+                        <li>Серверы и рабочие станции</li>
+                        <li>Сетевое оборудование</li>
+                        <li>Устройства хранения данных</li>
+                        <li>Периферийные устройства</li>
+                    </ul>
+                </div>
+                
+                <div class="component">
+                    <h4><i class="fas fa-code"></i> Программное обеспечение</h4>
+                    <p>Набор программ, обеспечивающих функционирование ИС:</p>
+                    <ul>
+                        <li>Системное программное обеспечение (ОС, СУБД)</li>
+                        <li>Прикладное программное обеспечение</li>
+                        <li>Инструментальные средства разработки</li>
+                        <li>Системы управления базами данных</li>
+                    </ul>
+                </div>
+                
+                <div class="component">
+                    <h4><i class="fas fa-database"></i> Данные</h4>
+                    <p>Информация, которая хранится, обрабатывается и используется в системе:</p>
+                    <ul>
+                        <li>Структурированные данные (базы данных)</li>
+                        <li>Неструктурированные данные (документы, изображения)</li>
+                        <li>Метаданные (данные о данных)</li>
+                    </ul>
+                </div>
+                
+                <div class="component">
+                    <h4><i class="fas fa-wifi"></i> Коммуникации</h4>
+                    <p>Средства обеспечения взаимодействия между компонентами системы:</p>
+                    <ul>
+                        <li>Локальные и глобальные сети</li>
+                        <li>Протоколы передачи данных</li>
+                        <li>Интерфейсы взаимодействия</li>
+                    </ul>
+                </div>
+                
+                <h2>Уровни архитектуры информационной системы</h2>
+                
+                <div class="levels">
+                    <div class="level-card">
+                        <h4>Уровень представления</h4>
+                        <p>Интерфейс взаимодействия с пользователем (GUI, веб-интерфейс, мобильные приложения)</p>
+                    </div>
+                    
+                    <div class="level-card">
+                        <h4>Бизнес-логика</h4>
+                        <p>Обработка данных согласно правилам предметной области</p>
+                    </div>
+                    
+                    <div class="level-card">
+                        <h4>Уровень данных</h4>
+                        <p>Хранение и управление данными (базы данных, файловые системы)</p>
+                    </div>
+                </div>
+                
+                <h2>Классификация информационных систем</h2>
+                
+                <table>
+                    <tr>
+                        <th>Критерий</th>
+                        <th>Типы систем</th>
+                    </tr>
+                    <tr>
+                        <td>По масштабу</td>
+                        <td>Локальные, корпоративные, глобальные</td>
+                    </tr>
+                    <tr>
+                        <td>По степени автоматизации</td>
+                        <td>Ручные, автоматизированные, автоматические</td>
+                    </tr>
+                    <tr>
+                        <td>По характеру обработки данных</td>
+                        <td>Информационно-справочные, управляющие, советующие</td>
+                    </tr>
+                    <tr>
+                        <td>По сфере применения</td>
+                        <td>Экономические, медицинские, образовательные, геоинформационные</td>
+                    </tr>
+                </table>
+                
+                <div class="quiz">
+                    <h3>Проверка знаний</h3>
+                    
+                    <div class="question">
+                        <p>1. Что из перечисленного не является основным компонентом информационной системы?</p>
+                        <div class="answers">
+                            <label><input type="radio" name="q1"> Аппаратное обеспечение</label>
+                            <label><input type="radio" name="q1"> Программное обеспечение</label>
+                            <label><input type="radio" name="q1"> Пользователи</label>
+                            <label><input type="radio" name="q1"> Маркетинговые стратегии</label>
+                        </div>
+                    </div>
+                    
+                    <div class="question">
+                        <p>2. Какой уровень архитектуры ИС отвечает за взаимодействие с пользователем?</p>
+                        <div class="answers">
+                            <label><input type="radio" name="q2"> Уровень данных</label>
+                            <label><input type="radio" name="q2"> Бизнес-логика</label>
+                            <label><input type="radio" name="q2"> Уровень представления</label>
+                            <label><input type="radio" name="q2"> Сетевой уровень</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="conclusion">
+                    <h3>Ключевые выводы</h3>
+                    <p>Информационная система представляет собой сложный комплекс взаимосвязанных компонентов, работающих как единое целое для достижения определенных целей. Понимание базовой структуры ИС является фундаментальным для проектирования, разработки и эффективного использования информационных систем в различных предметных областях.</p>
+                </div>
+            </div>
+            
+            <div class="sidebar">
+                <h2>Материалы лекции</h2>
+                <ul>
+                    <li><i class="fas fa-file-pdf"></i> Презентация лекции</li>
+                    <li><i class="fas fa-book"></i> Учебные материалы</li>
+                    <li><i class="fas fa-link"></i> Дополнительные ресурсы</li>
+                    <li><i class="fas fa-video"></i> Видеозапись лекции</li>
+                </ul>
+                
+                <h2>Темы для изучения</h2>
+                <ol>
+                    <li>Понятие и назначение ИС</li>
+                    <li>Компоненты информационных систем</li>
+                    <li>Архитектура информационных систем</li>
+                    <li>Классификация ИС</li>
+                    <li>Принципы функционирования ИС</li>
+                </ol>
+                
+                <h2>Рекомендуемая литература</h2>
+                <ul>
+                    <li><i class="fas fa-book"></i> Информационные системы и технологии</li>
+                    <li><i class="fas fa-book"></i> Архитектура корпоративных ИС</li>
+                    <li><i class="fas fa-book"></i> Проектирование информационных систем</li>
+                    <li><i class="fas fa-book"></i> Базы данных и управление ими</li>
+                </ul>
+                
+                <h2>Практические работы</h2>
+                <ul>
+                    <li><i class="fas fa-tasks"></i> Анализ структуры ИС</li>
+                    <li><i class="fas fa-tasks"></i> Проектирование компонентов ИС</li>
+                    <li><i class="fas fa-tasks"></i> Разработка прототипа ИС</li>
+                </ul>
+                
+                <h2>Контрольные вопросы</h2>
+                <ol>
+                    <li>Дайте определение информационной системы</li>
+                    <li>Перечислите основные компоненты ИС</li>
+                    <li>Опишите уровни архитектуры ИС</li>
+                    <li>Приведите классификацию ИС</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>Лекция по МДК 06.03 "Устройство и функционирование информационных систем"</p>
+            <p>© 2023 Разработано для образовательных целей</p>
+        </div>
+    </footer>
+</body>
+</html>
