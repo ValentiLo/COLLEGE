@@ -1,13 +1,15 @@
 body{background: antiquewhite;width: 100%;}
         .cont{display: flex; width: 80%;
         }
+        aside{flex: 1;}
+        main{flex: 4;}
 
         .item1{flex-grow: 1;
         flex-basis: 150px}
         .item2{flex-grow: 4;}
         div{margin: 5px;padding: 5px;background: azure;}
         /* p,li{background: lavenderblush;padding: 10px;margin: 5px;} */
-        h1{text-align: center;}
+        h1{text-align: center;width: 90%;}
         img { margin: auto; display: block; }
         span{font-size: larger;color: blue;}
         header {
@@ -19,3 +21,4 @@ body{background: antiquewhite;width: 100%;}
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
             text-align: center;
         }
+        span{color: blue;}

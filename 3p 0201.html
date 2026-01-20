@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Гибкие методы разработки ПО - МДК.02.01</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --agile-color: #27ae60;
+            --scrum-color: #9b59b6;
+            --kanban-color: #e67e22;
+            --xp-color: #e74c3c;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* Стили для документа */
+        .document-mode {
+            display: none;
+            max-width: 210mm;
+            min-height: 297mm;
+            margin: 20px auto;
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            padding: 25mm;
+            box-sizing: border-box;
+        }
+        
+        .document-mode .header {
+            text-align: center;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .document-mode .section {
+            margin-bottom: 25px;
+        }
+        
+        .document-mode .section-title {
+            font-size: 14pt;
+            font-weight: bold;
+            color: var(--primary-color);
+            border-left: 4px solid var(--secondary-color);
+            padding-left: 10px;
+            margin-bottom: 15px;
+        }
+        
+        /* Стили для веб-страницы */
+        .web-mode {
+            display: block;
+        }
+        
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color), var(--scrum-color));
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .sidebar {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-right: 1px solid #dee2e6;
+            height: 100vh;
+            position: sticky;
+            top: 0;
+            overflow-y: auto;
+            backdrop-filter: blur(10px);
+        }
+        
+        .sidebar .nav-link {
+            color: var(--dark-color);
+            border-radius: 0.375rem;
+            margin-bottom: 0.25rem;
+            transition: all 0.3s;
+        }
+        
+        .sidebar .nav-link:hover, .sidebar .nav-link.active {
+            background: linear-gradient(135deg, var(--secondary-color), var(--agile-color));
+            color: white;
+        }
+        
+        .section {
+            padding: 2rem 0;
+        }
+        
+        .card {
+            border: none;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-bottom: 1.5rem;
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+        
+        .agile-card {
+            border-left: 4px solid var(--agile-color);
+        }
+        
+        .scrum-card {
+            border-left: 4px solid var(--scrum-color);
+        }
+        
+        .kanban-card {
+            border-left: 4px solid var(--kanban-color);
+        }
+        
+        .xp-card {
+            border-left: 4px solid var(--xp-color);
+        }
+        
+        .methodology-badge {
+            font-size: 0.8em;
+            margin: 0.1rem;
+        }
+        
+        .principle-item {
+            background: white;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--secondary-color);
+            transition: all 0.3s;
+        }
+        
+        .principle-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        
+        .comparison-table th {
+            background: linear-gradient(135deg, var(--secondary-color), var(--agile-color));
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        .comparison-table td {
+            padding: 12px;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .comparison-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .process-step {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--secondary-color), var(--agile-color));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+        
+        .toggle-buttons {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            z-index: 1000;
+        }
+        
+        @media (max-width: 768px) {
+            .sidebar {
+                height: auto;
+                position: relative;
+            }
+            
+            .toggle-buttons {
+                position: relative;
+                top: auto;
+                right: auto;
+                text-align: center;
+                margin-bottom: 1rem;
+            }
+        }
+        
+        .framework-card {
+            text-align: center;
+            padding: 1.5rem;
+            transition: all 0.3s;
+            height: 100%;
+        }
+        
+        .framework-card:hover {
+            transform: scale(1.05);
+        }
+        
+        .framework-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .agile-icon {
+            color: var(--agile-color);
+        }
+        
+        .scrum-icon {
+            color: var(--scrum-color);
+        }
+        
+        .kanban-icon {
+            color: var(--kanban-color);
+        }
+        
+        .xp-icon {
+            color: var(--xp-color);
+        }
+        
+        .tool-card {
+            background: white;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Переключатель режимов -->
+    <div class="toggle-buttons">
+        <div class="btn-group" role="group">
+            <button type="button" class="btn btn-outline-primary active" id="webModeBtn">Веб-страница</button>
+            <button type="button" class="btn btn-outline-secondary" id="documentModeBtn">Документ</button>
+        </div>
+    </div>
+
+    <!-- Режим документа -->
+    <div class="document-mode" id="documentMode">
+        <div class="header">
+            <div style="font-size: 14pt; color: #7f8c8d;">МДК.02.01 Технология разработки программного обеспечения</div>
+            <div style="font-size: 18pt; font-weight: bold; color: #2c3e50; margin: 10px 0;">Гибкие методы разработки ПО</div>
+            <div style="font-size: 14pt; color: #3498db;">Учебный материал</div>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">Введение в гибкие методологии</div>
+            <p>Гибкие методологии разработки программного обеспечения (Agile methodologies) — это набор подходов и практик, направленных на iterative и incremental разработку программного обеспечения. В отличие от традиционных каскадных моделей, гибкие методологии ориентированы на адаптивность, сотрудничество с заказчиком и быструю реакцию на изменения.</p>
+            
+            <p>Основной причиной появления гибких методологий стала необходимость ускорения процессов разработки в условиях быстро меняющихся требований рынка и технологий. Традиционные модели, такие как Waterfall, часто не справлялись с этой задачей из-за своей жесткости и длительных циклов разработки.</p>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">Agile-манифест и его принципы</div>
+            <p>В 2001 году группа разработчиков сформулировала Agile-манифест, который стал основой для всех гибких методологий. Манифест состоит из четырех ключевых ценностей:</p>
+            
+            <table style="width: 100%; border-collapse: collapse; margin: 15px 0;">
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #ddd; background-color: #f9f9f9; font-weight: bold;">Люди и взаимодействие</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">важнее процессов и инструментов</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #ddd; background-color: #f9f9f9; font-weight: bold;">Работающий продукт</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">важнее исчерпывающей документации</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #ddd; background-color: #f9f9f9; font-weight: bold;">Сотрудничество с заказчиком</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">важнее согласования условий контракта</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #ddd; background-color: #f9f9f9; font-weight: bold;">Готовность к изменениям</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">важнее следования первоначальному плану</td>
+                </tr>
+            </table>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">Scrum - наиболее популярная гибкая методология</div>
+            <p>Scrum — это framework для разработки, поставки и поддержки сложных продуктов. Он основан на итеративной и инкрементальной разработке, где работа разбивается на небольшие отрезки времени called спринты (обычно 1-4 недели).</p>
+            
+            <p><strong>Ключевые роли в Scrum:</strong></p>
+            <ul>
+                <li><strong>Владелец продукта (Product Owner)</strong> — представляет интересы заказчика и отвечает за ценность продукта</li>
+                <li><strong>Scrum-мастер (Scrum Master)</strong> — обеспечивает понимание и соблюдение принципов Scrum</li>
+                <li><strong>Команда разработки (Development Team)</strong> — кросс-функциональная группа профессионалов, выполняющая работу</li>
+            </ul>
+        </div>
+        
+        <div style="page-break-before: always;"></div>
+        
+        <div class="section">
+            <div class="section-title">Kanban - методология непрерывного потока</div>
+            <p>Kanban — это методология, ориентированная на визуализацию workflow и ограничение work in progress (WIP). В отличие от Scrum с его фиксированными спринтами, Kanban обеспечивает непрерывный поток работы.</p>
+            
+            <p><strong>Основные принципы Kanban:</strong></p>
+            <ol>
+                <li>Визуализация workflow</li>
+                <li>Ограничение work in progress (WIP)</li>
+                <li>Управление потоком</li>
+                <li>Четкое определение политик процесса</li>
+                <li>Использование циклов обратной связи</li>
+                <li>Совместное улучшение (эволюционирование)</li>
+            </ol>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">Extreme Programming (XP) - методология качества кода</div>
+            <p>Extreme Programming (XP) — это гибкая методология, ориентированная на технические аспекты разработки и качество кода. XP делает акцент на парном программировании, тестировании и непрерывной интеграции.</p>
+            
+            <p><strong>Ключевые практики XP:</strong></p>
+            <ul>
+                <li>Парное программирование (Pair Programming)</li>
+                <li>Разработка через тестирование (Test-Driven Development)</li>
+                <li>Непрерывная интеграция (Continuous Integration)</li>
+                <li>Рефакторинг (Refactoring)</li>
+                <li>Простое проектирование (Simple Design)</li>
+                <li>Коллективное владение кодом (Collective Code Ownership)</li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">Сравнение гибких методологий</div>
+            <table style="width: 100%; border-collapse: collapse; margin: 15px 0;">
+                <tr>
+                    <th style="padding: 10px; border: 1px solid #ddd; background-color: #3498db; color: white;">Методология</th>
+                    <th style="padding: 10px; border: 1px solid #ddd; background-color: #3498db; color: white;">Ключевые особенности</th>
+                    <th style="padding: 10px; border: 1px solid #ddd; background-color: #3498db; color: white;">Лучшие сценарии применения</th>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #ddd;"><strong>Scrum</strong></td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">Спринты, роли, артефакты, регулярные встречи</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">Проекты с изменяющимися требованиями, нуждающиеся в структуре</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #ddd;"><strong>Kanban</strong></td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">Визуализация, ограничение WIP, непрерывный поток</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">Поддержка и операционная деятельность, проекты с непредсказуемым workflow</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #ddd;"><strong>XP</strong></td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">Технические практики, качество кода, парное программирование</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">Проекты с высокими требованиями к качеству и надежности</td>
+                </tr>
+            </table>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">Заключение</div>
+            <p>Гибкие методологии разработки ПО доказали свою эффективность в современных условиях быстроменяющихся требований и технологий. Они позволяют командам быть более адаптивными, повышать качество продукта и удовлетворенность заказчика.</p>
+            
+            <p>Выбор конкретной методологии зависит от специфики проекта, состава команды и организационного контекста. Во многих случаях эффективным оказывается гибридный подход, сочетающий элементы разных методологий.</p>
+        </div>
+    </div>
+
+    <!-- Режим веб-страницы -->
+    <div class="web-mode" id="webMode">
+        <!-- Навигационная панель -->
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container">
+                <a class="navbar-brand" href="#">
+                    <i class="fas fa-project-diagram me-2"></i>МДК.02.01 - Гибкие методы разработки ПО
+                </a>
+            </div>
+        </nav>
+
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Боковая панель -->
+                <div class="col-lg-2 col-md-3 sidebar p-0">
+                    <div class="p-3">
+                        <h5 class="mb-3"><i class="fas fa-bars me-2"></i>Навигация</h5>
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#introduction"><i class="fas fa-play me-2"></i>Введение</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#agile"><i class="fas fa-gem me-2"></i>Agile-манифест</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#scrum"><i class="fas fa-tasks me-2"></i>Scrum</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#kanban"><i class="fas fa-columns me-2"></i>Kanban</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#xp"><i class="fas fa-code me-2"></i>Extreme Programming</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#comparison"><i class="fas fa-balance-scale me-2"></i>Сравнение</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#tools"><i class="fas fa-tools me-2"></i>Инструменты</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#conclusion"><i class="fas fa-flag me-2"></i>Заключение</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Основной контент -->
+                <main class="col-lg-10 col-md-9 ms-sm-auto px-4 py-4">
+                    <!-- Введение -->
+                    <section id="introduction" class="section">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h1 class="display-5 fw-bold">Гибкие методы разработки ПО</h1>
+                            <span class="badge bg-primary fs-6">МДК.02.01</span>
+                        </div>
+                        
+                        <div class="row mb-4">
+                            <div class="col-md-8">
+                                <div class="card agile-card">
+                                    <div class="card-body">
+                                        <h4><i class="fas fa-bullseye me-2"></i>Что такое гибкие методологии?</h4>
+                                        <p class="mb-0">Гибкие (Agile) методологии — это подходы к разработке ПО, ориентированные на итеративную разработку, быструю адаптацию к изменениям и тесное взаимодействие с заказчиком.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <div class="card-header bg-primary text-white">
+                                        <i class="fas fa-history me-2"></i>История появления
+                                    </div>
+                                    <div class="card-body">
+                                        <p>Возникли как ответ на неэффективность традиционных каскадных моделей в условиях быстро меняющихся требований.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <div class="card-header bg-gradient-primary text-white">
+                                <i class="fas fa-info-circle me-2"></i>Основные понятия гибкой разработки
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h5>Ключевые характеристики:</h5>
+                                        <ul>
+                                            <li>Итеративная и инкрементальная разработка</li>
+                                            <li>Адаптивное планирование</li>
+                                            <li>Частые поставки рабочего ПО</li>
+                                            <li>Непрерывное улучшение процессов</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h5>Преимущества:</h5>
+                                        <ul>
+                                            <li>Быстрая реакция на изменения</li>
+                                            <li>Повышение качества продукта</li>
+                                            <li>Улучшение коммуникации в команде</li>
+                                            <li>Высокая удовлетворенность заказчика</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Agile-манифест -->
+                    <section id="agile" class="section">
+                        <h2 class="mb-4"><i class="fas fa-gem me-2"></i>Agile-манифест и принципы</h2>
+                        
+                        <div class="card agile-card">
+                            <div class="card-header bg-success text-white">
+                                <i class="fas fa-book me-2"></i>Четыре ценности Agile-манифеста
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="principle-item">
+                                            <h5><i class="fas fa-people-arrows me-2"></i>Люди и взаимодействие</h5>
+                                            <p class="mb-0">важнее процессов и инструментов</p>
+                                        </div>
+                                        
+                                        <div class="principle-item">
+                                            <h5><i class="fas fa-cube me-2"></i>Работающий продукт</h5>
+                                            <p class="mb-0">важнее исчерпывающей документации</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="principle-item">
+                                            <h5><i class="fas fa-handshake me-2"></i>Сотрудничество с заказчиком</h5>
+                                            <p class="mb-0">важнее согласования условий контракта</p>
+                                        </div>
+                                        
+                                        <div class="principle-item">
+                                            <h5><i class="fas fa-exchange-alt me-2"></i>Готовность к изменениям</h5>
+                                            <p class="mb-0">важнее следования первоначальному плану</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card mt-4">
+                            <div class="card-header">
+                                <i class="fas fa-list-ol me-2"></i>12 принципов Agile-разработки
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <ol>
+                                            <li>Высший приоритет — удовлетворение заказчика</li>
+                                            <li>Приветствуйте изменения требований</li>
+                                            <li>Поставляйте рабочее ПО часто</li>
+                                            <li>Сотрудничайте с заказчиком ежедневно</li>
+                                            <li>Создавайте проекты вокруг мотивированных людей</li>
+                                            <li>Непосредственное общение — самый эффективный способ</li>
+                                        </ol>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <ol start="7">
+                                            <li>Рабочее ПО — основной показатель прогресса</li>
+                                            <li>Инвесторы и разработчики должны работать вместе</li>
+                                            <li>Постоянное внимание к техническому совершенству</li>
+                                            <li>Простота — искусство минимизации лишней работы</li>
+                                            <li>Самые лучшие требования рождаются у самоорганизующихся команд</li>
+                                            <li>Команда регулярно осмысливает как стать эффективнее</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Scrum -->
+                    <section id="scrum" class="section">
+                        <h2 class="mb-4"><i class="fas fa-tasks me-2"></i>Scrum - фреймворк для управления проектами</h2>
+                        
+                        <div class="row mb-4">
+                            <div class="col-md-4">
+                                <div class="card framework-card scrum-card">
+                                    <div class="framework-icon scrum-icon">
+                                        <i class="fas fa-sync-alt"></i>
+                                    </div>
+                                    <h5>Спринты</h5>
+                                    <p>Фиксированные итерации (1-4 недели) для достижения конкретных целей</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card framework-card scrum-card">
+                                    <div class="framework-icon scrum-icon">
+                                        <i class="fas fa-users"></i>
+                                    </div>
+                                    <h5>Роли</h5>
+                                    <p>Product Owner, Scrum Master, Development Team</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card framework-card scrum-card">
+                                    <div class="framework-icon scrum-icon">
+                                        <i class="fas fa-clipboard-list"></i>
+                                    </div>
+                                    <h5>Артефакты</h5>
+                                    <p>Product Backlog, Sprint Backlog, Increment</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card scrum-card">
+                            <div class="card-header bg-purple text-white">
+                                <i class="fas fa-road me-2"></i>Процесс Scrum
+                            </div>
+                            <div class="card-body">
+                                <div class="process-step">
+                                    <div class="step-number">1</div>
+                                    <div>
+                                        <h5>Планирование спринта</h5>
+                                        <p class="mb-0">Команда определяет объем работы на следующий спринт</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="process-step">
+                                    <div class="step-number">2</div>
+                                    <div>
+                                        <h5>Ежедневные стендапы</h5>
+                                        <p class="mb-0">15-минутные встречи для синхронизации команды</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="process-step">
+                                    <div class="step-number">3</div>
+                                    <div>
+                                        <h5>Обзор спринта</h5>
+                                        <p class="mb-0">Демонстрация выполненной работы заказчику</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="process-step">
+                                    <div class="step-number">4</div>
+                                    <div>
+                                        <h5>Ретроспектива</h5>
+                                        <p class="mb-0">Анализ процесса и поиск путей улучшения</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Kanban -->
+                    <section id="kanban" class="section">
+                        <h2 class="mb-4"><i class="fas fa-columns me-2"></i>Kanban - методология непрерывного потока</h2>
+                        
+                        <div class="card kanban-card">
+                            <div class="card-header bg-warning text-dark">
+                                <i class="fas fa-project-diagram me-2"></i>Принципы Kanban
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="principle-item">
+                                            <h5><i class="fas fa-eye me-2"></i>Визуализация workflow</h5>
+                                            <p class="mb-0">Использование Kanban-досок для отображения всех задач</p>
+                                        </div>
+                                        
+                                        <div class="principle-item">
+                                            <h5><i class="fas fa-tachometer-alt me-2"></i>Ограничение WIP</h5>
+                                            <p class="mb-0">Ограничение количества задач в работе одновременно</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="principle-item">
+                                            <h5><i class="fas fa-stream me-2"></i>Управление потоком</h5>
+                                            <p class="mb-0">Мониторинг и оптимизация движения задач</p>
+                                        </div>
+                                        
+                                        <div class="principle-item">
+                                            <h5><i class="fas fa-chart-line me-2"></i>Непрерывное улучшение</h5>
+                                            <p class="mb-0">Постоянный анализ и оптимизация процессов</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row mt-4">
+                            <div class="col-md-8">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <i class="fas fa-table me-2"></i>Пример Kanban-доски
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row text-center">
+                                            <div class="col">
+                                                <h6>Бэклог</h6>
+                                                <div class="kanban-column p-2 border rounded">
+                                                    <div class="kanban-task bg-light p-2 mb-2 rounded">Задача 1</div>
+                                                    <div class="kanban-task bg-light p-2 mb-2 rounded">Задача 2</div>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <h6>В работе (WIP: 2)</h6>
+                                                <div class="kanban-column p-2 border rounded">
+                                                    <div class="kanban-task bg-info text-white p-2 mb-2 rounded">Задача 3</div>
+                                                    <div class="kanban-task bg-info text-white p-2 mb-2 rounded">Задача 4</div>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <h6>Ревью</h6>
+                                                <div class="kanban-column p-2 border rounded">
+                                                    <div class="kanban-task bg-warning p-2 mb-2 rounded">Задача 5</div>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <h6>Готово</h6>
+                                                <div class="kanban-column p-2 border rounded">
+                                                    <div class="kanban-task bg-success text-white p-2 mb-2 rounded">Задача 6</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card kanban-card">
+                                    <div class="card-body">
+                                        <h5><i class="fas fa-thumbs-up me-2"></i>Преимущества Kanban</h5>
+                                        <ul>
+                                            <li>Гибкость и адаптивность</li>
+                                            <li>Снижение времени цикла</li>
+                                            <li>Прозрачность процесса</li>
+                                            <li>Постепенное внедрение изменений</li>
+                                            <li>Фокус на непрерывной поставке</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Extreme Programming -->
+                    <section id="xp" class="section">
+                        <h2 class="mb-4"><i class="fas fa-code me-2"></i>Extreme Programming (XP) - качество кода</h2>
+                        
+                        <div class="card xp-card">
+                            <div class="card-header bg-danger text-white">
+                                <i class="fas fa-bolt me-2"></i>Ключевые практики XP
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="tool-card">
+                                            <h6><i class="fas fa-user-friends me-2"></i>Парное программирование</h6>
+                                            <p class="mb-0">Два разработчика работают вместе за одним компьютером</p>
+                                        </div>
+                                        
+                                        <div class="tool-card">
+                                            <h6><i class="fas fa-vial me-2"></i>TDD (Test-Driven Development)</h6>
+                                            <p class="mb-0">Сначала пишутся тесты, затем реализация</p>
+                                        </div>
+                                        
+                                        <div class="tool-card">
+                                            <h6><i class="fas fa-sync-alt me-2"></i>Непрерывная интеграция</h6>
+                                            <p class="mb-0">Частое объединение кода с основной веткой</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="tool-card">
+                                            <h6><i class="fas fa-redo me-2"></i>Рефакторинг</h6>
+                                            <p class="mb-0">Постоянное улучшение структуры кода без изменения функциональности</p>
+                                        </div>
+                                        
+                                        <div class="tool-card">
+                                            <h6><i class="fas fa-leaf me-2"></i>Простое проектирование</h6>
+                                            <p class="mb-0">Проектирование только того, что нужно сейчас</p>
+                                        </div>
+                                        
+                                        <div class="tool-card">
+                                            <h6><i class="fas fa-users-cog me-2"></i>Коллективное владение</h6>
+                                            <p class="mb-0">Любой разработчик может изменить любой код</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Сравнение методологий -->
+                    <section id="comparison" class="section">
+                        <h2 class="mb-4"><i class="fas fa-balance-scale me-2"></i>Сравнение гибких методологий</h2>
+                        
+                        <div class="card">
+                            <div class="card-header bg-info text-white">
+                                <i class="fas fa-table me-2"></i>Сравнительная таблица методологий
+                            </div>
+                            <div class="card-body">
+                                <table class="comparison-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Характеристика</th>
+                                            <th>Scrum</th>
+                                            <th>Kanban</th>
+                                            <th>XP</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>Подход к планированию</strong></td>
+                                            <td>Итеративное (спринты)</td>
+                                            <td>Непрерывный поток</td>
+                                            <td>Итеративное</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Роли команды</strong></td>
+                                            <td>Строго определены (PO, SM, Team)</td>
+                                            <td>Гибкие, могут отсутствовать</td>
+                                            <td>Разработчики, коуч, заказчик</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Приоритет</strong></td>
+                                            <td>Выполнение спринта</td>
+                                            <td>Сокращение времени цикла</td>
+                                            <td>Качество кода и техническое совершенство</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Изменения в процессе</strong></td>
+                                            <td>В конце спринта</td>
+                                            <td>В любое время</td>
+                                            <td>В течение итерации с ограничениями</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Метрики</strong></td>
+                                            <td>Скорость команды (velocity)</td>
+                                            <td>Время цикла, lead time</td>
+                                            <td>Качество кода, покрытие тестами</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Лучшие сценарии применения</strong></td>
+                                            <td>Проекты с изменяющимися требованиями</td>
+                                            <td>Поддержка, операции, сервисные команды</td>
+                                            <td>Проекты с высокими требованиями к качеству</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Инструменты -->
+                    <section id="tools" class="section">
+                        <h2 class="mb-4"><i class="fas fa-tools me-2"></i>Инструменты для гибкой разработки</h2>
+                        
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="card tool-card">
+                                    <div class="card-body text-center">
+                                        <i class="fab fa-jira fa-3x text-primary mb-3"></i>
+                                        <h5>Jira</h5>
+                                        <p>Популярный инструмент для управления проектами по Scrum и Kanban</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card tool-card">
+                                    <div class="card-body text-center">
+                                        <i class="fab fa-trello fa-3x text-info mb-3"></i>
+                                        <h5>Trello</h5>
+                                        <p>Простая Kanban-доска для визуализации workflow</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card tool-card">
+                                    <div class="card-body text-center">
+                                        <i class="fab fa-github fa-3x text-dark mb-3"></i>
+                                        <h5>GitHub Projects</h5>
+                                        <p>Интеграция управления проектами с системой контроля версий</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row mt-3">
+                            <div class="col-md-4">
+                                <div class="card tool-card">
+                                    <div class="card-body text-center">
+                                        <i class="fas fa-code-branch fa-3x text-success mb-3"></i>
+                                        <h5>Azure DevOps</h5>
+                                        <p>Комплексная платформа для DevOps и Agile-разработки</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card tool-card">
+                                    <div class="card-body text-center">
+                                        <i class="fas fa-sliders-h fa-3x text-warning mb-3"></i>
+                                        <h5>VersionOne</h5>
+                                        <p>Инструмент для масштабирования Agile на уровне предприятия</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card tool-card">
+                                    <div class="card-body text-center">
+                                        <i classfas fa-chart-line fa-3x text-danger mb-3"></i>
+                                        <h5>Targetprocess</h5>
+                                        <p>Визуальное управление проектами с поддержкой Scrum и Kanban</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Заключение -->
+                    <section id="conclusion" class="section">
+                        <h2 class="mb-4"><i class="fas fa-flag me-2"></i>Заключение</h2>
+                        
+                        <div class="card">
+                            <div class="card-header bg-success text-white">
+                                <i class="fas fa-check-circle me-2"></i>Ключевые выводы
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h5>Преимущества гибких методологий:</h5>
+                                        <ul>
+                                            <li>Высокая адаптивность к изменениям</li>
+                                            <li>Улучшение качества продукта</li>
+                                            <li>Повышение прозрачности процесса</li>
+                                            <li>Увеличение удовлетворенности заказчика</li>
+                                            <li>Более эффективное использование ресурсов</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h5>Рекомендации по внедрению:</h5>
+                                        <ul>
+                                            <li>Начните с пилотного проекта</li>
+                                            <li>Обучите команду принципам Agile</li>
+                                            <li>Выберите методологию, подходящую вашим потребностям</li>
+                                            <li>Используйте подходящие инструменты</li>
+                                            <li>Постоянно совершенствуйте процесс</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                
+                                <div class="alert alert-info mt-4">
+                                    <h6><i class="fas fa-lightbulb me-2"></i>Важно помнить:</h6>
+                                    <p class="mb-0">Гибкие методологии — это не строгий набор правил, а философия и подход к разработке. 
+                                    Успешное внедрение требует изменения мышления всей команды и адаптации процессов к конкретному контексту.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </main>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Переключение между режимами
+        document.getElementById('webModeBtn').addEventListener('click', function() {
+            document.getElementById('webMode').style.display = 'block';
+            document.getElementById('documentMode').style.display = 'none';
+            this.classList.add('active');
+            this.classList.remove('btn-outline-primary');
+            this.classList.add('btn-primary');
+            document.getElementById('documentModeBtn').classList.remove('active');
+            document.getElementById('documentModeBtn').classList.remove('btn-primary');
+            document.getElementById('documentModeBtn').classList.add('btn-outline-secondary');
+        });
+        
+        document.getElementById('documentModeBtn').addEventListener('click', function() {
+            document.getElementById('webMode').style.display = 'none';
+            document.getElementById('documentMode').style.display = 'block';
+            this.classList.add('active');
+            this.classList.remove('btn-outline-secondary');
+            this.classList.add('btn-primary');
+            document.getElementById('webModeBtn').classList.remove('active');
+            document.getElementById('webModeBtn').classList.remove('btn-primary');
+            document.getElementById('webModeBtn').classList.add('btn-outline-primary');
+        });
+        
+        // Плавная прокрутка для навигации
+        document.querySelectorAll('.sidebar .nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetSection.offsetTop - 20,
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Подсветка активного раздела в навигации
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.sidebar .nav-link');
+            
+            let currentSection = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (window.pageYOffset >= sectionTop - 100) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + currentSection) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

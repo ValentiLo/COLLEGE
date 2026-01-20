@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Гибкие методы разработки ПО - Документ Word</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', serif;
+            line-height: 1.5;
+            margin: 0;
+            padding: 0;
+            background: white;
+            color: black;
+        }
+        
+        .word-document {
+            max-width: 21cm;
+            min-height: 29.7cm;
+            margin: 0 auto;
+            padding: 2.5cm;
+            box-sizing: border-box;
+            background: white;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 1.5cm;
+            border-bottom: 2px solid #2c3e50;
+            padding-bottom: 0.5cm;
+        }
+        
+        .discipline {
+            font-size: 14pt;
+            margin-bottom: 0.3cm;
+        }
+        
+        .topic {
+            font-size: 16pt;
+            font-weight: bold;
+            margin-bottom: 0.3cm;
+        }
+        
+        .document-type {
+            font-size: 14pt;
+            font-style: italic;
+        }
+        
+        .section {
+            margin-bottom: 0.8cm;
+        }
+        
+        .section-title {
+            font-size: 14pt;
+            font-weight: bold;
+            margin-bottom: 0.5cm;
+            border-left: 4px solid #2c3e50;
+            padding-left: 0.3cm;
+        }
+        
+        .subsection {
+            margin-bottom: 0.5cm;
+        }
+        
+        .subsection-title {
+            font-size: 12pt;
+            font-weight: bold;
+            margin-bottom: 0.3cm;
+        }
+        
+        p {
+            text-align: justify;
+            margin-bottom: 0.3cm;
+            text-indent: 1.25cm;
+        }
+        
+        ul, ol {
+            margin-left: 1.5cm;
+            margin-bottom: 0.5cm;
+        }
+        
+        li {
+            margin-bottom: 0.2cm;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0.5cm 0;
+        }
+        
+        th, td {
+            border: 1px solid #000;
+            padding: 0.3cm;
+            vertical-align: top;
+        }
+        
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+            text-align: left;
+        }
+        
+        .page-break {
+            page-break-before: always;
+        }
+        
+        .figure {
+            text-align: center;
+            margin: 0.5cm 0;
+        }
+        
+        .figure-caption {
+            font-style: italic;
+            margin-top: 0.2cm;
+        }
+        
+        .important {
+            background-color: #ffffcc;
+            padding: 0.3cm;
+            border-left: 4px solid #ffcc00;
+            margin: 0.3cm 0;
+        }
+        
+        .footer {
+            text-align: center;
+            font-size: 10pt;
+            margin-top: 1cm;
+            border-top: 1px solid #ccc;
+            padding-top: 0.3cm;
+        }
+        
+        @media print {
+            body {
+                margin: 0;
+                padding: 0;
+            }
+            
+            .word-document {
+                margin: 0;
+                padding: 2.5cm;
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="word-document">
+        <!-- Титульный лист -->
+        <div class="header">
+            <div class="discipline">МИНИСТЕРСТВО ОБРАЗОВАНИЯ И НАУКИ РОССИЙСКОЙ ФЕДЕРАЦИИ</div>
+            <div style="font-size: 12pt; margin: 0.5cm 0;">Образовательное учреждение</div>
+            
+            <div class="topic">МДК.02.01 Технология разработки программного обеспечения</div>
+            <div class="document-type">Лекционный материал</div>
+            
+            <div style="font-size: 16pt; font-weight: bold; margin: 1cm 0;">ГИБКИЕ МЕТОДЫ РАЗРАБОТКИ ПРОГРАММНОГО ОБЕСПЕЧЕНИЯ</div>
+            
+            <div style="margin-top: 2cm;">
+                <div>Выполнил: студент группы __________</div>
+                <div>ФИО: _________________________</div>
+                <div>Проверил: преподаватель</div>
+                <div>ФИО: _________________________</div>
+            </div>
+            
+            <div style="margin-top: 1.5cm;">г. ___________ 2024 г.</div>
+        </div>
+
+        <!-- Содержание -->
+        <div class="page-break"></div>
+        <div class="section">
+            <div class="section-title">СОДЕРЖАНИЕ</div>
+            
+            <p>Введение...................................................................................................3</p>
+            <p>1. Понятие гибких методологий разработки ПО...........................................4</p>
+            <p>2. Agile-манифест и его принципы.............................................................5</p>
+            <p>3. Scrum - фреймворк для управления проектами..........................................7</p>
+            <p>4. Kanban - методология непрерывного потока............................................9</p>
+            <p>5. Extreme Programming (XP)...................................................................11</p>
+            <p>6. Сравнительный анализ гибких методологий............................................13</p>
+            <p>7. Инструменты для реализации гибких методологий...................................15</p>
+            <p>Заключение............................................................................................16</p>
+            <p>Список использованных источников.........................................................17</p>
+        </div>
+
+        <!-- Введение -->
+        <div class="page-break"></div>
+        <div class="section">
+            <div class="section-title">ВВЕДЕНИЕ</div>
+            
+            <p>Современная разработка программного обеспечения характеризуется высокой динамичностью требований, короткими сроками выхода на рынок и необходимостью постоянной адаптации к изменяющимся условиям. В таких условиях традиционные каскадные модели разработки, такие как Waterfall, демонстрируют свою неэффективность из-за жесткости процессов и длительных циклов разработки.</p>
+            
+            <p>Гибкие методологии (Agile methodologies) emerged как ответ на эти вызовы, предлагая итеративный и инкрементальный подход к разработке программного обеспечения. Основная идея гибких методологий заключается в создании working software через короткие итерации, постоянном взаимодействии с заказчиком и готовности к изменениям требований на любом этапе проекта.</p>
+            
+            <p>Актуальность темы гибких методов разработки обусловлена их широким распространением в IT-индустрии. По данным исследований, более 70% компаний, занимающихся разработкой программного обеспечения, используют те или иные элементы гибких методологий в своей практике.</p>
+            
+            <p>Цель данного учебного материала - систематизировать знания о гибких методах разработки программного обеспечения, рассмотреть основные методологии (Scrum, Kanban, XP) и их практическое применение.</p>
+        </div>
+
+        <!-- Раздел 1 -->
+        <div class="page-break"></div>
+        <div class="section">
+            <div class="section-title">1. ПОНЯТИЕ ГИБКИХ МЕТОДОЛОГИЙ РАЗРАБОТКИ ПО</div>
+            
+            <p>Гибкие методологии разработки программного обеспечения - это совокупность подходов и практик, основанных на итеративной и инкрементальной разработке, где требования и решения эволюционируют в процессе collaboration между самоорганизующимися кросс-функциональными командами.</p>
+            
+            <div class="subsection">
+                <div class="subsection-title">1.1. Исторический контекст</div>
+                <p>Возникновение гибких методологий относится к 1990-м годам, когда различные группы разработчиков начали экспериментировать с альтернативными подходами к созданию программного обеспечения. Знаковым событием стало подписание Agile-манифеста в 2001 году, который formalized основные принципы гибкой разработки.</p>
+            </div>
+            
+            <div class="subsection">
+                <div class="subsection-title">1.2. Ключевые характеристики гибких методологий</div>
+                
+                <p>Гибкие методологии обладают следующими distinguishing characteristics:</p>
+                
+                <ul>
+                    <li><strong>Итеративность</strong> - работа разбивается на небольшие временные отрезки (итерации), по окончании которых создается working increment продукта</li>
+                    <li><strong>Инкрементальность</strong> - продукт развивается постепенно, с добавлением новой функциональности в каждой итерации</li>
+                    <li><strong>Адаптивность</strong> - процессы легко адаптируются к изменяющимся требованиям и условиям</li>
+                    <li><strong>Ориентация на людей</strong> - приоритет отдается взаимодействию между членами команды и с заказчиком</li>
+                    <li><strong>Непрерывная поставка ценности</strong> - фокус на регулярной поставке working software, представляющей ценность для заказчика</li>
+                </ul>
+            </div>
+            
+            <div class="subsection">
+                <div class="subsection-title">1.3. Преимущества и ограничения</div>
+                
+                <table>
+                    <tr>
+                        <th>Преимущества</th>
+                        <th>Ограничения</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <ul>
+                                <li>Высокая адаптивность к изменениям</li>
+                                <li>Раннее обнаружение проблем</li>
+                                <li>Повышение прозрачности процесса</li>
+                                <li>Улучшение качества продукта</li>
+                                <li>Высокая удовлетворенность заказчика</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li>Требует высокой дисциплины команды</li>
+                                <li>Может быть менее предсказуемым</li>
+                                <li>Не подходит для проектов с фиксированными требованиями</li>
+                                <li>Требует активного участия заказчика</li>
+                                <li>Сложность масштабирования на большие проекты</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- Раздел 2 -->
+        <div class="page-break"></div>
+        <div class="section">
+            <div class="section-title">2. AGILE-МАНИФЕСТ И ЕГО ПРИНЦИПЫ</div>
+            
+            <p>Agile-манифест, подписанный в 2001 году, представляет собой фундаментальный документ, определяющий ценности и принципы гибкой разработки программного обеспечения. Манифест был создан семнадцатью ведущими экспертами в области разработки ПО.</p>
+            
+            <div class="subsection">
+                <div class="subsection-title">2.1. Четыре ценности Agile-манифеста</div>
+                
+                <p>Манифест провозглашает четыре ключевые ценности, которые определяют приоритеты в гибкой разработке:</p>
+                
+                <div class="important">
+                    <p><strong>1. Люди и взаимодействие важнее процессов и инструментов</strong></p>
+                    <p>Эффективная коммуникация между членами команды и с заказчиком имеет большее значение, чем строгое следование процессам или использование конкретных инструментов.</p>
+                </div>
+                
+                <div class="important">
+                    <p><strong>2. Работающий продукт важнее исчерпывающей документации</strong></p>
+                    <p>Главным мерилом прогресса является working software, а не объем созданной документации.</p>
+                </div>
+                
+                <div class="important">
+                    <p><strong>3. Сотрудничество с заказчиком важнее согласования условий контракта</strong></p>
+                    <p>Постоянное взаимодействие с заказчиком и готовность к изменениям требований ценятся выше формальных договоренностей.</p>
+                </div>
+                
+                <div class="important">
+                    <p><strong>4. Готовность к изменениям важнее следования первоначальному плану</strong></p>
+                    <p>Способность адаптироваться к изменяющимся требованиям рассматривается как конкурентное преимущество.</p>
+                </div>
+            </div>
+            
+            <div class="subsection">
+                <div class="subsection-title">2.2. Двенадцать принципов Agile-разработки</div>
+                
+                <p>Помимо четырех ценностей, Agile-манифест содержит двенадцать принципов, которые конкретизируют подход к гибкой разработке:</p>
+                
+                <ol>
+                    <li>Наивысшим приоритетом является удовлетворение заказчика благодаря ранней и непрерывной поставке ценного программного обеспечения.</li>
+                    <li>Изменение требований приветствуется даже на поздних стадиях разработки.</li>
+                    <li>Работающий продукт следует выпускать как можно чаще.</li>
+                    <li>На протяжении всего проекта разработчики и представители бизнеса должны работать вместе ежедневно.</li>
+                    <li>Проекты следует строить вокруг мотивированных individuals.</li>
+                    <li>Непосредственное общение является наиболее эффективным способом обмена информацией.</li>
+                    <li>Работающий продукт - основной показатель прогресса.</li>
+                    <li>Инвесторы, разработчики и пользователи должны иметь возможность поддерживать постоянный ритм.</li>
+                    <li>Постоянное внимание к техническому совершенству и качеству проектирования.</li>
+                    <li>Простота - искусство минимизации лишней работы.</li>
+                    <li>Самые лучшие требования, архитектурные и проектные решения рождаются у самоорганизующихся команд.</li>
+                    <li>Команда регулярно осмысливает, как стать эффективнее, и соответствующим образом корректирует свою работу.</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Раздел 3 -->
+        <div class="page-break"></div>
+        <div class="section">
+            <div class="section-title">3. SCRUM - ФРЕЙМВОРК ДЛЯ УПРАВЛЕНИЯ ПРОЕКТАМИ</div>
+            
+            <p>Scrum является одним из наиболее популярных фреймворков для реализации принципов Agile. Он предоставляет структуру для управления процессом разработки через фиксированные временные итерации, называемые спринтами.</p>
+            
+            <div class="subsection">
+                <div class="subsection-title">3.1. Ключевые роли в Scrum</div>
+                
+                <p>Scrum определяет три основные роли, каждая из которых имеет четкие responsibilities:</p>
+                
+                <table>
+                    <tr>
+                        <th>Роль</th>
+                        <th>Обязанности</th>
+                        <th>Характеристики</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Владелец продукта (Product Owner)</strong></td>
+                        <td>
+                            <ul>
+                                <li>Определение требований к продукту</li>
+                                <li>Приоритизация backlog</li>
+                                <li>Принятие решений о содержании релизов</li>
+                            </ul>
+                        </td>
+                        <td>Представляет интересы заказчика, обладает vision продукта</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Scrum-мастер (Scrum Master)</strong></td>
+                        <td>
+                            <ul>
+                                <li>Обеспечение понимания и соблюдения Scrum</li>
+                                <li>Устранение препятствий</li>
+                                <li>Фасилитация мероприятий Scrum</li>
+                            </ul>
+                        </td>
+                        <td>Лидер служения, коуч для команды</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Команда разработки (Development Team)</strong></td>
+                        <td>
+                            <ul>
+                                <li>Выполнение работы по созданию продукта</li>
+                                <li>Самоорганизация и кросс-функциональность</li>
+                                <li>Оценка и планирование работы</li>
+                            </ul>
+                        </td>
+                        <td>Кросс-функциональная группа из 3-9 человек</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div class="subsection">
+                <div class="subsection-title">3.2. Артефакты Scrum</div>
+                
+                <p>Scrum определяет три основных артефакта, которые обеспечивают прозрачность и возможность инспекции:</p>
+                
+                <ul>
+                    <li><strong>Product Backlog</strong> - упорядоченный список всего, что может понадобиться в продукте</li>
+                    <li><strong>Sprint Backlog</strong> - набор элементов из Product Backlog, selected для реализации в текущем спринте</li>
+                    <li><strong>Increment</strong> - сумма всех элементов Product Backlog, completed during the sprint</li>
+                </ul>
+            </div>
+            
+            <div class="subsection">
+                <div class="subsection-title">3.3. Мероприятия Scrum</div>
+                
+                <p>Scrum процесс состоит из пяти основных мероприятий, которые structure работу команды:</p>
+                
+                <table>
+                    <tr>
+                        <th>Мероприятие</th>
+                        <th>Цель</th>
+                        <th>Продолжительность</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Sprint Planning</strong></td>
+                        <td>Определение объема работ на предстоящий спринт</td>
+                        <td>2-4 часа для 2-недельного спринта</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Daily Scrum</strong></td>
+                        <td>Синхронизация работы команды, identification препятствий</td>
+                        <td>15 минут ежедневно</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Sprint Review</strong></td>
+                        <td>Демонстрация completed work заказчику, сбор feedback</td>
+                        <td>1-2 часа для 2-недельного спринта</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Sprint Retrospective</strong></td>
+                        <td>Анализ процесса и identification улучшений</td>
+                        <td>1-2 часа для 2-недельного спринта</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Sprint</strong></td>
+                        <td>Временной контейнер для всех других мероприятий</td>
+                        <td>1-4 недели (фиксированная длина)</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- Раздел 4 -->
+        <div class="page-break"></div>
+        <div class="section">
+            <div class="section-title">4. KANBAN - МЕТОДОЛОГИЯ НЕПРЕРЫВНОГО ПОТОКА</div>
+            
+            <p>Kanban - это методология, ориентированная на визуализацию workflow и управление work in progress (WIP). В отличие от Scrum с его фиксированными спринтами, Kanban обеспечивает continuous flow работы.</p>
+            
+            <div class="subsection">
+                <div class="subsection-title">4.1. Основные принципы Kanban</div>
+                
+                <p>Kanban основан на шести фундаментальных principles:</p>
+                
+                <ol>
+                    <li><strong>Визуализация workflow</strong> - использование Kanban-досок для отображения всех tasks и их статуса</li>
+                    <li><strong>Ограничение work in progress (WIP)</strong> - установление лимитов на количество tasks, одновременно находящихся в работе</li>
+                    <li><strong>Управление потоком</strong> - мониторинг и оптимизация движения tasks через workflow</li>
+                    <li><strong>Четкое определение политик процесса</strong> - explicit формулирование правил работы</li>
+                    <li><strong>Использование циклов обратной связи</strong> - регулярный анализ и improvement процесса</li>
+                    <li><strong>Совместное улучшение (эволюционирование)</strong> - постепенное внедрение изменений</li>
+                </ol>
+            </div>
+            
+            <div class="subsection">
+                <div class="subsection-title">4.2. Kanban-доска</div>
+                
+                <p>Central элементом Kanban является доска, которая visualizes workflow. Типичная Kanban-доска состоит из нескольких columns, представляющих различные стадии процесса:</p>
+                
+                <div class="figure">
+                    <div style="border: 1px solid #000; padding: 0.5cm; margin: 0 auto; max-width: 15cm;">
+                        <div style="display: flex; text-align: center;">
+                            <div style="flex: 1; border-right: 1px solid #000; padding: 0.3cm;">
+                                <strong>Backlog</strong><br>
+                                [Задача 1]<br>
+                                [Задача 2]
+                            </div>
+                            <div style="flex: 1; border-right: 1px solid #000; padding: 0.3cm;">
+                                <strong>To Do</strong><br>
+                                [Задача 3]<br>
+                                [Задача 4]
+                            </div>
+                            <div style="flex: 1; border-right: 1px solid #000; padding: 0.3cm;">
+                                <strong>In Progress (WIP: 2)</strong><br>
+                                [Задача 5]<br>
+                                [Задача 6]
+                            </div>
+                            <div style="flex: 1; border-right: 1px solid #000; padding: 0.3cm;">
+                                <strong>Review</strong><br>
+                                [Задача 7]
+                            </div>
+                            <div style="flex: 1; padding: 0.3cm;">
+                                <strong>Done</strong><br>
+                                [Задача 8]
+                            </div>
+                        </div>
+                    </div>
+                    <div class="figure-caption">Рисунок 1. Пример Kanban-доски с ограничением WIP</div>
+                </div>
+            </div>
+            
+            <div class="subsection">
+                <div class="subsection-title">4.3. Преимущества Kanban</div>
+                
+                <p>Методология Kanban предлагает several advantages для команд разработки:</p>
+                
+                <ul>
+                    <li><strong>Гибкость</strong> - отсутствие фиксированных итераций позволяет быстро реагировать на изменения</li>
+                    <li><strong>Снижение времени цикла</strong> - ограничение WIP уменьшает multitasking и ускоряет completion tasks</li>
+                    <li><strong>Прозрачность процесса</strong> - визуализация делает workflow понятным для всех участников</li>
+                    <li><strong>Постепенное внедрение изменений</strong> - Kanban не требует radical изменений существующих процессов</li>
+                    <li><strong>Фокус на continuous delivery</strong> - ориентация на непрерывную поставку ценности</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Раздел 5 -->
+        <div class="page-break"></div>
+        <div class="section">
+            <div class="section-title">5. EXTREME PROGRAMMING (XP)</div>
+            
+            <p>Extreme Programming (XP) - это гибкая методология, ориентированная на technical excellence и качество кода. XP делает акцент на engineering practices, которые обеспечивают создание высококачественного software.</p>
+            
+            <div class="subsection">
+                <div class="subsection-title">5.1. Ключевые практики XP</div>
+                
+                <p>XP включает двенадцать core practices, сгруппированных в четыре категории:</p>
+                
+                <table>
+                    <tr>
+                        <th>Категория</th>
+                        <th>Практики</th>
+                        <th>Описание</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Fine-scale feedback</strong></td>
+                        <td>
+                            <ul>
+                                <li>Парное программирование</li>
+                                <li>Планирование игры</li>
+                                <li>Тестовый дизайн (TDD)</li>
+                                <li>Весь код пишется коллективно</li>
+                            </ul>
+                        </td>
+                        <td>Практики, обеспечивающие быструю обратную связь</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Continuous process</strong></td>
+                        <td>
+                            <ul>
+                                <li>Непрерывная интеграция</li>
+                                <li>Рефакторинг</li>
+                                <li>Частые небольшие релизы</li>
+                            </ul>
+                        </td>
+                        <td>Практики, обеспечивающие непрерывность процесса</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Shared understanding</strong></td>
+                        <td>
+                            <ul>
+                                <li>Простое проектирование</li>
+                                <li>Метафора системы</li>
+                                <li>Коллективное владение кодом</li>
+                                <li>Стандарты кодирования</li>
+                            </ul>
+                        </td>
+                        <td>Практики, обеспечивающие общее понимание</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Programmer welfare</strong></td>
+                        <td>
+                            <ul>
+                                <li>40-часовая рабочая неделя</li>
+                            </ul>
+                        </td>
+                        <td>Практики, обеспечивающие благополучие программистов</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div class="subsection">
+                <div class="subsection-title">5.2. Test-Driven Development (TDD)</div>
+                
+                <p>TDD является одной из наиболее известных практик XP. Этот approach к разработке состоит из трех этапов, известных как "красный-зеленый-рефакторинг":</p>
+                
+                <ol>
+                    <li><strong>Красный</strong> - написание failing test для новой functionality</li>
+                    <li><strong>Зеленый</strong> - написание минимального кода, necessary чтобы тест passed</li>
+                    <li><strong>Рефакторинг</strong> - улучшение кода без изменения functionality</li>
+                </ol>
+                
+                <p>TDD обеспечивает several benefits, включая better code design, comprehensive test coverage и confidence при внесении изменений.</p>
+            </div>
+            
+            <div class="subsection">
+                <div class="subsection-title">5.3. Парное программирование</div>
+                
+                <p>Парное программирование предполагает, что два разработчика work together за одним computer. Один из них (driver) пишет код, while другой (navigator) reviews код и думает о strategic direction.</p>
+                
+                <p>Преимущества парного программирования include:</p>
+                
+                <ul>
+                    <li>Улучшение качества кода за счет continuous review</li>
+                    <li>Распространение знаний внутри команды</li>
+                    <li>Снижение количества defects</li>
+                    <li>Повышение team cohesion</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Раздел 6 -->
+        <div class="page-break"></div>
+        <div class="section">
+            <div class="section-title">6. СРАВНИТЕЛЬНЫЙ АНАЛИЗ ГИБКИХ МЕТОДОЛОГИЙ</div>
+            
+            <p>Каждая из рассмотренных методологий имеет свои strengths и weaknesses, что делает их suitable для разных контекстов и типов проектов.</p>
+            
+            <div class="subsection">
+                <div class="subsection-title">6.1. Критерии сравнения</div>
+                
+                <p>Для comparative analysis гибких методологий используются следующие criteria:</p>
+                
+                <ul>
+                    <li><strong>Структурированность</strong> - степень formalization процессов и ролей</li>
+                    <li><strong>Гибкость</strong> - способность адаптироваться к изменениям</li>
+                    <li><strong>Предсказуемость</strong> - возможность точного планирования</li>
+                    <li><strong>Фокус на качестве</strong> - внимание к technical excellence</li>
+                    <li><strong>Масштабируемость</strong> - применимость к large projects</li>
+                    <li><strong>Требования к команде</strong> - необходимый уровень expertise и дисциплины</li>
+                </ul>
+            </div>
+            
+            <div class="subsection">
+                <div class="subsection-title">6.2. Сравнительная таблица</div>
+                
+                <table>
+                    <tr>
+                        <th>Критерий</th>
+                        <th>Scrum</th>
+                        <th>Kanban</th>
+                        <th>XP</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Структурированность</strong></td>
+                        <td>Высокая (фиксированные роли, события, артефакты)</td>
+                        <td>Низкая (гибкие правила, минимальные предписания)</td>
+                        <td>Средняя (технические практики, но гибкий процесс)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Гибкость</strong></td>
+                        <td>Средняя (изменения между спринтами)</td>
+                        <td>Высокая (изменения в любое время)</td>
+                        <td>Средняя (техническая гибкость, процесс более стабилен)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Предсказуемость</strong></td>
+                        <td>Высокая (фиксированные спринты, velocity tracking)</td>
+                        <td>Низкая (flow-based, зависит от WIP limits)</td>
+                        <td>Средняя (итеративное планирование)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Фокус на качестве</strong></td>
+                        <td>Средний (как бизнес-качество, так и техническое)</td>
+                        <td>Низкий (фокус на flow efficiency)</td>
+                        <td>Высокий (техническое excellence как приоритет)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Масштабируемость</strong></td>
+                        <td>Высокая (Scrum of Scrums, SAFe, LeSS)</td>
+                        <td>Средняя (Kanban на уровне портфеля)</td>
+                        <td>Низкая (ориентирована на небольшие команды)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Требования к команде</strong></td>
+                        <td>Высокие (дисциплина, самоорганизация)</td>
+                        <td>Низкие (можно внедрять постепенно)</td>
+                        <td>Очень высокие (техническая экспертиза)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Лучшие сценарии применения</strong></td>
+                        <td>Проекты с changing requirements, нуждающиеся в structure</td>
+                        <td>Support, operations, service teams, unpredictable workflow</td>
+                        <td>Проекты с high quality requirements, critical systems</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div class="subsection">
+                <div class="subsection-title">6.3. Гибридные подходы</div>
+                
+                <p>На практике многие организации используют hybrid approaches, combining элементы разных методологий. Например:</p>
+                
+                <ul>
+                    <li><strong>Scrumban</strong> - сочетание structure Scrum с flexibility Kanban</li>
+                    <li><strong>XP + Scrum</strong> - использование technical practices XP в рамках Scrum process</li>
+                    <li><strong>Lean UX + Agile</strong> - integration дизайн-мышления с гибкой разработкой</li>
+                </ul>
+                
+                <p>Гибридные подходы позволяют tailor процессы под specific needs организации и проекта.</p>
+            </div>
+        </div>
+
+        <!-- Раздел 7 -->
+        <div class="page-break"></div>
+        <div class="section">
+            <div class="section-title">7. ИНСТРУМЕНТЫ ДЛЯ РЕАЛИЗАЦИИ ГИБКИХ МЕТОДОЛОГИЙ</div>
+            
+            <p>Современные инструменты играют crucial role в successful implementation гибких методологий, обеспечивая поддержку key practices и процессов.</p>
+            
+            <div class="subsection">
+                <div class="subsection-title">7.1. Категории инструментов</div>
+                
+                <p>Инструменты для гибкой разработки можно categorized по их основным функциям:</p>
+                
+                <table>
+                    <tr>
+                        <th>Категория</th>
+                        <th>Назначение</th>
+                        <th>Примеры инструментов</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Управление проектами</strong></td>
+                        <td>Планирование, отслеживание задач, визуализация workflow</td>
+                        <td>Jira, Trello, Azure DevOps, Asana</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Сотрудничество и коммуникация</strong></td>
+                        <td>Обеспечение effective communication в команде</td>
+                        <td>Slack, Microsoft Teams, Confluence</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Непрерывная интеграция/поставка</strong></td>
+                        <td>Автоматизация сборки, тестирования и развертывания</td>
+                        <td>Jenkins, GitLab CI, GitHub Actions, CircleCI</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Управление кодом</strong></td>
+                        <td>Версионный контроль, code review, collaboration</td>
+                        <td>Git, GitHub, GitLab, Bitbucket</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Тестирование</strong></td>
+                        <td>Автоматизация testing processes</td>
+                        <td>Selenium, JUnit, TestNG, Cypress</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div class="subsection">
+                <div class="subsection-title">7.2. Критерии выбора инструментов</div>
+                
+                <p>При selection инструментов для гибкой разработки следует учитывать several factors:</p>
+                
+                <ul>
+                    <li><strong>Интеграция</strong> - способность инструментов работать together seamlessly</li>
+                    <li><strong>Масштабируемость</strong> - поддержка growth команды и проекта</li>
+                    <li><strong>Пользовательский опыт</strong> - intuitive interface и ease of use</li>
+                    <li><strong>Гибкость настройки</strong> - возможность adaptation под specific processes</li>
+                    <li><strong>Стоимость владения</strong> - total cost of ownership, включая лицензии и поддержку</li>
+                    <li><strong>Сообщество и поддержка</strong> - availability documentation и community support</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Заключение -->
+        <div class="page-break"></div>
+        <div class="section">
+            <div class="section-title">ЗАКЛЮЧЕНИЕ</div>
+            
+            <p>Гибкие методологии разработки программного обеспечения represent significant evolution в подходе к созданию software products. Они emerged как response на challenges современной IT-индустрии, характеризующейся rapid changes и high uncertainty.</p>
+            
+            <p>Agile-манифест, сформулированный в 2001 году, established philosophical foundation для гибкой разработки, emphasizing ценности individuals и interactions, working software, customer collaboration и response to change.</p>
+            
+            <p>Scrum, Kanban и Extreme Programming - три наиболее prominent методологии, каждая из которых offers unique approach к реализации agile principles. Scrum provides structured framework с фиксированными ролями и событиями, Kanban focuses на flow efficiency и continuous improvement, а XP emphasizes technical excellence и engineering practices.</p>
+            
+            <p>Выбор конкретной методологии или их combination depends от multiple factors, включая nature проекта, organizational culture, team composition и customer requirements. Successful implementation требует не только adoption процессов и tools, но и cultural transformation, ориентированной на collaboration, transparency и continuous learning.</p>
+            
+            <p>Гибкие методологии continue to evolve, с появлением scaling frameworks (таких как SAFe, LeSS, Nexus) для large organizations и integration с emerging trends, такими как DevOps, Data Science и AI-assisted development.</p>
+            
+            <p>В conclusion, гибкие методологии разработки стали industry standard для modern software development, offering effective approach к созданию high-quality software в условиях uncertainty и rapid change. Их continued relevance и evolution свидетельствуют об enduring value agile principles в современной IT-индустрии.</p>
+        </div>
+
+        <!-- Список литературы -->
+        <div class="page-break"></div>
+        <div class="section">
+            <div class="section-title">СПИСОК ИСПОЛЬЗОВАННЫХ ИСТОЧНИКОВ</div>
+            
+            <ol>
+                <li>Бек, К. Экстремальное программирование: разработка через тестирование. - СПб.: Питер, 2020. - 320 с.</li>
+                <li>Кнокберг, Х. Scrum и XP: заметки с передовой. - М.: Вильямс, 2019. - 190 с.</li>
+                <li>Манифест гибкой разработки программного обеспечения [Электронный ресурс]. - Режим доступа: https://agilemanifesto.org/iso/ru/manifesto.html</li>
+                <li>Рубин, К. Scrum: гибкая разработка ПО. - М.: Эксмо, 2021. - 280 с.</li>
+                <li>Сазерленд, Д. Scrum: революционный метод управления проектами. - М.: Манн, Иванов и Фербер, 2022. - 350 с.</li>
+                <li>Андерсон, Д. Канбан: альтернативный путь в Agile. - М.: Питер, 2020. - 270 с.</li>
+                <li>Швабер, К. Agile-проектирование с использованием Scrum. - СПб.: БХВ-Петербург, 2019. - 310 с.</li>
+                <li>Фаулер, М. Непрерывная интеграция. - М.: Символ-Плюс, 2021. - 190 с.</li>
+                <li>Мартин, Р. Чистый код: создание, анализ и рефакторинг. - М.: Вильямс, 2020. - 450 с.</li>
+                <li>Поппендик, М. Принципы Lean-разработки ПО. - М.: Эксмо, 2022. - 320 с.</li>
+            </ol>
+        </div>
+
+        <div class="footer">
+            МДК.02.01 Технология разработки программного обеспечения | Гибкие методы разработки ПО | 2024
+        </div>
+    </div>
+
+    <script>
+        // Функция для копирования содержимого в Word
+        function copyToWord() {
+            const content = document.querySelector('.word-document').innerHTML;
+            
+            // Создаем временный элемент для копирования
+            const tempElement = document.createElement('div');
+            tempElement.innerHTML = content;
+            
+            // Удаляем ненужные элементы
+            const elementsToRemove = tempElement.querySelectorAll('script, style, .toggle-buttons');
+            elementsToRemove.forEach(el => el.remove());
+            
+            // Копируем текст
+            const range = document.createRange();
+            range.selectNode(tempElement);
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+            
+            try {
+                document.execCommand('copy');
+                alert('Содержимое скопировано в буфер обмена. Теперь вы можете вставить его в Word.');
+            } catch (err) {
+                alert('Ошибка при копировании: ' + err);
+            }
+            
+            window.getSelection().removeAllRanges();
+        }
+        
+        // Добавляем кнопку для копирования (только для демонстрации)
+        document.addEventListener('DOMContentLoaded', function() {
+            const button = document.createElement('button');
+            button.textContent = 'Копировать в Word';
+            button.style.position = 'fixed';
+            button.style.top = '10px';
+            button.style.right = '10px';
+            button.style.zIndex = '1000';
+            button.style.padding = '10px';
+            button.style.backgroundColor = '#2c3e50';
+            button.style.color = 'white';
+            button.style.border = 'none';
+            button.style.borderRadius = '5px';
+            button.style.cursor = 'pointer';
+            
+            button.addEventListener('click', copyToWord);
+            
+            document.body.appendChild(button);
+        });
+    </script>
+</body>
+</html>

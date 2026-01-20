@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лекция МДК.02.01 - Современные принципы разработки ПО</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        
+        .document-container {
+            max-width: 210mm;
+            min-height: 297mm;
+            margin: 20px auto;
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            padding: 25mm;
+            box-sizing: border-box;
+        }
+        
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #2c3e50;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .discipline {
+            font-size: 14pt;
+            color: #7f8c8d;
+            margin-bottom: 5px;
+        }
+        
+        .topic {
+            font-size: 18pt;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .lecture-title {
+            font-size: 16pt;
+            color: #3498db;
+            margin-bottom: 15px;
+        }
+        
+        .section {
+            margin-bottom: 25px;
+        }
+        
+        .section-title {
+            font-size: 14pt;
+            font-weight: bold;
+            color: #2c3e50;
+            border-left: 4px solid #3498db;
+            padding-left: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .subsection {
+            margin-bottom: 15px;
+        }
+        
+        .subsection-title {
+            font-size: 12pt;
+            font-weight: bold;
+            color: #34495e;
+            margin-bottom: 8px;
+        }
+        
+        .content {
+            text-align: justify;
+            margin-bottom: 10px;
+        }
+        
+        .principles-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 15px 0;
+        }
+        
+        .principle-card {
+            background: #ecf0f1;
+            padding: 12px;
+            border-radius: 5px;
+            border-left: 3px solid #3498db;
+        }
+        
+        .principle-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #2c3e50;
+        }
+        
+        .methodology-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        
+        .methodology-table th {
+            background: #3498db;
+            color: white;
+            padding: 10px;
+            text-align: left;
+        }
+        
+        .methodology-table td {
+            padding: 10px;
+            border-bottom: 1px solid #bdc3c7;
+        }
+        
+        .methodology-table tr:nth-child(even) {
+            background: #f5f5f5;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 10pt;
+            color: #7f8c8d;
+            border-top: 1px solid #bdc3c7;
+            padding-top: 15px;
+        }
+        
+        .page-break {
+            page-break-before: always;
+        }
+        
+        @media print {
+            body {
+                background: white;
+            }
+            
+            .document-container {
+                box-shadow: none;
+                margin: 0;
+                padding: 15mm;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="document-container">
+        <div class="header">
+            <div class="discipline">МДК.02.01 Технологии разработки программного обеспечения</div>
+            <div class="topic">Современные принципы и методы разработки программных приложений</div>
+            <div class="lecture-title">Лекционный материал</div>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">Введение</div>
+            <div class="content">
+                <p>Современная разработка программного обеспечения претерпела значительные изменения за последние два десятилетия. 
+                Переход от традиционных каскадных моделей к гибким методологиям, распространение DevOps-практик и микросервисной 
+                архитектуры кардинально изменили подходы к созданию программных продуктов.</p>
+                
+                <p>Современные принципы разработки направлены на повышение качества кода, ускорение времени выхода на рынок, 
+                улучшение взаимодействия между командами и обеспечение надежности программных систем.</p>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">1. Ключевые принципы современной разработки ПО</div>
+            
+            <div class="principles-grid">
+                <div class="principle-card">
+                    <div class="principle-title">Agile-манифест</div>
+                    <div class="content">
+                        Люди и взаимодействие важнее процессов и инструментов. 
+                        Работающий продукт важнее исчерпывающей документации. 
+                        Сотрудничество с заказчиком важнее согласования условий контракта. 
+                        Готовность к изменениям важнее следования первоначальному плану.
+                    </div>
+                </div>
+                
+                <div class="principle-card">
+                    <div class="principle-title">DevOps-культура</div>
+                    <div class="content">
+                        Стирание границ между разработкой и эксплуатацией. 
+                        Автоматизация процессов сборки, тестирования и развертывания. 
+                        Непрерывная интеграция и непрерывная поставка (CI/CD). 
+                        Мониторинг и обратная связь на всех этапах жизненного цикла.
+                    </div>
+                </div>
+                
+                <div class="principle-card">
+                    <div class="principle-title">Микросервисная архитектура</div>
+                    <div class="content">
+                        Разделение приложения на небольшие, слабосвязанные сервисы. 
+                        Независимое развертывание и масштабирование компонентов. 
+                        Использование легковесных протоколов взаимодействия (REST, gRPC). 
+                        Отказоустойчивость и устойчивость к сбоям.
+                    </div>
+                </div>
+                
+                <div class="principle-card">
+                    <div class="principle-title">Контейнеризация</div>
+                    <div class="content">
+                        Изоляция приложений и их зависимостей. 
+                        Единообразие сред разработки, тестирования и production. 
+                        Оркестрация контейнеров (Kubernetes, Docker Swarm). 
+                        Быстрое развертывание и масштабирование.
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">2. Современные методологии разработки</div>
+            
+            <table class="methodology-table">
+                <thead>
+                    <tr>
+                        <th>Методология</th>
+                        <th>Ключевые особенности</th>
+                        <th>Область применения</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Scrum</td>
+                        <td>Итеративная разработка, спринты, роли (Product Owner, Scrum Master)</td>
+                        <td>Проекты с изменяющимися требованиями</td>
+                    </tr>
+                    <tr>
+                        <td>Kanban</td>
+                        <td>Визуализация workflow, ограничение work in progress, непрерывная поставка</td>
+                        <td>Поддержка и развитие существующих систем</td>
+                    </tr>
+                    <tr>
+                        <td>Extreme Programming (XP)</td>
+                        <td>Парное программирование, TDD, непрерывная интеграция, частые релизы</td>
+                        <td>Проекты с высокими требованиями к качеству</td>
+                    </tr>
+                    <tr>
+                        <td>DevOps</td>
+                        <td>Автоматизация, CI/CD, инфраструктура как код, мониторинг</td>
+                        <td>Высоконагруженные и распределенные системы</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="page-break"></div>
+        
+        <div class="section">
+            <div class="section-title">3. Принципы проектирования (SOLID)</div>
+            
+            <div class="subsection">
+                <div class="subsection-title">S - Single Responsibility Principle (Принцип единственной ответственности)</div>
+                <div class="content">
+                    Каждый класс должен иметь только одну причину для изменения. 
+                    Это означает, что класс должен решать только одну задачу.
+                </div>
+            </div>
+            
+            <div class="subsection">
+                <div class="subsection-title">O - Open/Closed Principle (Принцип открытости/закрытости)</div>
+                <div class="content">
+                    Программные сущности должны быть открыты для расширения, но закрыты для модификации. 
+                    Новый функционал добавляется через создание новых классов, а не изменением существующих.
+                </div>
+            </div>
+            
+            <div class="subsection">
+                <div class="subsection-title">L - Liskov Substitution Principle (Принцип подстановки Барбары Лисков)</div>
+                <div class="content">
+                    Объекты в программе должны быть заменяемыми на экземпляры их подтипов без изменения правильности программы.
+                </div>
+            </div>
+            
+            <div class="subsection">
+                <div class="subsection-title">I - Interface Segregation Principle (Принцип разделения интерфейсов)</div>
+                <div class="content">
+                    Много специализированных интерфейсов лучше, чем один универсальный. 
+                    Клиенты не должны зависеть от методов, которые они не используют.
+                </div>
+            </div>
+            
+            <div class="subsection">
+                <div class="subsection-title">D - Dependency Inversion Principle (Принцип инверсии зависимостей)</div>
+                <div class="content">
+                    Модули верхнего уровня не должны зависеть от модулей нижнего уровня. 
+                    И те, и другие должны зависеть от абстракций. Абстракции не должны зависеть от деталей.
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">4. Современные технологии и инструменты</div>
+            
+            <div class="subsection">
+                <div class="subsection-title">Системы контроля версий</div>
+                <div class="content">
+                    Git стал стандартом де-факто в современной разработке. 
+                    Платформы типа GitHub, GitLab, Bitbucket предоставляют инструменты для совместной работы, 
+                    code review, CI/CD и управления проектами.
+                </div>
+            </div>
+            
+            <div class="subsection">
+                <div class="subsection-title">Фреймворки и библиотеки</div>
+                <div class="content">
+                    Современная разработка heavily relies на фреймворки: Spring (Java), Django (Python), 
+                    React/Vue/Angular (JavaScript), .NET Core (C#). Это ускоряет разработку и обеспечивает лучшую структуру кода.
+                </div>
+            </div>
+            
+            <div class="subsection">
+                <div class="subsection-title">Облачные платформы</div>
+                <div class="content">
+                    AWS, Azure, Google Cloud предоставляют инфраструктуру как услугу, 
+                    позволяя быстро развертывать и масштабировать приложения без управления физическими серверами.
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">Заключение</div>
+            <div class="content">
+                <p>Современные принципы и методы разработки ПО направлены на создание гибких, масштабируемых 
+                и надежных систем, способных быстро адаптироваться к изменяющимся требованиям рынка.</p>
+                
+                <p>Ключевые тенденции включают переход к микросервисной архитектуре, широкое внедрение DevOps-практик, 
+                использование контейнеризации и оркестрации, а также автоматизацию всех этапов жизненного цикла ПО.</p>
+                
+                <p>Понимание и применение этих принципов является обязательным для современных разработчиков, 
+                стремящихся создавать качественные и конкурентоспособные программные продукты.</p>
+            </div>
+        </div>
+        
+        <div class="footer">
+            Лекционный материал по МДК.02.01 | Технологии разработки программного обеспечения | 2023
+        </div>
+    </div>
+</body>
+</html>

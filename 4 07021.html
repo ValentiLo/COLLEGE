@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лекция: МДК.07.02 - Восстановление БД и Брандмауэры</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f2f5;
+            color: #333;
+        }
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        h1, h2, h3, h4 {
+            color: #2c3e50;
+        }
+        h1 {
+            text-align: center;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+        h2 {
+            border-left: 5px solid #3498db;
+            padding-left: 15px;
+            margin-top: 40px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            box-shadow: 0 0 10px rgba(0,0,0,0.03);
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 18px;
+            text-align: left;
+            vertical-align: top;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+            font-weight: bold;
+            position: sticky;
+            top: 0;
+        }
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        tr:hover {
+            background-color: #e3f2fd;
+            transition: background-color 0.3s;
+        }
+        ul, ol {
+            padding-left: 25px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        .algorithm-box {
+            background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%);
+            border-left: 5px solid #4caf50;
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 0 10px 10px 0;
+        }
+        .firewall-types {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border-left: 5px solid #2196F3;
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 0 10px 10px 0;
+        }
+        .certification-block {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+            border-left: 5px solid #ffc107;
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 0 10px 10px 0;
+        }
+        .key-term {
+            background-color: #e3f2fd;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+        .code {
+            font-family: 'Courier New', monospace;
+            background-color: #f5f5f5;
+            padding: 3px 6px;
+            border-radius: 3px;
+            border: 1px solid #ddd;
+        }
+        .diagram {
+            text-align: center;
+            margin: 25px 0;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Лекция по МДК.07.02</h1>
+        <h2>Тема: Восстановление базы данных: основные алгоритмы и этапы. Брандмауэры.</h2>
+
+        <section>
+            <h3>1. Восстановление базы данных: основные алгоритмы и этапы</h3>
+            
+            <h4>1.1. Типы сбоев СУБД</h4>
+            <ul>
+                <li><strong>Мягкие сбои (Soft Crash):</strong> Сбой ОС или аварийное завершение СУБД. Структуры данных на диске не повреждены.</li>
+                <li><strong>Жесткие сбои (Hard Crash):</strong> Повреждение носителя информации. Требуется восстановление из резервной копии.</li>
+                <li><strong>Ошибки приложения/пользователя:</strong> Неправильные транзакции, случайное удаление данных.</li>
+            </ul>
+
+            <h4>1.2. Основные алгоритмы восстановления</h4>
+            
+            <div class="algorithm-box">
+                <h4>Протокол Write-Ahead Logging (WAL)</h4>
+                <ul>
+                    <li><strong>Правило 1:</strong> Любое изменение сначала записывается в журнал транзакций, и только потом — в базу данных.</li>
+                    <li><strong>Правило 2:</strong> Запись в журнал должна быть сброшена на диск до записи измененных данных в основную базу.</li>
+                    <li><strong>Цель:</strong> Гарантия, что информация о любой незавершенной транзакции сохранится в журнале после сбоя.</li>
+                </ul>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Алгоритм</th>
+                        <th>Назначение</th>
+                        <th>Процесс</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Алгоритм отката (UNDO)</strong></td>
+                        <td>Отмена изменений незавершенных транзакций</td>
+                        <td>СУБД просматривает журнал <em>назад</em> и отменяет действия транзакций, которые находились в состоянии "в процессе" на момент сбоя.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Алгоритм повтора (REDO)</strong></td>
+                        <td>Повтор изменений завершенных транзакций</td>
+                        <td>СУБД просматривает журнал <em>вперед</em> и повторяет действия транзакций, которые были зафиксированы, но их изменения не попали в базу.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>1.3. Этапы восстановления СУБД после сбоя</h4>
+            <ol>
+                <li><strong>Анализ (Analysis):</strong> Определение состояния транзакций на момент сбоя путем чтения журнала от последней контрольной точки.</li>
+                <li><strong>Повтор (Redo):</strong> Применение всех изменений от <strong>завершенных</strong> транзакций.</li>
+                <li><strong>Откат (Undo):</strong> Отмена всех изменений <strong>незавершенных</strong> транзакций.</li>
+            </ol>
+            
+            <p class="key-term">Контрольная точка (Checkpoint)</p> — момент гарантированного сброса измененных буферов из памяти на диск для ускорения восстановления.
+        </section>
+
+        <section>
+            <h3>2. Брандмауэры (Межсетевые экраны)</h3>
+            
+            <h4>2.1. Определение и назначение</h4>
+            <p><strong>Брандмауэр (Firewall)</strong> — программный или аппаратный комплекс для фильтрации сетевого трафика на основе правил безопасности.</p>
+            
+            <div class="firewall-types">
+                <h4>2.2. Типы брандмауэров</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Тип</th>
+                            <th>Уровень OSI</th>
+                            <th>Принцип работы</th>
+                            <th>Плюсы/Минусы</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Пакетный фильтр</strong></td>
+                            <td>Сетевой (3)</td>
+                            <td>Анализ IP-адресов, портов, протоколов</td>
+                            <td>+ Высокая скорость<br>- Не анализирует содержимое</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Stateful Inspection</strong></td>
+                            <td>Транспортный (4)</td>
+                            <td>Отслеживание состояния соединений</td>
+                            <td>+ "Умная" фильтрация<br>- Большая нагрузка</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Прокси-шлюз</strong></td>
+                            <td>Прикладной (7)</td>
+                            <td>Глубокий анализ содержимого трафика</td>
+                            <td>+ Максимальная защита<br>- Низкая производительность</td>
+                        </tr>
+                        <tr>
+                            <td><strong>NGFW</strong></td>
+                            <td>Все уровни (3-7)</td>
+                            <td>Все методы + IPS, контроль приложений</td>
+                            <td>+ Комплексная защита<br>- Высокая стоимость</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4>2.3. Концепция DMZ (Demilitarized Zone)</h4>
+            <p>DMZ — изолированный сегмент сети для общедоступных сервисов (веб-сервер, почта).</p>
+            <div class="diagram">
+                <strong>Схема сети:</strong><br>
+                Интернет → Брандмауэр → DMZ → Брандмауэр → Внутренняя сеть
+            </div>
+        </section>
+
+        <section>
+            <h3>3. Сертификация информационных систем: Связь с темами лекции</h3>
+            
+            <div class="certification-block">
+                <h4>3.1. Как документ (Требования регулятора)</h4>
+                <p>При сертификации ИС (ФСТЭК России) предъявляются строгие требования:</p>
+                <ul>
+                    <li><strong>Для СУБД:</strong> Обязательность журналирования, регламент восстановления, регулярные учения.</li>
+                    <li><strong>Для брандмауэров:</strong> Обязательное использование, настроенные правила ACL, ведение журналов событий.</li>
+                </ul>
+
+                <h4>3.2. Как «веб-страница» (Практическая реализация)</h4>
+                <p>В современной системе технологии реализуются через динамические интерфейсы:</p>
+                <ul>
+                    <li><strong>Панель управления СУБД:</strong> Веб-интерфейс для мониторинга журналов, бэкапов и восстановления.</li>
+                    <li><strong>Панель управления NGFW:</strong> Веб-интерфейс для просмотра топологии, сессий, атак и генерации отчетов.</li>
+                </ul>
+                <p>При аудите специалист демонстрирует работу механизмов через эти веб-интерфейсы, доказывая их эффективность.</p>
+            </div>
+        </section>
+
+        <section>
+            <h3>4. Заключение</h3>
+            <p>Восстановление БД и использование брандмауэров — фундаментальные аспекты обеспечения целостности, доступности и конфиденциальности информации. Алгоритмы WAL, REDO и UNDO гарантируют согласованность данных, а брандмауэры защищают сетевой периметр. Корректная настройка и документальное оформление этих механизмов являются обязательными для сертификации ИС.</p>
+        </section>
+    </div>
+</body>
+</html>

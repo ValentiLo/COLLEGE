@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лекция МДК.02.01 - Современные принципы разработки ПО</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #34495e;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color), var(--dark-color));
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .sidebar {
+            background-color: var(--light-color);
+            border-right: 1px solid #dee2e6;
+            height: 100vh;
+            position: sticky;
+            top: 0;
+            overflow-y: auto;
+        }
+        
+        .sidebar .nav-link {
+            color: var(--dark-color);
+            border-radius: 0.375rem;
+            margin-bottom: 0.25rem;
+            transition: all 0.3s;
+        }
+        
+        .sidebar .nav-link:hover, .sidebar .nav-link.active {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+        
+        .section {
+            padding: 2rem 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .section:last-child {
+            border-bottom: none;
+        }
+        
+        .card {
+            border: none;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-bottom: 1.5rem;
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+        
+        .card-header {
+            background: linear-gradient(135deg, var(--secondary-color), #2980b9);
+            color: white;
+            font-weight: 600;
+            border-bottom: none;
+        }
+        
+        .principle-card {
+            border-left: 4px solid var(--secondary-color);
+            transition: all 0.3s;
+        }
+        
+        .principle-card:hover {
+            border-left-color: var(--accent-color);
+            transform: translateX(5px);
+        }
+        
+        .methodology-badge {
+            font-size: 0.8em;
+            margin: 0.1rem;
+        }
+        
+        .solid-principle {
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid #2196f3;
+        }
+        
+        .solid-letter {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background-color: #2196f3;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        
+        .tech-card {
+            text-align: center;
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+        
+        .tech-card:hover {
+            background-color: #f8f9fa;
+            transform: scale(1.05);
+        }
+        
+        .tech-icon {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .hierarchy-level {
+            padding: 0.75rem 1rem;
+            margin: 0.5rem 0;
+            border-radius: 0.375rem;
+            font-weight: 600;
+            text-align: center;
+        }
+        
+        .scroll-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--secondary-color);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            cursor: pointer;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .scroll-top.show {
+            opacity: 1;
+        }
+        
+        .agile-principle {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0.375rem;
+        }
+        
+        @media (max-width: 768px) {
+            .sidebar {
+                height: auto;
+                position: relative;
+            }
+            
+            .section {
+                padding: 1.5rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Навигационная панель -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-laptop-code me-2"></i>МДК.02.01 - Технологии разработки ПО
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#introduction"><i class="fas fa-info-circle me-1"></i>Введение</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#principles"><i class="fas fa-star me-1"></i>Принципы</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#methodologies"><i class="fas fa-project-diagram me-1"></i>Методологии</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Боковая панель -->
+            <div class="col-lg-2 col-md-3 sidebar p-0">
+                <div class="p-3">
+                    <h5 class="mb-3">Содержание лекции</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#introduction"><i class="fas fa-play-circle me-2"></i>Введение</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#principles"><i class="fas fa-gem me-2"></i>Ключевые принципы</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#agile"><i class="fas fa-bolt me-2"></i>Agile-манифест</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#methodologies"><i class="fas fa-sitemap me-2"></i>Методологии</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#solid"><i class="fas fa-cube me-2"></i>SOLID-принципы</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#technologies"><i class="fas fa-tools me-2"></i>Технологии</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#conclusion"><i class="fas fa-flag-checkered me-2"></i>Заключение</a>
+                        </li>
+                    </ul>
+                    
+                    <div class="mt-4">
+                        <h6>Быстрый доступ</h6>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-sm btn-outline-primary" onclick="scrollToSection('agile')">Agile</button>
+                            <button class="btn btn-sm btn-outline-primary" onclick="scrollToSection('solid')">SOLID</button>
+                            <button class="btn btn-sm btn-outline-primary" onclick="scrollToSection('technologies')">Технологии</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Основной контент -->
+            <main class="col-lg-10 col-md-9 ms-sm-auto px-4 py-4">
+                <!-- Введение -->
+                <section id="introduction" class="section">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h1 class="display-5 fw-bold">Современные принципы и методы разработки ПО</h1>
+                        <span class="badge bg-primary fs-6">МДК.02.01</span>
+                    </div>
+                    
+                    <div class="row mb-4">
+                        <div class="col-md-8">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4><i class="fas fa-bullseye me-2"></i>Цель лекции</h4>
+                                    <p class="mb-0">Изучить современные подходы, принципы и методологии разработки программного обеспечения, 
+                                    понять их преимущества и области применения в современных IT-проектах.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <i class="fas fa-clock me-2"></i>Актуальность темы
+                                </div>
+                                <div class="card-body">
+                                    <p>Современная разработка ПО требует понимания гибких методологий, DevOps-практик и принципов создания масштабируемых систем.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fas fa-info-circle me-2"></i>Введение в современную разработку ПО
+                        </div>
+                        <div class="card-body">
+                            <p>За последние два десятилетия индустрия разработки программного обеспечения претерпела значительную трансформацию. 
+                            Переход от традиционных каскадных моделей к гибким методологиям, распространение DevOps-культуры и микросервисной 
+                            архитектуры кардинально изменили подходы к созданию программных продуктов.</p>
+                            
+                            <p>Современные принципы разработки направлены на:</p>
+                            <ul>
+                                <li>Повышение качества кода и надежности систем</li>
+                                <li>Ускорение времени выхода на рынок (time-to-market)</li>
+                                <li>Улучшение взаимодействия между командами разработки и эксплуатации</li>
+                                <li>Обеспечение гибкости и адаптивности к изменениям требований</li>
+                            </ul>
+                            
+                            <div class="alert alert-info mt-3">
+                                <i class="fas fa-lightbulb me-2"></i>
+                                <strong>Ключевой тренд:</strong> Смещение фокуса с документации и строгого планирования на работоспособный продукт и быстрое реагирование на изменения.
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Ключевые принципы -->
+                <section id="principles" class="section">
+                    <h2 class="mb-4"><i class="fas fa-gem me-2"></i>Ключевые принципы современной разработки</h2>
+                    
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="card principle-card">
+                                <div class="card-body">
+                                    <h5><i class="fas fa-users me-2"></i>DevOps-культура</h5>
+                                    <p>Интеграция процессов разработки и эксплуатации, направленная на сокращение времени между внесением изменения и его развертыванием в production.</p>
+                                    <ul>
+                                        <li>Автоматизация сборки, тестирования и развертывания</li>
+                                        <li>Непрерывная интеграция и поставка (CI/CD)</li>
+                                        <li>Мониторинг и обратная связь на всех этапах</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-6">
+                            <div class="card principle-card">
+                                <div class="card-body">
+                                    <h5><i class="fas fa-puzzle-piece me-2"></i>Микросервисная архитектура</h5>
+                                    <p>Подход к разработке приложений как набора небольших, слабосвязанных сервисов, каждый из которых решает конкретную бизнес-задачу.</p>
+                                    <ul>
+                                        <li>Независимое развертывание компонентов</li>
+                                        <li>Использование REST, gRPC для взаимодействия</li>
+                                        <li>Устойчивость к сбоям и отказоустойчивость</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row mt-3">
+                        <div class="col-lg-6">
+                            <div class="card principle-card">
+                                <div class="card-body">
+                                    <h5><i class="fas fa-box me-2"></i>Контейнеризация</h5>
+                                    <p>Технология упаковки приложения со всеми его зависимостями в изолированную среду выполнения.</p>
+                                    <ul>
+                                        <li>Единообразие сред разработки и production</li>
+                                        <li>Оркестрация (Kubernetes, Docker Swarm)</li>
+                                        <li>Быстрое развертывание и масштабирование</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-6">
+                            <div class="card principle-card">
+                                <div class="card-body">
+                                    <h5><i class="fas fa-shield-alt me-2"></i>Безопасность как код (DevSecOps)</h5>
+                                    <p>Интеграция практик безопасности на всех этапах жизненного цикла разработки ПО.</p>
+                                    <ul>
+                                        <li>Автоматизированное сканирование уязвимостей</li>
+                                        <li>Политики безопасности как код</li>
+                                        <li>Непрерывный мониторинг безопасности</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Agile-манифест -->
+                <section id="agile" class="section">
+                    <h2 class="mb-4"><i class="fas fa-bolt me-2"></i>Agile-манифест и его принципы</h2>
+                    
+                    <div class="agile-principle">
+                        <h5><i class="fas fa-arrow-right me-2"></i>Люди и взаимодействие важнее процессов и инструментов</h5>
+                        <p class="mb-0">Эффективная коммуникация между членами команды и с заказчиком имеет первостепенное значение.</p>
+                    </div>
+                    
+                    <div class="agile-principle">
+                        <h5><i class="fas fa-arrow-right me-2"></i>Работающий продукт важнее исчерпывающей документации</h5>
+                        <p class="mb-0">Главный показатель прогресса - работоспособное программное обеспечение.</p>
+                    </div>
+                    
+                    <div class="agile-principle">
+                        <h5><i class="fas fa-arrow-right me-2"></i>Сотрудничество с заказчиком важнее согласования условий контракта</h5>
+                        <p class="mb-0">Постоянное взаимодействие с заказчиком для понимания и удовлетворения его потребностей.</p>
+                    </div>
+                    
+                    <div class="agile-principle">
+                        <h5><i class="fas fa-arrow-right me-2"></i>Готовность к изменениям важнее следования первоначальному плану</h5>
+                        <p class="mb-0">Гибкость и адаптивность к изменяющимся требованиям - ключевое преимущество Agile-подхода.</p>
+                    </div>
+                    
+                    <div class="card mt-4">
+                        <div class="card-header">
+                            <i class="fas fa-list-ol me-2"></i>12 принципов Agile-манифеста
+                        </div>
+                        <div class="card-body">
+                            <ol>
+                                <li>Высший приоритет - удовлетворение заказчика благодаря ранней и непрерывной поставке ценного ПО</li>
+                                <li>Изменение требований приветствуется даже на поздних стадиях разработки</li>
+                                <li>Работающий продукт следует выпускать как можно чаще</li>
+                                <li>На протяжении всего проекта разработчики и представители бизнеса должны работать вместе</li>
+                                <li>Проекты строятся вокруг мотивированных individuals</li>
+                                <li>Непосредственное общение является наиболее эффективным способом обмена информацией</li>
+                                <li>Работающий продукт - основной показатель прогресса</li>
+                                <li>Инвесторы, разработчики и пользователи должны иметь возможность поддерживать постоянный ритм</li>
+                                <li>Постоянное внимание к техническому совершенству и качеству проектирования</li>
+                                <li>Простота - искусство минимизации лишней работы</li>
+                                <li>Самые лучшие требования, архитектурные и проектные решения рождаются у самоорганизующихся команд</li>
+                                <li>Команда регулярно осмысливает, как стать эффективнее, и соответствующим образом корректирует свою работу</li>
+                            </ol>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Методологии -->
+                <section id="methodologies" class="section">
+                    <h2 class="mb-4"><i class="fas fa-sitemap me-2"></i>Современные методологии разработки</h2>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header bg-success text-white">
+                                    <i class="fas fa-tasks me-2"></i>Scrum
+                                </div>
+                                <div class="card-body">
+                                    <p>Итеративная методология с фиксированными временными интервалами (спринтами).</p>
+                                    <h6>Ключевые элементы:</h6>
+                                    <span class="badge bg-primary methodology-badge">Спринты (1-4 недели)</span>
+                                    <span class="badge bg-primary methodology-badge">Scrum-доска</span>
+                                    <span class="badge bg-primary methodology-badge">Ежедневные стендапы</span>
+                                    <span class="badge bg-primary methodology-badge">Ретроспективы</span>
+                                    
+                                    <h6 class="mt-3">Роли:</h6>
+                                    <ul>
+                                        <li>Product Owner (владелец продукта)</li>
+                                        <li>Scrum Master (ведущий Scrum-процесса)</li>
+                                        <li>Development Team (команда разработки)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header bg-info text-white">
+                                    <i class="fas fa-columns me-2"></i>Kanban
+                                </div>
+                                <div class="card-body">
+                                    <p>Методология визуализации workflow и ограничения work in progress.</p>
+                                    <h6>Ключевые принципы:</h6>
+                                    <span class="badge bg-info methodology-badge">Визуализация workflow</span>
+                                    <span class="badge bg-info methodology-badge">Ограничение WIP</span>
+                                    <span class="badge bg-info methodology-badge">Управление потоком</span>
+                                    <span class="badge bg-info methodology-badge">Непрерывное улучшение</span>
+                                    
+                                    <h6 class="mt-3">Преимущества:</h6>
+                                    <ul>
+                                        <li>Гибкость и адаптивность</li>
+                                        <li>Снижение времени цикла разработки</li>
+                                        <li>Прозрачность процесса</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header bg-warning text-dark">
+                                    <i class="fas fa-code me-2"></i>Extreme Programming (XP)
+                                </div>
+                                <div class="card-body">
+                                    <p>Методология, ориентированная на высокое качество кода и частые релизы.</p>
+                                    <h6>Ключевые практики:</h6>
+                                    <span class="badge bg-warning methodology-badge">Парное программирование</span>
+                                    <span class="badge bg-warning methodology-badge">TDD (Test-Driven Development)</span>
+                                    <span class="badge bg-warning methodology-badge">Непрерывная интеграция</span>
+                                    <span class="badge bg-warning methodology-badge">Частые небольшие релизы</span>
+                                    
+                                    <h6 class="mt-3">Ценности:</h6>
+                                    <ul>
+                                        <li>Коммуникация</li>
+                                        <li>Простота</li>
+                                        <li>Обратная связь</li>
+                                        <li>Смелость</li>
+                                        <li>Уважение</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header bg-danger text-white">
+                                    <i class="fas fa-sync-alt me-2"></i>DevOps
+                                </div>
+                                <div class="card-body">
+                                    <p>Культура и практика, объединяющая разработку и эксплуатацию.</p>
+                                    <h6>Ключевые практики:</h6>
+                                    <span class="badge bg-danger methodology-badge">CI/CD</span>
+                                    <span class="badge bg-danger methodology-badge">Инфраструктура как код</span>
+                                    <span class="badge bg-danger methodology-badge">Мониторинг и логирование</span>
+                                    <span class="badge bg-danger methodology-badge">Коммуникация и сотрудничество</span>
+                                    
+                                    <h6 class="mt-3">Преимущества:</h6>
+                                    <ul>
+                                        <li>Ускорение time-to-market</li>
+                                        <li>Повышение надежности систем</li>
+                                        <li>Масштабируемость и эффективность</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SOLID-принципы -->
+                <section id="solid" class="section">
+                    <h2 class="mb-4"><i class="fas fa-cube me-2"></i>Принципы проектирования SOLID</h2>
+                    
+                    <div class="solid-principle">
+                        <h4><span class="solid-letter">S</span>Single Responsibility Principle (Принцип единственной ответственности)</h4>
+                        <p>Класс должен иметь только одну причину для изменения. Каждый класс решает только одну задачу.</p>
+                        <div class="alert alert-light">
+                            <strong>Пример:</strong> Класс "User" должен отвечать только за данные пользователя, а не за их валидацию и сохранение в БД.
+                        </div>
+                    </div>
+                    
+                    <div class="solid-principle">
+                        <h4><span class="solid-letter">O</span>Open/Closed Principle (Принцип открытости/закрытости)</h4>
+                        <p>Программные сущности должны быть открыты для расширения, но закрыты для модификации.</p>
+                        <div class="alert alert-light">
+                            <strong>Пример:</strong> Добавление нового типа уведомлений через создание нового класса, а не изменение существующего.
+                        </div>
+                    </div>
+                    
+                    <div class="solid-principle">
+                        <h4><span class="solid-letter">L</span>Liskov Substitution Principle (Принцип подстановки Лисков)</h4>
+                        <p>Объекты должны быть заменяемыми экземплярами своих подтипов без изменения правильности программы.</p>
+                        <div class="alert alert-light">
+                            <strong>Пример:</strong> Класс "Square" должен быть полноценной заменой класса "Rectangle" в любом контексте.
+                        </div>
+                    </div>
+                    
+                    <div class="solid-principle">
+                        <h4><span class="solid-letter">I</span>Interface Segregation Principle (Принцип разделения интерфейсов)</h4>
+                        <p>Много специализированных интерфейсов лучше, чем один универсальный.</p>
+                        <div class="alert alert-light">
+                            <strong>Пример:</strong> Разделение интерфейса "Printer" на "Print", "Scan", "Fax" вместо одного общего.
+                        </div>
+                    </div>
+                    
+                    <div class="solid-principle">
+                        <h4><span class="solid-letter">D</span>Dependency Inversion Principle (Принцип инверсии зависимостей)</h4>
+                        <p>Модули верхнего уровня не должны зависеть от модулей нижнего уровня. Оба должны зависеть от абстракций.</p>
+                        <div class="alert alert-light">
+                            <strong>Пример:</strong> Класс "ReportGenerator" должен зависеть от интерфейса "DataRepository", а не от конкретной реализации.
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Технологии -->
+                <section id="technologies" class="section">
+                    <h2 class="mb-4"><i class="fas fa-tools me-2"></i>Современные технологии и инструменты</h2>
+                    
+                    <div class="row">
+                        <div class="col-lg-3 col-md-6">
+                            <div class="card tech-card">
+                                <div class="tech-icon">
+                                    <i class="fab fa-git-alt"></i>
+                                </div>
+                                <h5>Системы контроля версий</h5>
+                                <p>Git, GitHub, GitLab, Bitbucket</p>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-3 col-md-6">
+                            <div class="card tech-card">
+                                <div class="tech-icon">
+                                    <i class="fas fa-cloud"></i>
+                                </div>
+                                <h5>Облачные платформы</h5>
+                                <p>AWS, Azure, Google Cloud</p>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-3 col-md-6">
+                            <div class="card tech-card">
+                                <div class="tech-icon">
+                                    <i class="fab fa-docker"></i>
+                                </div>
+                                <h5>Контейнеризация</h5>
+                                <p>Docker, Kubernetes, Podman</p>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-3 col-md-6">
+                            <div class="card tech-card">
+                                <div class="tech-icon">
+                                    <i class="fas fa-code-branch"></i>
+                                </div>
+                                <h5>CI/CD системы</h5>
+                                <p>Jenkins, GitLab CI, GitHub Actions</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row mt-3">
+                        <div class="col-lg-3 col-md-6">
+                            <div class="card tech-card">
+                                <div class="tech-icon">
+                                    <i class="fab fa-js-square"></i>
+                                </div>
+                                <h5>Фронтенд-фреймворки</h5>
+                                <p>React, Vue, Angular, Svelte</p>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-3 col-md-6">
+                            <div class="card tech-card">
+                                <div class="tech-icon">
+                                    <i class="fab fa-java"></i>
+                                </div>
+                                <h5>Бэкенд-фреймворки</h5>
+                                <p>Spring, Django, Express, .NET</p>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-3 col-md-6">
+                            <div class="card tech-card">
+                                <div class="tech-icon">
+                                    <i class="fas fa-database"></i>
+                                </div>
+                                <h5>Базы данных</h5>
+                                <p>PostgreSQL, MongoDB, Redis</p>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-3 col-md-6">
+                            <div class="card tech-card">
+                                <div class="tech-icon">
+                                    <i class="fas fa-mobile-alt"></i>
+                                </div>
+                                <h5>Мобильная разработка</h5>
+                                <p>React Native, Flutter, Swift, Kotlin</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Заключение -->
+                <section id="conclusion" class="section">
+                    <h2 class="mb-4"><i class="fas fa-flag-checkered me-2"></i>Заключение</h2>
+                    
+                    <div class="card">
+                        <div class="card-header bg-success text-white">
+                            <i class="fas fa-check-circle me-2"></i>Итоги лекции
+                        </div>
+                        <div class="card-body">
+                            <h5>Ключевые выводы:</h5>
+                            <ul>
+                                <li>Современная разработка ПО ориентирована на гибкость, качество и скорость</li>
+                                <li>Agile-манифест и DevOps-культура стали стандартом в индустрии</li>
+                                <li>Микросервисная архитектура и контейнеризация обеспечивают масштабируемость</li>
+                                <li>SOLID-принципы являются основой качественного объектно-ориентированного дизайна</li>
+                                <li>Современные инструменты значительно ускоряют процесс разработки</li>
+                            </ul>
+                            
+                            <h5 class="mt-4">Тенденции на ближайшее будущее:</h5>
+                            <ul>
+                                <li>Углубление интеграции AI/ML в процессы разработки</li>
+                                <li>Распространение low-code/no-code платформ</li>
+                                <li>Развитие edge computing и IoT-разработки</li>
+                                <li>Усиление фокуса на безопасности (DevSecOps)</li>
+                                <li>Экосистемный подход к разработке программных продуктов</li>
+                            </ul>
+                            
+                            <div class="alert alert-info mt-4">
+                                <h6><i class="fas fa-graduation-cap me-2"></i>Рекомендации для дальнейшего изучения:</h6>
+                                <ul class="mb-0">
+                                    <li>Изучение конкретных фреймворков и технологий по выбранному направлению</li>
+                                    <li>Практическое освоение DevOps-инструментов (Docker, Kubernetes, CI/CD)</li>
+                                    <li>Углубленное изучение архитектурных паттернов и принципов проектирования</li>
+                                    <li>Освоение практик тестирования и обеспечения качества кода</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- Кнопка прокрутки вверх -->
+    <div class="scroll-top" id="scrollTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Прокрутка к верху страницы
+        document.getElementById('scrollTop').addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        
+        // Показать/скрыть кнопку прокрутки
+        window.addEventListener('scroll', function() {
+            const scrollTop = document.getElementById('scrollTop');
+            if (window.pageYOffset > 300) {
+                scrollTop.classList.add('show');
+            } else {
+                scrollTop.classList.remove('show');
+            }
+        });
+        
+        // Подсветка активного раздела в навигации
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.sidebar .nav-link');
+        
+        window.addEventListener('scroll', function() {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').substring(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+        
+        // Функция для быстрой прокрутки к разделу
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
